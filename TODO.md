@@ -127,7 +127,7 @@
   the education section would be a signature visual. Right now every zone is "spheres but different color." One
   recognizable creature breaks the pattern and gives the twilight zone real identity.
 
-- [] Marine snow — Thousands of tiny falling specks (a single Points geometry, very cheap to render) layered across the
+- [x] Marine snow — Thousands of tiny falling specks (a single Points geometry, very cheap to render) layered across the
   deeper zones. Real deep ocean has this constant gentle snowfall of organic matter. It adds atmosphere and depth that
   the current sparse particles miss.
 
@@ -172,3 +172,4 @@
 - **Fix hero section brightness and readability** — 2026-06-16
 - **Include all database.js entries in portfolio** — 2026-06-16
 - **Jellyfish in the twilight zone** — 2026-06-16
+- **Marine snow particle overlay** — 2026-06-16
