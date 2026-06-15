@@ -97,11 +97,11 @@ export default function ContactSection() {
           want to collaborate, or just want to say hello — I'd love to hear from you.
         </p>
         <a
-          href="mailto:vetle.larsen.gundersen@decisive.no"
+          href="mailto:vetle.larsen.gundersen@gmail.com"
           className="contact__email-btn"
-          aria-label="Send email to vetle.larsen.gundersen@decisive.no"
+          aria-label="Send email to vetle.larsen.gundersen@gmail.com"
         >
-          vetle.larsen.gundersen@decisive.no
+          vetle.larsen.gundersen@gmail.com
         </a>
         <div className="contact__socials">
           <a
