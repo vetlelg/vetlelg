@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
-import AbyssParticles from './AbyssParticles'
+
+const AbyssParticles = lazy(() => import('./AbyssParticles'))
 import './ContactSection.css'
 
 export default function ContactSection() {
@@ -86,7 +87,9 @@ export default function ContactSection() {
 
   return (
     <section ref={sectionRef} id="contact" className="zone-section contact">
-      <AbyssParticles />
+      <Suspense fallback={null}>
+        <AbyssParticles />
+      </Suspense>
       <div className="contact__inner">
         <span className="zone-label">6,000m — Abyssal Zone</span>
         <h2 className="contact__heading zone-title" style={{ color: 'var(--accent-abyss)' }}>

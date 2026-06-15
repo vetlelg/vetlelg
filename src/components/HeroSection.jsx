@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import HeroCaustics from './HeroCaustics'
+
+const HeroCaustics = lazy(() => import('./HeroCaustics'))
 import './HeroSection.css'
 
 export default function HeroSection() {
@@ -49,7 +50,9 @@ export default function HeroSection() {
 
   return (
     <section ref={sectionRef} id="hero" className="zone-section hero">
-      <HeroCaustics />
+      <Suspense fallback={null}>
+        <HeroCaustics />
+      </Suspense>
       <div className="hero__content">
         <span className="zone-label">0m — Surface Zone</span>
         <h1 className="hero__name">Vetle Larsen Gundersen</h1>

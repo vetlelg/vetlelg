@@ -114,7 +114,7 @@
 
 - [x] No active state on navbar links to indicate which section is currently in view. Add scroll-based highlighting (IntersectionObserver or ScrollTrigger) to show the current section in the nav.
 
-- [ ] Bundle is 1,212KB (346KB gzipped) and Vite warns about chunk size. Code-split Three.js scenes with `React.lazy()` + dynamic `import()` so the initial bundle is lighter and canvases load on demand.
+- [x] Bundle is 1,212KB (346KB gzipped) and Vite warns about chunk size. Code-split Three.js scenes with `React.lazy()` + dynamic `import()` so the initial bundle is lighter and canvases load on demand.
 
 - [ ] `SunlightParticles` and `TwilightParticles` are missing `depthWrite={false}` on their material, while `HeroCaustics` Bubbles has it. This inconsistency could cause z-ordering artifacts with transparent particles. Add `depthWrite={false}` to all particle materials for consistency.
 
@@ -142,3 +142,4 @@
 - **Fix contact email to personal address** — 2026-06-16
 - **Add Open Graph / Twitter Card meta tags** — 2026-06-16
 - **Add active state highlighting to navbar links** — 2026-06-16
+- **Code-split Three.js scenes with React.lazy()** — 2026-06-16

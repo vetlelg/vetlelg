@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import education from '../data/education'
-import TwilightParticles from './TwilightParticles'
+
+const TwilightParticles = lazy(() => import('./TwilightParticles'))
 import './EducationSection.css'
 
 export default function EducationSection() {
@@ -32,7 +33,9 @@ export default function EducationSection() {
 
   return (
     <section ref={sectionRef} id="education" className="zone-section education">
-      <TwilightParticles />
+      <Suspense fallback={null}>
+        <TwilightParticles />
+      </Suspense>
       <div className="education__content">
         <span className="zone-label">1,000m — Twilight Zone</span>
         <h2 className="zone-title" style={{ color: 'var(--accent-twilight)' }}>

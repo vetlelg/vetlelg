@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import projects from '../data/projects'
-import MidnightParticles from './MidnightParticles'
+
+const MidnightParticles = lazy(() => import('./MidnightParticles'))
 import './ProjectsSection.css'
 
 export default function ProjectsSection() {
@@ -32,7 +33,9 @@ export default function ProjectsSection() {
 
   return (
     <section ref={sectionRef} id="projects" className="zone-section projects">
-      <MidnightParticles />
+      <Suspense fallback={null}>
+        <MidnightParticles />
+      </Suspense>
       <div className="projects__content">
         <span className="zone-label">4,000m — Midnight Zone</span>
         <h2 className="zone-title" style={{ color: 'var(--accent-midnight)' }}>

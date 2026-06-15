@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import experience from '../data/experience'
-import SunlightParticles from './SunlightParticles'
+
+const SunlightParticles = lazy(() => import('./SunlightParticles'))
 import './ExperienceSection.css'
 
 export default function ExperienceSection() {
@@ -33,7 +34,9 @@ export default function ExperienceSection() {
 
   return (
     <section ref={sectionRef} id="experience" className="zone-section experience">
-      <SunlightParticles />
+      <Suspense fallback={null}>
+        <SunlightParticles />
+      </Suspense>
       <div className="experience__content">
         <span className="zone-label">200m — Sunlight Zone</span>
         <h2 className="zone-title" style={{ color: 'var(--accent-sunlight)' }}>
