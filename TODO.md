@@ -138,7 +138,7 @@
 - [x] Fog progression — Three.js fog that gets denser as you scroll deeper. Simple to add, reinforces the depth narrative
   physically rather than just through color.
 
-- [] Fix the nav bar menu on smaller screens
+- [x] Fix the nav bar menu on smaller screens
 
 - [] Make sure the portfolio looks good on (almost) all screen sizes
 
@@ -175,3 +175,4 @@
 - **Marine snow particle overlay** — 2026-06-16
 - **Angler fish lure in the abyss** — 2026-06-16
 - **Fog progression** — 2026-06-16
+- **Fix mobile nav menu** — 2026-06-16
