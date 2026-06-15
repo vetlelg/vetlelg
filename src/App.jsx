@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import DepthIndicator from './components/DepthIndicator'
 import HeroSection from './components/HeroSection'
 import ExperienceSection from './components/ExperienceSection'
+import EducationSection from './components/EducationSection'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -66,6 +67,7 @@ function App() {
       {zones.map((zone) => {
         if (zone.id === 'hero') return <HeroSection key={zone.id} />
         if (zone.id === 'experience') return <ExperienceSection key={zone.id} />
+        if (zone.id === 'education') return <EducationSection key={zone.id} />
         return (
           <section key={zone.id} id={zone.id} className="zone-section">
             <span className="zone-label">{zone.label}</span>
