@@ -106,7 +106,19 @@
 
 - [x] The navbar is a bit too distinct from the rest of the page when scrolling, especially in the beginning at the lighter parts of the page. Potentially change or remove the navbar. Do what you think looks better.
 
-- [ ] Review everything and suggest improvements / more discovered issues to fix
+- [x] Review everything and suggest improvements / more discovered issues to fix
+
+- [ ] Contact section email uses work address (`vetle.larsen.gundersen@decisive.no`). This is a personal portfolio — should use a personal email address instead.
+
+- [ ] No Open Graph / Twitter Card meta tags in `index.html`. The site won't preview well when shared on social media (e.g. LinkedIn, Twitter/X). Add `og:title`, `og:description`, `og:image`, and `twitter:card` tags.
+
+- [ ] No active state on navbar links to indicate which section is currently in view. Add scroll-based highlighting (IntersectionObserver or ScrollTrigger) to show the current section in the nav.
+
+- [ ] Bundle is 1,212KB (346KB gzipped) and Vite warns about chunk size. Code-split Three.js scenes with `React.lazy()` + dynamic `import()` so the initial bundle is lighter and canvases load on demand.
+
+- [ ] `SunlightParticles` and `TwilightParticles` are missing `depthWrite={false}` on their material, while `HeroCaustics` Bubbles has it. This inconsistency could cause z-ordering artifacts with transparent particles. Add `depthWrite={false}` to all particle materials for consistency.
+
+- [ ] `public/icons.svg` contains unused social icons (Bluesky, Discord, X/Twitter). Either add these as additional social links in the Contact section or remove the unused file.
 
 ## Completed
 
@@ -126,3 +138,4 @@
 - **Fix depth indicator width shifting** — 2026-06-16
 - **Enhanced hero ocean effects (god rays + bubbles)** — 2026-06-16
 - **Fix navbar too distinct from page** — 2026-06-16
+- **Review everything and suggest improvements** — 2026-06-16
