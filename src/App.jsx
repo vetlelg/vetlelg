@@ -8,6 +8,7 @@ import ExperienceSection from './components/ExperienceSection'
 import EducationSection from './components/EducationSection'
 import ProjectsSection from './components/ProjectsSection'
 import ContactSection from './components/ContactSection'
+import DepthFog from './components/DepthFog'
 const MarineSnow = lazy(() => import('./components/MarineSnow'))
 import './App.css'
 
@@ -70,6 +71,7 @@ function App() {
       </a>
       <Navbar />
       <DepthIndicator />
+      <DepthFog />
       <Suspense fallback={null}>
         <MarineSnow />
       </Suspense>

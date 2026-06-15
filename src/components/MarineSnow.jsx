@@ -1,5 +1,6 @@
 import { Suspense, useRef, useMemo, useEffect } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import * as THREE from 'three'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
@@ -67,8 +68,28 @@ function Snow() {
   )
 }
 
+function SceneFog({ densityRef }) {
+  const { scene } = useThree()
+
+  useEffect(() => {
+    scene.fog = new THREE.FogExp2('#000000', 0)
+    return () => {
+      scene.fog = null
+    }
+  }, [scene])
+
+  useFrame(() => {
+    if (scene.fog) {
+      scene.fog.density = densityRef.current
+    }
+  })
+
+  return null
+}
+
 export default function MarineSnow() {
   const containerRef = useRef(null)
+  const fogDensityRef = useRef(0)
 
   const prefersReduced =
     typeof window !== 'undefined' &&
@@ -77,7 +98,7 @@ export default function MarineSnow() {
   useEffect(() => {
     if (prefersReduced || !containerRef.current) return
 
-    const trigger = ScrollTrigger.create({
+    const opacityTrigger = ScrollTrigger.create({
       trigger: '#education',
       start: 'top bottom',
       end: 'top 30%',
@@ -89,7 +110,19 @@ export default function MarineSnow() {
       },
     })
 
-    return () => trigger.kill()
+    const fogTrigger = ScrollTrigger.create({
+      start: 0,
+      end: 'max',
+      scrub: true,
+      onUpdate: (self) => {
+        fogDensityRef.current = self.progress * 0.12
+      },
+    })
+
+    return () => {
+      opacityTrigger.kill()
+      fogTrigger.kill()
+    }
   }, [prefersReduced])
 
   if (prefersReduced) return null
@@ -112,6 +145,7 @@ export default function MarineSnow() {
           gl={{ alpha: true, antialias: false }}
         >
           <Snow />
+          <SceneFog densityRef={fogDensityRef} />
         </Canvas>
       </Suspense>
     </div>
