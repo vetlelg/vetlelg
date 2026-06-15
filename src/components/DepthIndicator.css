@@ -1,0 +1,46 @@
+.depth-indicator {
+  position: fixed;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+
+.depth-indicator__track {
+  width: 1px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 1px;
+  position: relative;
+}
+
+.depth-indicator__marker {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  box-shadow: 0 0 6px rgba(224, 247, 250, 0.4);
+}
+
+.depth-indicator__value {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  min-width: 5ch;
+}
+
+@media (max-width: 768px) {
+  .depth-indicator {
+    display: none;
+  }
+}

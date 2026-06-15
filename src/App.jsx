@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Navbar from './components/Navbar'
+import DepthIndicator from './components/DepthIndicator'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -57,6 +59,8 @@ function App() {
 
   return (
     <div ref={containerRef}>
+      <Navbar />
+      <DepthIndicator />
       {zones.map((zone) => (
         <section key={zone.id} id={zone.id} className="zone-section">
           <span className="zone-label">{zone.label}</span>

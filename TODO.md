@@ -12,7 +12,7 @@
   sections (one per zone, 100vh each) so scrolling works.
   _Done when: `npm run dev` shows a page that transitions through all zone colors on scroll._
 
-- [ ] **1.2 Navbar and depth indicator**
+- [x] **1.2 Navbar and depth indicator**
   Fixed navbar: name/logo left, section links right. Starts transparent,
   gains a dark blur on scroll. Smooth-scroll links to each section.
   Mobile hamburger at < 768px. Depth indicator on the right edge of
@@ -102,3 +102,4 @@
 ## Completed
 
 - **1.1 Setup and zone background system** — 2026-06-15
+- **1.2 Navbar and depth indicator** — 2026-06-15
