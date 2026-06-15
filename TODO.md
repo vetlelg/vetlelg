@@ -121,7 +121,7 @@
 
 - [x] Hero section is a bit too bright. The text, github and linkedin links are not very visible. The education text in the hero section is weirdly placed. I don't know if this text or the links are necessary. Fix it, remove them or make other improvements to the hero section so it looks good.
 
-- [] All the entries in database.js has to be included in the content of the portfolio. The content within each entry can be adjusted to fit to the page and make it look good.
+- [x] All the entries in database.js has to be included in the content of the portfolio. The content within each entry can be adjusted to fit to the page and make it look good.
 
 - [] Jellyfish in the twilight zone — A procedural jellyfish (dome + sinusoidal tentacle curves) drifting slowly through
   the education section would be a signature visual. Right now every zone is "spheres but different color." One
@@ -170,3 +170,4 @@
 - **Add depthWrite={false} to all particle materials** — 2026-06-16
 - **Remove unused public/icons.svg** — 2026-06-16
 - **Fix hero section brightness and readability** — 2026-06-16
+- **Include all database.js entries in portfolio** — 2026-06-16
