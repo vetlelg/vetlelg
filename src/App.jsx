@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Navbar from './components/Navbar'
@@ -8,6 +8,7 @@ import ExperienceSection from './components/ExperienceSection'
 import EducationSection from './components/EducationSection'
 import ProjectsSection from './components/ProjectsSection'
 import ContactSection from './components/ContactSection'
+const MarineSnow = lazy(() => import('./components/MarineSnow'))
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -69,6 +70,9 @@ function App() {
       </a>
       <Navbar />
       <DepthIndicator />
+      <Suspense fallback={null}>
+        <MarineSnow />
+      </Suspense>
       <main id="main-content">
       {zones.map((zone) => {
         if (zone.id === 'hero') return <HeroSection key={zone.id} />
