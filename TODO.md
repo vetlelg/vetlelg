@@ -123,7 +123,7 @@
 
 - [x] All the entries in database.js has to be included in the content of the portfolio. The content within each entry can be adjusted to fit to the page and make it look good.
 
-- [] Jellyfish in the twilight zone — A procedural jellyfish (dome + sinusoidal tentacle curves) drifting slowly through
+- [x] Jellyfish in the twilight zone — A procedural jellyfish (dome + sinusoidal tentacle curves) drifting slowly through
   the education section would be a signature visual. Right now every zone is "spheres but different color." One
   recognizable creature breaks the pattern and gives the twilight zone real identity.
 
@@ -171,3 +171,4 @@
 - **Remove unused public/icons.svg** — 2026-06-16
 - **Fix hero section brightness and readability** — 2026-06-16
 - **Include all database.js entries in portfolio** — 2026-06-16
+- **Jellyfish in the twilight zone** — 2026-06-16
