@@ -140,7 +140,7 @@
 
 - [x] Fix the nav bar menu on smaller screens
 
-- [] Make sure the portfolio looks good on (almost) all screen sizes
+- [x] Make sure the portfolio looks good on (almost) all screen sizes
 
 - [] Review everything and suggest discovered issues (and improvements to the page). If you find any, add them to this document
 
@@ -176,3 +176,4 @@
 - **Angler fish lure in the abyss** — 2026-06-16
 - **Fog progression** — 2026-06-16
 - **Fix mobile nav menu** — 2026-06-16
+- **Responsive improvements for all screen sizes** — 2026-06-16
