@@ -131,7 +131,7 @@
   deeper zones. Real deep ocean has this constant gentle snowfall of organic matter. It adds atmosphere and depth that
   the current sparse particles miss.
 
-- [] Angler fish lure in the abyss — A single bright point light with a subtle sway in the contact section, illuminating
+- [x] Angler fish lure in the abyss — A single bright point light with a subtle sway in the contact section, illuminating
   nearby particles as it passes. Iconic deep-sea imagery, and it gives the abyss zone a focal point instead of just
   sparse dots.
 
@@ -173,3 +173,4 @@
 - **Include all database.js entries in portfolio** — 2026-06-16
 - **Jellyfish in the twilight zone** — 2026-06-16
 - **Marine snow particle overlay** — 2026-06-16
+- **Angler fish lure in the abyss** — 2026-06-16
