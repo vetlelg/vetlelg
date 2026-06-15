@@ -108,7 +108,7 @@
 
 - [x] Review everything and suggest improvements / more discovered issues to fix
 
-- [ ] Contact section email uses work address (`vetle.larsen.gundersen@decisive.no`). This is a personal portfolio — should use a personal email address instead.
+- [x] Contact section email uses work address (`vetle.larsen.gundersen@decisive.no`). This is a personal portfolio — should use a personal email address instead.
 
 - [ ] No Open Graph / Twitter Card meta tags in `index.html`. The site won't preview well when shared on social media (e.g. LinkedIn, Twitter/X). Add `og:title`, `og:description`, `og:image`, and `twitter:card` tags.
 
@@ -139,3 +139,4 @@
 - **Enhanced hero ocean effects (god rays + bubbles)** — 2026-06-16
 - **Fix navbar too distinct from page** — 2026-06-16
 - **Review everything and suggest improvements** — 2026-06-16
+- **Fix contact email to personal address** — 2026-06-16
