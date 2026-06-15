@@ -98,7 +98,11 @@ ALL_TASKS_COMPLETE
 ---
 
 ## Discovered issues
-
+- [x] When loading the page, the background is white first before it turns blue. It looks clunky when reloading or loading the page.
+- [ ] The right bar showing depth moves with the meter number gaining width. It looks strange that the width changes when the number increases.
+- [ ] Possibly add more effects or improve the existing one to make it clearer that this is actually water / the ocean. Maybe the hero should actually start above water? I'm not sure. But I think there's potential to make the effects more fancy.
+- [ ] The navbar is a bit too distinct from the rest of the page when scrolling, especially in the beginning at the lighter parts of the page. Potentially change or remove the navbar. Do what you think looks better.
+- [ ] Review everything and suggest improvements / more discovered issues to fix
 
 ## Completed
 
@@ -114,3 +118,4 @@ ALL_TASKS_COMPLETE
 - **3.2 Responsive and accessibility** — 2026-06-15
 - **3.3 Performance and final polish** — 2026-06-15
 - **3.4 Deploy** — 2026-06-15
+- **Fix white flash on page load** — 2026-06-16
