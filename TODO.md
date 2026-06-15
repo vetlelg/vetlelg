@@ -116,7 +116,7 @@
 
 - [x] Bundle is 1,212KB (346KB gzipped) and Vite warns about chunk size. Code-split Three.js scenes with `React.lazy()` + dynamic `import()` so the initial bundle is lighter and canvases load on demand.
 
-- [ ] `SunlightParticles` and `TwilightParticles` are missing `depthWrite={false}` on their material, while `HeroCaustics` Bubbles has it. This inconsistency could cause z-ordering artifacts with transparent particles. Add `depthWrite={false}` to all particle materials for consistency.
+- [x] `SunlightParticles` and `TwilightParticles` are missing `depthWrite={false}` on their material, while `HeroCaustics` Bubbles has it. This inconsistency could cause z-ordering artifacts with transparent particles. Add `depthWrite={false}` to all particle materials for consistency.
 
 - [ ] `public/icons.svg` contains unused social icons (Bluesky, Discord, X/Twitter). Either add these as additional social links in the Contact section or remove the unused file.
 
@@ -143,3 +143,4 @@
 - **Add Open Graph / Twitter Card meta tags** — 2026-06-16
 - **Add active state highlighting to navbar links** — 2026-06-16
 - **Code-split Three.js scenes with React.lazy()** — 2026-06-16
+- **Add depthWrite={false} to all particle materials** — 2026-06-16
