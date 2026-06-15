@@ -1,0 +1,165 @@
+.experience {
+  position: relative;
+  overflow: hidden;
+  align-items: stretch;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.experience__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.experience__timeline {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.experience__timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--accent-sunlight),
+    transparent
+  );
+  opacity: 0.3;
+}
+
+.experience__card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--card-radius);
+  padding: 1.75rem;
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.experience__card::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 2rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-sunlight);
+  transform: translateX(-50%);
+  box-shadow: 0 0 8px var(--accent-sunlight);
+}
+
+.experience__card:hover {
+  border-color: var(--accent-sunlight);
+  box-shadow: 0 0 20px rgba(144, 224, 239, 0.08);
+}
+
+.experience__card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.experience__role {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.experience__dates {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.experience__company {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--accent-sunlight);
+  margin-bottom: 0.75rem;
+}
+
+.experience__description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.experience__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.experience__tech-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-sunlight);
+  background: rgba(144, 224, 239, 0.08);
+  border: 1px solid rgba(144, 224, 239, 0.15);
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 768px) {
+  .experience__timeline {
+    padding-left: 1.5rem;
+  }
+
+  .experience__card::before {
+    left: -1.5rem;
+  }
+
+  .experience__card {
+    padding: 1.25rem;
+  }
+
+  .experience__card-header {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .experience__timeline {
+    padding-left: 1.25rem;
+  }
+
+  .experience__card::before {
+    left: -1.25rem;
+  }
+
+  .experience__role {
+    font-size: 1.1rem;
+  }
+}

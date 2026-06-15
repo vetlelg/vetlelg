@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Navbar from './components/Navbar'
 import DepthIndicator from './components/DepthIndicator'
 import HeroSection from './components/HeroSection'
+import ExperienceSection from './components/ExperienceSection'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -62,10 +63,10 @@ function App() {
     <div ref={containerRef}>
       <Navbar />
       <DepthIndicator />
-      {zones.map((zone) =>
-        zone.id === 'hero' ? (
-          <HeroSection key={zone.id} />
-        ) : (
+      {zones.map((zone) => {
+        if (zone.id === 'hero') return <HeroSection key={zone.id} />
+        if (zone.id === 'experience') return <ExperienceSection key={zone.id} />
+        return (
           <section key={zone.id} id={zone.id} className="zone-section">
             <span className="zone-label">{zone.label}</span>
             <h2 className="zone-title" style={{ color: `var(${zone.accent})` }}>
@@ -74,7 +75,7 @@ function App() {
             <p className="zone-subtitle">Content coming soon</p>
           </section>
         )
-      )}
+      })}
     </div>
   )
 }
