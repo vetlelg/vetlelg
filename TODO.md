@@ -104,7 +104,7 @@
 
 - [x] Possibly add more effects or improve the existing one to make it clearer that this is actually water / the ocean. Maybe the hero should actually start above water? I'm not sure. But I think there's potential to make the effects more fancy.
 
-- [ ] The navbar is a bit too distinct from the rest of the page when scrolling, especially in the beginning at the lighter parts of the page. Potentially change or remove the navbar. Do what you think looks better.
+- [x] The navbar is a bit too distinct from the rest of the page when scrolling, especially in the beginning at the lighter parts of the page. Potentially change or remove the navbar. Do what you think looks better.
 
 - [ ] Review everything and suggest improvements / more discovered issues to fix
 
@@ -125,3 +125,4 @@
 - **Fix white flash on page load** — 2026-06-16
 - **Fix depth indicator width shifting** — 2026-06-16
 - **Enhanced hero ocean effects (god rays + bubbles)** — 2026-06-16
+- **Fix navbar too distinct from page** — 2026-06-16
