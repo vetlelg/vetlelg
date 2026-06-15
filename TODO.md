@@ -75,7 +75,7 @@
   Verify all GSAP animations reverse correctly on scroll-up.
   _Done when: full-page scroll feels like one continuous descent, no jarring transitions._
 
-- [ ] **3.2 Responsive and accessibility**
+- [x] **3.2 Responsive and accessibility**
   Test at 480px, 768px, 1440px. Fix overflow, text sizing, grid layouts.
   Reduce Three.js complexity on mobile if needed. Add aria-labels to
   interactive elements. Keyboard navigation. prefers-reduced-motion support.
@@ -110,3 +110,4 @@
 - **2.5 Projects section** — 2026-06-15
 - **2.6 Contact section** — 2026-06-15
 - **3.1 Integration and transitions** — 2026-06-15
+- **3.2 Responsive and accessibility** — 2026-06-15
