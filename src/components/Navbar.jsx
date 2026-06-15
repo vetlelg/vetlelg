@@ -11,12 +11,26 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const navRef = useRef(null)
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
+      const currentY = window.scrollY
+      const delta = currentY - lastScrollY.current
+
+      setScrolled(currentY > 50)
+
+      if (currentY > 200 && delta > 8) {
+        setHidden(true)
+        setMenuOpen(false)
+      } else if (delta < -4 || currentY <= 50) {
+        setHidden(false)
+      }
+
+      lastScrollY.current = currentY
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
@@ -57,10 +71,14 @@ export default function Navbar() {
     setMenuOpen(false)
   }
 
+  let className = 'navbar'
+  if (scrolled) className += ' navbar--scrolled'
+  if (hidden) className += ' navbar--hidden'
+
   return (
     <nav
       ref={navRef}
-      className={`navbar${scrolled ? ' navbar--scrolled' : ''}`}
+      className={className}
       aria-label="Main navigation"
     >
       <a

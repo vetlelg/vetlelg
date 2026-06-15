@@ -8,13 +8,21 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem 2rem;
-  transition: background-color 0.3s, backdrop-filter 0.3s, -webkit-backdrop-filter 0.3s;
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.5s ease,
+              backdrop-filter 0.5s ease,
+              -webkit-backdrop-filter 0.5s ease;
 }
 
 .navbar--scrolled {
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.navbar--hidden {
+  transform: translateY(-100%);
 }
 
 .navbar__logo {
@@ -24,6 +32,12 @@
   color: var(--text-primary);
   letter-spacing: 0.05em;
   z-index: 102;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.navbar__logo:hover {
+  opacity: 1;
 }
 
 .navbar__links {
@@ -37,11 +51,13 @@
   font-size: 0.8rem;
   color: var(--text-secondary);
   letter-spacing: 0.05em;
-  transition: color 0.2s;
+  opacity: 0.7;
+  transition: color 0.2s, opacity 0.2s;
 }
 
 .navbar__links a:hover {
   color: var(--text-primary);
+  opacity: 1;
 }
 
 .navbar__hamburger {
@@ -107,6 +123,7 @@
 
   .navbar__links a {
     font-size: 1.125rem;
+    opacity: 1;
   }
 }
 
