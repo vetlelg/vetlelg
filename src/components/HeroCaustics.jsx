@@ -29,6 +29,15 @@ const fragmentShader = `
     return min(a, b);
   }
 
+  float godRay(vec2 uv, float angle, float width, float speed, float offset) {
+    float s = sin(angle);
+    float c = cos(angle);
+    float projected = uv.x * c + uv.y * s + offset;
+    projected += sin(uTime * speed) * 0.2;
+    float ray = smoothstep(width, 0.0, abs(fract(projected) - 0.5));
+    return ray * ray;
+  }
+
   void main() {
     float c = 0.0;
     c += causticLayer(vUv, 4.0, 0.12, 0.0);
@@ -38,11 +47,19 @@ const fragmentShader = `
 
     float brightness = exp(-c * 5.0);
 
+    float rays = 0.0;
+    rays += godRay(vUv, 0.35, 0.12, 0.02, 0.0) * 0.5;
+    rays += godRay(vUv, 0.55, 0.08, 0.015, 1.7) * 0.35;
+    rays += godRay(vUv, 0.25, 0.15, 0.025, 3.2) * 0.25;
+    float depthFade = smoothstep(0.0, 0.8, vUv.y);
+    rays *= depthFade;
+
     vec2 center = vUv - 0.5;
     float vignette = 1.0 - dot(center, center) * 2.0;
     vignette = clamp(vignette, 0.0, 1.0);
 
-    gl_FragColor = vec4(uAccent, brightness * vignette * 0.25);
+    float finalAlpha = (brightness * 0.3 + rays * 0.12) * vignette;
+    gl_FragColor = vec4(uAccent, finalAlpha);
   }
 `
 
@@ -76,6 +93,54 @@ function CausticMesh() {
 }
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
+const BUBBLE_COUNT = IS_MOBILE ? 12 : 30
+
+function Bubbles() {
+  const meshRef = useRef()
+  const dummy = useMemo(() => new THREE.Object3D(), [])
+
+  const bubbles = useMemo(() => {
+    const arr = []
+    for (let i = 0; i < BUBBLE_COUNT; i++) {
+      arr.push({
+        x: (Math.random() - 0.5) * 5,
+        y: Math.random() * 6 - 3,
+        z: Math.random() * 1.2 + 0.3,
+        speed: Math.random() * 0.25 + 0.08,
+        wobbleSpeed: Math.random() * 1.0 + 0.5,
+        wobbleAmp: Math.random() * 0.2 + 0.05,
+        scale: Math.random() * 0.018 + 0.004,
+        phase: Math.random() * Math.PI * 2,
+      })
+    }
+    return arr
+  }, [])
+
+  useFrame((state) => {
+    const t = state.clock.elapsedTime
+    bubbles.forEach((b, i) => {
+      let y = b.y + t * b.speed
+      const range = 5
+      y = ((y % range) + range) % range - range / 2
+
+      const x = b.x + Math.sin(t * b.wobbleSpeed + b.phase) * b.wobbleAmp
+      const z = b.z + Math.cos(t * b.wobbleSpeed * 0.7 + b.phase) * 0.05
+
+      dummy.position.set(x, y, z)
+      dummy.scale.setScalar(b.scale * (1 + Math.sin(t + b.phase) * 0.1))
+      dummy.updateMatrix()
+      meshRef.current.setMatrixAt(i, dummy.matrix)
+    })
+    meshRef.current.instanceMatrix.needsUpdate = true
+  })
+
+  return (
+    <instancedMesh ref={meshRef} args={[null, null, BUBBLE_COUNT]}>
+      <sphereGeometry args={[1, 10, 10]} />
+      <meshBasicMaterial color="#CAF0F8" transparent opacity={0.12} depthWrite={false} />
+    </instancedMesh>
+  )
+}
 
 export default function HeroCaustics() {
   const prefersReduced =
@@ -100,6 +165,7 @@ export default function HeroCaustics() {
         }}
       >
         <CausticMesh />
+        <Bubbles />
       </Canvas>
     </Suspense>
   )
