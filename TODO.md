@@ -21,7 +21,7 @@
 
 ## Phase 2: Sections
 
-- [ ] **2.1 Hero section**
+- [x] **2.1 Hero section**
   Full viewport. Name, subtitle, scroll-to-descend indicator with a
   gentle animation. A Three.js scene behind the text providing a caustic
   light effect or shimmering water surface — something that says "ocean
@@ -103,3 +103,4 @@
 
 - **1.1 Setup and zone background system** — 2026-06-15
 - **1.2 Navbar and depth indicator** — 2026-06-15
+- **2.1 Hero section** — 2026-06-15
