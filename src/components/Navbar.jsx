@@ -48,6 +48,11 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
+  useEffect(() => {
     if (!menuOpen) return
     const handleKey = (e) => {
       if (e.key === 'Escape') setMenuOpen(false)
@@ -72,6 +77,14 @@ export default function Navbar() {
     return () => window.removeEventListener('keydown', handleKey)
   }, [menuOpen])
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) setMenuOpen(false)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const handleNavClick = (e, id) => {
     e.preventDefault()
     const el = document.getElementById(id)
@@ -79,6 +92,10 @@ export default function Navbar() {
       el.scrollIntoView({ behavior: 'smooth' })
     }
     setMenuOpen(false)
+  }
+
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) setMenuOpen(false)
   }
 
   let className = 'navbar'
@@ -111,7 +128,12 @@ export default function Navbar() {
         <span />
       </button>
 
-      <ul id="nav-menu" className={`navbar__links${menuOpen ? ' navbar__links--open' : ''}`} role="list">
+      <ul
+        id="nav-menu"
+        className={`navbar__links${menuOpen ? ' navbar__links--open' : ''}`}
+        role="list"
+        onClick={handleOverlayClick}
+      >
         {navLinks.map((link) => (
           <li key={link.id}>
             <a
