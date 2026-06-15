@@ -135,7 +135,7 @@
   nearby particles as it passes. Iconic deep-sea imagery, and it gives the abyss zone a focal point instead of just
   sparse dots.
 
-- [] Fog progression — Three.js fog that gets denser as you scroll deeper. Simple to add, reinforces the depth narrative
+- [x] Fog progression — Three.js fog that gets denser as you scroll deeper. Simple to add, reinforces the depth narrative
   physically rather than just through color.
 
 - [] Fix the nav bar menu on smaller screens
@@ -174,3 +174,4 @@
 - **Jellyfish in the twilight zone** — 2026-06-16
 - **Marine snow particle overlay** — 2026-06-16
 - **Angler fish lure in the abyss** — 2026-06-16
+- **Fog progression** — 2026-06-16
