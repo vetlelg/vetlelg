@@ -93,6 +93,8 @@ export default function HeroCaustics() {
           inset: 0,
           pointerEvents: 'none',
           zIndex: 0,
+          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)',
+          maskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)',
         }}
       >
         <CausticMesh />

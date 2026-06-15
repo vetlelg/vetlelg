@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HeroCaustics from './HeroCaustics'
 import './HeroSection.css'
 
@@ -29,6 +30,17 @@ export default function HeroSection() {
         duration: 1,
         delay: 0.8,
         ease: 'power2.out',
+      })
+
+      gsap.to('.hero__scroll-indicator', {
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: '25% top',
+          scrub: true,
+        },
+        opacity: 0,
+        y: -10,
       })
     }, sectionRef)
 

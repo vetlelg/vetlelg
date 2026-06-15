@@ -96,6 +96,8 @@ export default function AbyssParticles() {
           inset: 0,
           pointerEvents: 'none',
           zIndex: 0,
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 100%)',
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 100%)',
         }}
       >
         <Particles />

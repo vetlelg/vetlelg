@@ -69,6 +69,8 @@ export default function TwilightParticles() {
           inset: 0,
           pointerEvents: 'none',
           zIndex: 0,
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
         }}
       >
         <Particles />
