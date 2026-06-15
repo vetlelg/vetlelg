@@ -82,7 +82,7 @@
   Skip-to-content link.
   _Done when: no horizontal scroll at any width, tab navigation works, reduced motion works._
 
-- [ ] **3.3 Performance and final polish**
+- [x] **3.3 Performance and final polish**
   `npm run build` — check bundle size (aim for < 500KB gzipped). Verify
   Three.js cleanup (dispose calls, no memory leaks on repeated scroll).
   Add Suspense fallbacks for Three.js scenes. Favicon. Consistent spacing.
@@ -111,3 +111,4 @@
 - **2.6 Contact section** — 2026-06-15
 - **3.1 Integration and transitions** — 2026-06-15
 - **3.2 Responsive and accessibility** — 2026-06-15
+- **3.3 Performance and final polish** — 2026-06-15
