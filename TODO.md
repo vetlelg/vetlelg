@@ -42,7 +42,7 @@
   light, organic, ambient. Data from experience.js.
   _Done when: section renders from data, animates on scroll, particles work, responsive._
 
-- [ ] **2.4 Education section**
+- [x] **2.4 Education section**
   Credentials section in the twilight zone. Cards for each degree with
   institution, degree, year, highlights. GSAP scroll reveal. Include a
   Three.js element fitting the twilight zone — darker, bioluminescent,
@@ -106,3 +106,4 @@
 - **2.1 Hero section** — 2026-06-15
 - **2.2 Data files** — 2026-06-15
 - **2.3 Experience section** — 2026-06-15
+- **2.4 Education section** — 2026-06-15
