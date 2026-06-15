@@ -112,7 +112,7 @@
 
 - [x] No Open Graph / Twitter Card meta tags in `index.html`. The site won't preview well when shared on social media (e.g. LinkedIn, Twitter/X). Add `og:title`, `og:description`, `og:image`, and `twitter:card` tags.
 
-- [ ] No active state on navbar links to indicate which section is currently in view. Add scroll-based highlighting (IntersectionObserver or ScrollTrigger) to show the current section in the nav.
+- [x] No active state on navbar links to indicate which section is currently in view. Add scroll-based highlighting (IntersectionObserver or ScrollTrigger) to show the current section in the nav.
 
 - [ ] Bundle is 1,212KB (346KB gzipped) and Vite warns about chunk size. Code-split Three.js scenes with `React.lazy()` + dynamic `import()` so the initial bundle is lighter and canvases load on demand.
 
@@ -141,3 +141,4 @@
 - **Review everything and suggest improvements** — 2026-06-16
 - **Fix contact email to personal address** — 2026-06-16
 - **Add Open Graph / Twitter Card meta tags** — 2026-06-16
+- **Add active state highlighting to navbar links** — 2026-06-16
