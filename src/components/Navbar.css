@@ -43,7 +43,7 @@
 .navbar__links {
   display: flex;
   list-style: none;
-  gap: 2rem;
+  gap: clamp(1rem, 2vw, 2rem);
 }
 
 .navbar__links a {

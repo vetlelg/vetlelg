@@ -46,6 +46,9 @@
   transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
   display: inline-block;
   pointer-events: auto;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .contact__email-btn:hover {

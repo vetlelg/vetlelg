@@ -36,6 +36,12 @@
   }
 }
 
+@media (min-width: 1440px) {
+  .zone-section {
+    padding: 5rem 3rem;
+  }
+}
+
 @media (max-width: 480px) {
   .zone-section {
     padding: 2.5rem 1rem;
