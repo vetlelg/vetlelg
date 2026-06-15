@@ -110,7 +110,7 @@
 
 - [x] Contact section email uses work address (`vetle.larsen.gundersen@decisive.no`). This is a personal portfolio — should use a personal email address instead.
 
-- [ ] No Open Graph / Twitter Card meta tags in `index.html`. The site won't preview well when shared on social media (e.g. LinkedIn, Twitter/X). Add `og:title`, `og:description`, `og:image`, and `twitter:card` tags.
+- [x] No Open Graph / Twitter Card meta tags in `index.html`. The site won't preview well when shared on social media (e.g. LinkedIn, Twitter/X). Add `og:title`, `og:description`, `og:image`, and `twitter:card` tags.
 
 - [ ] No active state on navbar links to indicate which section is currently in view. Add scroll-based highlighting (IntersectionObserver or ScrollTrigger) to show the current section in the nav.
 
@@ -140,3 +140,4 @@
 - **Fix navbar too distinct from page** — 2026-06-16
 - **Review everything and suggest improvements** — 2026-06-16
 - **Fix contact email to personal address** — 2026-06-16
+- **Add Open Graph / Twitter Card meta tags** — 2026-06-16
