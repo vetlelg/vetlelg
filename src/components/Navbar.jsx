@@ -13,6 +13,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('hero')
   const navRef = useRef(null)
   const lastScrollY = useRef(0)
 
@@ -29,6 +30,15 @@ export default function Navbar() {
       } else if (delta < -4 || currentY <= 50) {
         setHidden(false)
       }
+
+      let current = navLinks[0].id
+      for (const link of navLinks) {
+        const el = document.getElementById(link.id)
+        if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.35) {
+          current = link.id
+        }
+      }
+      setActiveSection(current)
 
       lastScrollY.current = currentY
     }
@@ -104,7 +114,13 @@ export default function Navbar() {
       <ul id="nav-menu" className={`navbar__links${menuOpen ? ' navbar__links--open' : ''}`} role="list">
         {navLinks.map((link) => (
           <li key={link.id}>
-            <a href={`#${link.id}`} onClick={(e) => handleNavClick(e, link.id)}>
+            <a
+              href={`#${link.id}`}
+              className={activeSection === link.id ? 'navbar__link--active' : ''}
+              data-section={link.id}
+              aria-current={activeSection === link.id ? 'true' : undefined}
+              onClick={(e) => handleNavClick(e, link.id)}
+            >
               {link.label}
             </a>
           </li>
