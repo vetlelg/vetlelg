@@ -145,6 +145,12 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .experience__card {
+    transition: none;
+  }
+}
+
 @media (max-width: 480px) {
   .experience {
     padding-left: 1rem;

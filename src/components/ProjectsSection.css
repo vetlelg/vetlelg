@@ -146,6 +146,14 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .projects__card,
+  .projects__link,
+  .projects__link--github {
+    transition: none;
+  }
+}
+
 @media (max-width: 480px) {
   .projects {
     padding-left: 1rem;

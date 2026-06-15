@@ -57,7 +57,7 @@ export default function HeroSection() {
       </div>
       <div className="hero__scroll-indicator">
         <span className="hero__scroll-text">Scroll to descend</span>
-        <svg className="hero__scroll-chevrons" width="20" height="16" viewBox="0 0 20 16" fill="none">
+        <svg className="hero__scroll-chevrons" width="20" height="16" viewBox="0 0 20 16" fill="none" aria-hidden="true">
           <path d="M4 2L10 8L16 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.8" />
           <path d="M4 8L10 14L16 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.4" />
         </svg>

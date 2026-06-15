@@ -2,7 +2,8 @@ import { Suspense, useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
-const PARTICLE_COUNT = 30
+const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
+const PARTICLE_COUNT = IS_MOBILE ? 14 : 30
 
 function Particles() {
   const meshRef = useRef()
@@ -89,7 +90,7 @@ export default function AbyssParticles() {
     <Suspense fallback={null}>
       <Canvas
         camera={{ position: [0, 0, 5], fov: 60 }}
-        dpr={[1, 1.5]}
+        dpr={IS_MOBILE ? 1 : [1, 1.5]}
         gl={{ alpha: true, antialias: false }}
         style={{
           position: 'absolute',

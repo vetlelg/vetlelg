@@ -96,7 +96,11 @@ export default function ContactSection() {
           Signals still reach down here. Whether you have a project in mind,
           want to collaborate, or just want to say hello — I'd love to hear from you.
         </p>
-        <a href="mailto:vetle.larsen.gundersen@decisive.no" className="contact__email-btn">
+        <a
+          href="mailto:vetle.larsen.gundersen@decisive.no"
+          className="contact__email-btn"
+          aria-label="Send email to vetle.larsen.gundersen@decisive.no"
+        >
           vetle.larsen.gundersen@decisive.no
         </a>
         <div className="contact__socials">
@@ -123,7 +127,12 @@ export default function ContactSection() {
             </svg>
           </a>
         </div>
-        <a href="#hero" onClick={handleBackToSurface} className="contact__surface-link">
+        <a
+          href="#hero"
+          onClick={handleBackToSurface}
+          className="contact__surface-link"
+          aria-label="Scroll back to top of page"
+        >
           Back to surface
         </a>
       </div>

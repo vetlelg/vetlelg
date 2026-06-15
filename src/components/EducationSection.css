@@ -97,6 +97,12 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .education__card {
+    transition: none;
+  }
+}
+
 @media (max-width: 480px) {
   .education {
     padding-left: 1rem;

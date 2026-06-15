@@ -113,6 +113,14 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .contact__email-btn,
+  .contact__social-link,
+  .contact__surface-link {
+    transition: none;
+  }
+}
+
 @media (max-width: 480px) {
   .contact {
     padding-left: 1rem;
@@ -122,6 +130,6 @@
   .contact__email-btn {
     font-size: 0.7rem;
     padding: 0.6rem 1.25rem;
-    word-break: break-all;
+    overflow-wrap: break-word;
   }
 }

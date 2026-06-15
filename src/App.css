@@ -29,3 +29,19 @@
   max-width: 40ch;
   text-align: center;
 }
+
+@media (max-width: 768px) {
+  .zone-section {
+    padding: 3rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .zone-section {
+    padding: 2.5rem 1rem;
+  }
+
+  .zone-title {
+    font-size: clamp(1.75rem, 5vw, 3.5rem);
+  }
+}

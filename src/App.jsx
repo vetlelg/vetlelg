@@ -64,8 +64,12 @@ function App() {
 
   return (
     <div ref={containerRef}>
+      <a href="#experience" className="skip-link">
+        Skip to content
+      </a>
       <Navbar />
       <DepthIndicator />
+      <main id="main-content">
       {zones.map((zone) => {
         if (zone.id === 'hero') return <HeroSection key={zone.id} />
         if (zone.id === 'experience') return <ExperienceSection key={zone.id} />
@@ -74,6 +78,7 @@ function App() {
         if (zone.id === 'contact') return <ContactSection key={zone.id} />
         return null
       })}
+      </main>
     </div>
   )
 }

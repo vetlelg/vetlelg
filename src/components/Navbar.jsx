@@ -27,6 +27,22 @@ export default function Navbar() {
     if (!menuOpen) return
     const handleKey = (e) => {
       if (e.key === 'Escape') setMenuOpen(false)
+
+      if (e.key === 'Tab' && navRef.current) {
+        const focusable = navRef.current.querySelectorAll(
+          'a, button, [tabindex]:not([tabindex="-1"])'
+        )
+        if (focusable.length === 0) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
     }
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
@@ -60,13 +76,14 @@ export default function Navbar() {
         onClick={() => setMenuOpen((v) => !v)}
         aria-label="Toggle navigation menu"
         aria-expanded={menuOpen}
+        aria-controls="nav-menu"
       >
         <span />
         <span />
         <span />
       </button>
 
-      <ul className={`navbar__links${menuOpen ? ' navbar__links--open' : ''}`}>
+      <ul id="nav-menu" className={`navbar__links${menuOpen ? ' navbar__links--open' : ''}`} role="list">
         {navLinks.map((link) => (
           <li key={link.id}>
             <a href={`#${link.id}`} onClick={(e) => handleNavClick(e, link.id)}>

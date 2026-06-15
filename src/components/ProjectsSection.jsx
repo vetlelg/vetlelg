@@ -60,6 +60,7 @@ export default function ProjectsSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="projects__link"
+                  aria-label={`Live demo of ${project.title}`}
                 >
                   Live Demo
                 </a>
@@ -68,6 +69,7 @@ export default function ProjectsSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="projects__link projects__link--github"
+                  aria-label={`Source code for ${project.title}`}
                 >
                   Source
                 </a>

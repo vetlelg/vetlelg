@@ -75,6 +75,8 @@ function CausticMesh() {
   )
 }
 
+const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
+
 export default function HeroCaustics() {
   const prefersReduced =
     typeof window !== 'undefined' &&
@@ -86,7 +88,7 @@ export default function HeroCaustics() {
     <Suspense fallback={null}>
       <Canvas
         camera={{ position: [0, 0, 3], fov: 60 }}
-        dpr={[1, 1.5]}
+        dpr={IS_MOBILE ? 1 : [1, 1.5]}
         gl={{ alpha: true, antialias: false }}
         style={{
           position: 'absolute',
