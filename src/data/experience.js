@@ -1,33 +1,53 @@
 const experience = [
   {
     id: 'decisive',
-    company: 'Decisive',
-    role: 'Software Developer',
-    startDate: '2023',
+    company: 'Decisive AS',
+    role: 'Consultant',
+    startDate: '2025',
     endDate: 'Present',
     description:
-      'Building data-driven decision platforms for enterprise clients. Full-stack development with React frontends and Python microservices. Led migration of legacy dashboard system to a modern component architecture, reducing page load times by 60%.',
-    technologies: ['React', 'Python', 'TypeScript', 'PostgreSQL', 'Docker'],
+      'Software development consulting for clients working with event-driven architecture and reactive systems.',
+    technologies: ['Kotlin', 'Spring WebFlux', 'PostgreSQL', 'R2DBC', 'Docker'],
   },
   {
-    id: 'kantega',
-    company: 'Kantega',
-    role: 'Junior Developer',
-    startDate: '2021',
-    endDate: '2023',
+    id: 'intility-ir',
+    company: 'Intility',
+    role: 'Incident Responder',
+    startDate: '2017',
+    endDate: '2022',
     description:
-      'Developed and maintained web applications for public-sector clients across health and education. Worked in cross-functional agile teams shipping features on two-week cycles. Built accessible UI components and contributed to shared design system.',
-    technologies: ['Vue.js', 'Java', 'Spring Boot', 'Azure', 'REST APIs'],
+      'Monitoring and incident management of network and server infrastructure. Troubleshooting, resolving, or escalating critical issues across networks, servers, and business applications.',
+    technologies: ['Windows Server', 'Linux', 'VMware', 'Azure', 'Cisco'],
   },
   {
-    id: 'ntnu-research',
-    company: 'NTNU',
-    role: 'Research Assistant',
-    startDate: '2020',
-    endDate: '2021',
+    id: 'intility-senior',
+    company: 'Intility',
+    role: 'Senior Technician',
+    startDate: '2015',
+    endDate: '2017',
     description:
-      'Assisted the Machine Learning Group with data pipeline development and experiment automation. Built visualization tools for model performance analysis and contributed to a published paper on energy-efficient neural architecture search.',
-    technologies: ['Python', 'PyTorch', 'NumPy', 'Jupyter', 'Linux'],
+      'Technical escalation and mentoring. 3 months in Auckland and 12 months at the Singapore office, establishing 24/7 support and monitoring. On-site client support in Singapore and Hong Kong.',
+    technologies: ['IT Operations', 'Mentoring', 'Global Support'],
+  },
+  {
+    id: 'intility-tech',
+    company: 'Intility',
+    role: 'Technician',
+    startDate: '2014',
+    endDate: '2015',
+    description:
+      'Technical support specializing in business applications. Training of apprentices and new employees.',
+    technologies: ['IT Support', 'Business Applications'],
+  },
+  {
+    id: 'intility-apprentice',
+    company: 'Intility',
+    role: 'Technical Apprentice',
+    startDate: '2012',
+    endDate: '2014',
+    description:
+      'Apprenticeship providing technical support via phone, email, and chat.',
+    technologies: ['IT Support'],
   },
 ]
 

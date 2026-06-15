@@ -1,24 +1,40 @@
 const education = [
   {
-    id: 'ntnu-msc',
-    institution: 'Norwegian University of Science and Technology (NTNU)',
-    degree: 'MSc Computer Science',
-    year: '2023',
+    id: 'uio-msc',
+    institution: 'University of Oslo',
+    degree: 'MSc Informatics',
+    year: '2025 — 2028',
     highlights: [
-      'Specialization in Artificial Intelligence',
-      'Thesis: "Efficient Neural Architecture Search for Edge Deployment"',
-      'Teaching assistant for TDT4120 Algorithms and Data Structures',
+      'Programming and Systems Architecture',
     ],
   },
   {
-    id: 'ntnu-bsc',
-    institution: 'Norwegian University of Science and Technology (NTNU)',
-    degree: 'BSc Computer Science',
-    year: '2021',
+    id: 'oslomet-beng',
+    institution: 'Oslo Metropolitan University',
+    degree: 'B.Eng Software Engineering',
+    year: '2022 — 2025',
     highlights: [
-      'Focus on software engineering and databases',
-      'Bachelor project: full-stack booking system for student organizations',
-      'Active in Abakus — student association for computer science',
+      'Programming, algorithms, databases, web and app development',
+      'Software testing, cyber security, computer networks',
+    ],
+  },
+  {
+    id: 'oslomet-pre',
+    institution: 'Oslo Metropolitan University',
+    degree: 'Pre-Engineering',
+    year: '2019 — 2020',
+    highlights: [
+      'Mathematics and physics prerequisites for engineering',
+    ],
+  },
+  {
+    id: 'electronics',
+    institution: 'Elvebakken VGS / Sogn VGS / Intility',
+    degree: 'Trade Certificate — Computer Electronics',
+    year: '2009 — 2014',
+    highlights: [
+      'Electronics, programming, servers, and computer networks',
+      '18-month apprenticeship at Intility',
     ],
   },
 ]
