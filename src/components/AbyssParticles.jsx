@@ -74,7 +74,7 @@ function Particles() {
           args={[colorArr, 3]}
         />
       </sphereGeometry>
-      <meshBasicMaterial vertexColors transparent opacity={0.4} />
+      <meshBasicMaterial vertexColors transparent opacity={0.4} depthWrite={false} />
     </instancedMesh>
   )
 }

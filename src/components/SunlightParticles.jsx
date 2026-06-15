@@ -42,7 +42,7 @@ function Particles() {
   return (
     <instancedMesh ref={meshRef} args={[null, null, PARTICLE_COUNT]}>
       <sphereGeometry args={[1, 8, 8]} />
-      <meshBasicMaterial color="#90E0EF" transparent opacity={0.4} />
+      <meshBasicMaterial color="#90E0EF" transparent opacity={0.4} depthWrite={false} />
     </instancedMesh>
   )
 }
