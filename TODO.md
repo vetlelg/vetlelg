@@ -1,3 +1,4 @@
+ALL_TASKS_COMPLETE
 # TODO.md — Deep Sea Dev Portfolio
 
 > Read this first every session. Pick the top incomplete task. Update before exiting.
@@ -89,7 +90,7 @@
   Make it feel finished.
   _Done when: build passes, Lighthouse performance > 80, feels complete._
 
-- [ ] **3.4 Deploy**
+- [x] **3.4 Deploy**
   Production build. Deploy to Vercel, Netlify, or GitHub Pages. Verify
   everything works in the deployed version.
   _Done when: live URL works with no console errors._
@@ -112,3 +113,4 @@
 - **3.1 Integration and transitions** — 2026-06-15
 - **3.2 Responsive and accessibility** — 2026-06-15
 - **3.3 Performance and final polish** — 2026-06-15
+- **3.4 Deploy** — 2026-06-15
