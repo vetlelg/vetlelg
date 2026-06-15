@@ -36,7 +36,9 @@
   color: var(--text-dim);
   letter-spacing: 0.05em;
   white-space: nowrap;
-  min-width: 5ch;
+  width: 7ch;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 @media (max-width: 768px) {
