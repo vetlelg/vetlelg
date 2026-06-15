@@ -1,5 +1,3 @@
-ALL_TASKS_COMPLETE
-
 # TODO.md — Deep Sea Dev Portfolio
 
 > Read this first every session. Pick the top incomplete task. Update before exiting.
@@ -121,6 +119,31 @@ ALL_TASKS_COMPLETE
 
 - [x] `public/icons.svg` contains unused social icons (Bluesky, Discord, X/Twitter). Either add these as additional social links in the Contact section or remove the unused file.
 
+- [x] Hero section is a bit too bright. The text, github and linkedin links are not very visible. The education text in the hero section is weirdly placed. I don't know if this text or the links are necessary. Fix it, remove them or make other improvements to the hero section so it looks good.
+
+- [] All the entries in database.js has to be included in the content of the portfolio. The content within each entry can be adjusted to fit to the page and make it look good.
+
+- [] Jellyfish in the twilight zone — A procedural jellyfish (dome + sinusoidal tentacle curves) drifting slowly through
+  the education section would be a signature visual. Right now every zone is "spheres but different color." One
+  recognizable creature breaks the pattern and gives the twilight zone real identity.
+
+- [] Marine snow — Thousands of tiny falling specks (a single Points geometry, very cheap to render) layered across the
+  deeper zones. Real deep ocean has this constant gentle snowfall of organic matter. It adds atmosphere and depth that
+  the current sparse particles miss.
+
+- [] Angler fish lure in the abyss — A single bright point light with a subtle sway in the contact section, illuminating
+  nearby particles as it passes. Iconic deep-sea imagery, and it gives the abyss zone a focal point instead of just
+  sparse dots.
+
+- [] Fog progression — Three.js fog that gets denser as you scroll deeper. Simple to add, reinforces the depth narrative
+  physically rather than just through color.
+
+- [] Fix the nav bar menu on smaller screens
+
+- [] Make sure the portfolio looks good on (almost) all screen sizes
+
+- [] Review everything and suggest discovered issues (and improvements to the page). If you find any, add them to this document
+
 ## Completed
 
 - **1.1 Setup and zone background system** — 2026-06-15
@@ -146,3 +169,4 @@ ALL_TASKS_COMPLETE
 - **Code-split Three.js scenes with React.lazy()** — 2026-06-16
 - **Add depthWrite={false} to all particle materials** — 2026-06-16
 - **Remove unused public/icons.svg** — 2026-06-16
+- **Fix hero section brightness and readability** — 2026-06-16

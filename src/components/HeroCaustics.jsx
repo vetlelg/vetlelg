@@ -1,6 +1,7 @@
 import { Suspense, useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
+import { EffectComposer, Bloom } from '@react-three/postprocessing'
 
 const vertexShader = `
   varying vec2 vUv;
@@ -58,7 +59,7 @@ const fragmentShader = `
     float vignette = 1.0 - dot(center, center) * 2.0;
     vignette = clamp(vignette, 0.0, 1.0);
 
-    float finalAlpha = (brightness * 0.3 + rays * 0.12) * vignette;
+    float finalAlpha = (brightness * 0.18 + rays * 0.08) * vignette;
     gl_FragColor = vec4(uAccent, finalAlpha);
   }
 `
@@ -87,6 +88,7 @@ function CausticMesh() {
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         transparent
+        toneMapped={false}
       />
     </mesh>
   )
@@ -137,7 +139,7 @@ function Bubbles() {
   return (
     <instancedMesh ref={meshRef} args={[null, null, BUBBLE_COUNT]}>
       <sphereGeometry args={[1, 10, 10]} />
-      <meshBasicMaterial color="#CAF0F8" transparent opacity={0.12} depthWrite={false} />
+      <meshBasicMaterial color="#CAF0F8" transparent opacity={0.12} depthWrite={false} toneMapped={false} />
     </instancedMesh>
   )
 }
@@ -166,6 +168,9 @@ export default function HeroCaustics() {
       >
         <CausticMesh />
         <Bubbles />
+        <EffectComposer multisampling={0}>
+          <Bloom mipmapBlur intensity={0.5} luminanceThreshold={0.2} luminanceSmoothing={0.3} />
+        </EffectComposer>
       </Canvas>
     </Suspense>
   )
