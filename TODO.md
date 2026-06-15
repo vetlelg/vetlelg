@@ -49,7 +49,7 @@
   something with purple/violet glow. Data from education.js.
   _Done when: section renders from data, animates on scroll, Three.js element works, responsive._
 
-- [ ] **2.5 Projects section**
+- [x] **2.5 Projects section**
   Project showcase in the midnight zone. Grid layout (2 cols desktop,
   1 mobile). Each card: title, description, tech tags, links to live site
   and GitHub. Styled as specimen cards or deep-sea research records.
@@ -107,3 +107,4 @@
 - **2.2 Data files** — 2026-06-15
 - **2.3 Experience section** — 2026-06-15
 - **2.4 Education section** — 2026-06-15
+- **2.5 Projects section** — 2026-06-15
