@@ -7,6 +7,7 @@ import HeroSection from './components/HeroSection'
 import ExperienceSection from './components/ExperienceSection'
 import EducationSection from './components/EducationSection'
 import ProjectsSection from './components/ProjectsSection'
+import ContactSection from './components/ContactSection'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -70,15 +71,8 @@ function App() {
         if (zone.id === 'experience') return <ExperienceSection key={zone.id} />
         if (zone.id === 'education') return <EducationSection key={zone.id} />
         if (zone.id === 'projects') return <ProjectsSection key={zone.id} />
-        return (
-          <section key={zone.id} id={zone.id} className="zone-section">
-            <span className="zone-label">{zone.label}</span>
-            <h2 className="zone-title" style={{ color: `var(${zone.accent})` }}>
-              {zone.title}
-            </h2>
-            <p className="zone-subtitle">Content coming soon</p>
-          </section>
-        )
+        if (zone.id === 'contact') return <ContactSection key={zone.id} />
+        return null
       })}
     </div>
   )
