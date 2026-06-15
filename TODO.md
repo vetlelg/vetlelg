@@ -68,7 +68,7 @@
 
 ## Phase 3: Polish and ship
 
-- [ ] **3.1 Integration and transitions**
+- [x] **3.1 Integration and transitions**
   Scroll the full page top to bottom and back. Fix any hard cuts between
   zones — backgrounds, particle scenes, and content should blend smoothly.
   Three.js canvases should fade at zone boundaries, not pop in/out.
@@ -109,3 +109,4 @@
 - **2.4 Education section** — 2026-06-15
 - **2.5 Projects section** — 2026-06-15
 - **2.6 Contact section** — 2026-06-15
+- **3.1 Integration and transitions** — 2026-06-15
