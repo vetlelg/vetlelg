@@ -34,7 +34,7 @@
   an array of objects with all the fields the sections will need.
   _Done when: all three files import cleanly and contain complete placeholder data._
 
-- [ ] **2.3 Experience section**
+- [x] **2.3 Experience section**
   Work history section in the sunlight zone. Timeline or structured layout
   showing role, company, dates, and description for each entry. Cards use
   the glassmorphism style. GSAP scroll animation to reveal entries.
@@ -105,3 +105,4 @@
 - **1.2 Navbar and depth indicator** — 2026-06-15
 - **2.1 Hero section** — 2026-06-15
 - **2.2 Data files** — 2026-06-15
+- **2.3 Experience section** — 2026-06-15
