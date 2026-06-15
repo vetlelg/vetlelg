@@ -28,7 +28,7 @@
   surface" without being heavy. Canvas behind text, pointer-events none.
   _Done when: hero renders with visible Three.js atmosphere, text is readable, 60fps._
 
-- [ ] **2.2 Data files**
+- [x] **2.2 Data files**
   Create src/data/experience.js (3 entries), education.js (2 entries),
   projects.js (4 entries) with realistic placeholder content. Each exports
   an array of objects with all the fields the sections will need.
@@ -104,3 +104,4 @@
 - **1.1 Setup and zone background system** — 2026-06-15
 - **1.2 Navbar and depth indicator** — 2026-06-15
 - **2.1 Hero section** — 2026-06-15
+- **2.2 Data files** — 2026-06-15
