@@ -58,7 +58,7 @@
   Data from projects.js.
   _Done when: grid renders from data, hover states work, links clickable, particles work, responsive._
 
-- [ ] **2.6 Contact section**
+- [x] **2.6 Contact section**
   Contact section in the abyss zone. "Send a transmission" or similar
   heading. Email link as a glowing accent button. Social icon links
   (GitHub, LinkedIn — inline SVG, no icon library). "Back to surface"
@@ -108,3 +108,4 @@
 - **2.3 Experience section** — 2026-06-15
 - **2.4 Education section** — 2026-06-15
 - **2.5 Projects section** — 2026-06-15
+- **2.6 Contact section** — 2026-06-15
