@@ -43,7 +43,7 @@ export default function DepthFog() {
         position: 'fixed',
         inset: 0,
         pointerEvents: 'none',
-        zIndex: 2,
+        zIndex: 0,
       }}
     />
   )
