@@ -146,7 +146,7 @@
 
 - [x] Unused asset files in `src/assets/` — `react.svg`, `vite.svg`, and `hero.png` are not referenced anywhere in the source code. These are leftover from the Vite scaffold and earlier development. Delete them.
 
-- [] Orphaned `database.js` at project root — This file is untracked in git and not imported by any source file. All data has been integrated into `src/data/*.js`. Delete this file.
+- [x] Orphaned `database.js` at project root — This file is untracked in git and not imported by any source file. All data has been integrated into `src/data/*.js`. Delete this file.
 
 - [] Project cards lack year and organization context — The original data included `year` and `organization` fields (e.g., "Fall 2024 — Oslo Metropolitan University") that add useful context. Adding a small year/context line to each project card would make the section more informative and show career progression over time.
 
@@ -189,3 +189,4 @@
 - **Responsive improvements for all screen sizes** — 2026-06-16
 - **Review everything and suggest discovered issues (round 2)** — 2026-06-16
 - **Remove unused asset files from src/assets/** — 2026-06-16
+- **Delete orphaned database.js from project root** — 2026-06-16
