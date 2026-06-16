@@ -50,6 +50,9 @@ export default function ProjectsSection() {
                 </span>
                 <span className="projects__status">CATALOGUED</span>
               </div>
+              <span className="projects__context">
+                {project.year} — {project.organization}
+              </span>
               <h3 className="projects__title">{project.title}</h3>
               <p className="projects__description">{project.description}</p>
               <div className="projects__tech">
@@ -57,26 +60,32 @@ export default function ProjectsSection() {
                   <span key={tech} className="projects__tech-tag">{tech}</span>
                 ))}
               </div>
-              <div className="projects__links">
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="projects__link"
-                  aria-label={`Live demo of ${project.title}`}
-                >
-                  Live Demo
-                </a>
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="projects__link projects__link--github"
-                  aria-label={`Source code for ${project.title}`}
-                >
-                  Source
-                </a>
-              </div>
+              {(project.liveUrl || project.githubUrl) && (
+                <div className="projects__links">
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="projects__link"
+                      aria-label={`Live demo of ${project.title}`}
+                    >
+                      Live Demo
+                    </a>
+                  )}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="projects__link projects__link--github"
+                      aria-label={`Source code for ${project.title}`}
+                    >
+                      Source
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
           ))}
         </div>
