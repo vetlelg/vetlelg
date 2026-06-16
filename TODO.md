@@ -150,7 +150,7 @@
 
 - [x] Project cards lack year and organization context — The original data included `year` and `organization` fields (e.g., "Fall 2024 — Oslo Metropolitan University") that add useful context. Adding a small year/context line to each project card would make the section more informative and show career progression over time.
 
-- [] DepthFog overlay sits above content and can dim text — The fog div is at z-index: 2, above the section content at z-index: 1. At deep scroll positions the edge darkening can reduce readability, especially in the contact section near viewport edges. Either lower the fog z-index to sit between background and content, or expand the clear radius to ensure text remains fully readable.
+- [x] DepthFog overlay sits above content and can dim text — The fog div is at z-index: 2, above the section content at z-index: 1. At deep scroll positions the edge darkening can reduce readability, especially in the contact section near viewport edges. Either lower the fog z-index to sit between background and content, or expand the clear radius to ensure text remains fully readable.
 
 - [] Open Graph image (`og-image.png`) is only 4KB — At this size the image is likely very small or low quality. For good social media previews (LinkedIn, Twitter/X), the image should be at least 1200x630px and clearly represent the site. Regenerate or replace with a proper screenshot/design.
 
@@ -191,3 +191,4 @@
 - **Remove unused asset files from src/assets/** — 2026-06-16
 - **Delete orphaned database.js from project root** — 2026-06-16
 - **Add year and organization context to project cards** — 2026-06-16
+- **Fix DepthFog z-index dimming text content** — 2026-06-16
