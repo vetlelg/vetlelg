@@ -144,7 +144,7 @@
 
 - [x] Review everything and suggest discovered issues (and improvements to the page). If you find any, add them to this document
 
-- [] Unused asset files in `src/assets/` — `react.svg`, `vite.svg`, and `hero.png` are not referenced anywhere in the source code. These are leftover from the Vite scaffold and earlier development. Delete them.
+- [x] Unused asset files in `src/assets/` — `react.svg`, `vite.svg`, and `hero.png` are not referenced anywhere in the source code. These are leftover from the Vite scaffold and earlier development. Delete them.
 
 - [] Orphaned `database.js` at project root — This file is untracked in git and not imported by any source file. All data has been integrated into `src/data/*.js`. Delete this file.
 
@@ -188,3 +188,4 @@
 - **Fix mobile nav menu** — 2026-06-16
 - **Responsive improvements for all screen sizes** — 2026-06-16
 - **Review everything and suggest discovered issues (round 2)** — 2026-06-16
+- **Remove unused asset files from src/assets/** — 2026-06-16
