@@ -148,7 +148,7 @@
 
 - [x] Orphaned `database.js` at project root — This file is untracked in git and not imported by any source file. All data has been integrated into `src/data/*.js`. Delete this file.
 
-- [] Project cards lack year and organization context — The original data included `year` and `organization` fields (e.g., "Fall 2024 — Oslo Metropolitan University") that add useful context. Adding a small year/context line to each project card would make the section more informative and show career progression over time.
+- [x] Project cards lack year and organization context — The original data included `year` and `organization` fields (e.g., "Fall 2024 — Oslo Metropolitan University") that add useful context. Adding a small year/context line to each project card would make the section more informative and show career progression over time.
 
 - [] DepthFog overlay sits above content and can dim text — The fog div is at z-index: 2, above the section content at z-index: 1. At deep scroll positions the edge darkening can reduce readability, especially in the contact section near viewport edges. Either lower the fog z-index to sit between background and content, or expand the clear radius to ensure text remains fully readable.
 
@@ -190,3 +190,4 @@
 - **Review everything and suggest discovered issues (round 2)** — 2026-06-16
 - **Remove unused asset files from src/assets/** — 2026-06-16
 - **Delete orphaned database.js from project root** — 2026-06-16
+- **Add year and organization context to project cards** — 2026-06-16
