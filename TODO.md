@@ -20,7 +20,7 @@
   Read scroll position and interpolate between zone accent colors.
   _Done when: cursor bubbles smoothly shift color as you scroll through zones._
 
-- [ ] **Fading god rays into the experience zone**
+- [x] **Fading god rays into the experience zone**
   The hero's caustic god rays stop abruptly at the section boundary because the
   canvas is position-absolute within the hero. Add a separate, much dimmer god ray
   element (a simple gradient overlay or minimal shader) that appears in the top

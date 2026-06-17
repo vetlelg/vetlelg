@@ -6,6 +6,47 @@
   padding-bottom: 6rem;
 }
 
+.experience::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -10%;
+  width: 120%;
+  height: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(
+      168deg,
+      transparent 18%,
+      rgba(202, 240, 248, 0.06) 23%,
+      rgba(202, 240, 248, 0.14) 27%,
+      rgba(202, 240, 248, 0.06) 31%,
+      transparent 36%,
+      transparent 50%,
+      rgba(202, 240, 248, 0.04) 54%,
+      rgba(202, 240, 248, 0.11) 57%,
+      rgba(202, 240, 248, 0.04) 60%,
+      transparent 65%
+    ),
+    linear-gradient(
+      175deg,
+      transparent 32%,
+      rgba(202, 240, 248, 0.03) 37%,
+      rgba(202, 240, 248, 0.09) 41%,
+      rgba(202, 240, 248, 0.03) 45%,
+      transparent 50%,
+      transparent 67%,
+      rgba(202, 240, 248, 0.025) 71%,
+      rgba(202, 240, 248, 0.07) 74%,
+      rgba(202, 240, 248, 0.025) 77%,
+      transparent 82%
+    );
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 20%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 20%, transparent 100%);
+  animation: godRaysDrift 25s ease-in-out infinite alternate;
+}
+
 .experience__content {
   position: relative;
   z-index: 1;
@@ -151,9 +192,22 @@
   }
 }
 
+@keyframes godRaysDrift {
+  from {
+    transform: translateX(-1.5%);
+  }
+  to {
+    transform: translateX(1.5%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .experience__card {
     transition: none;
+  }
+
+  .experience::before {
+    animation: none;
   }
 }
 
