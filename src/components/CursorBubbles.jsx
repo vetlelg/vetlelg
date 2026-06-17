@@ -3,6 +3,14 @@ import { useEffect, useRef } from 'react'
 const MAX_BUBBLES = 60
 const SPAWN_DISTANCE = 12
 
+const ACCENT_COLORS = [
+  [202, 240, 248],
+  [144, 224, 239],
+  [123, 47, 190],
+  [0, 245, 212],
+  [247, 37, 133],
+]
+
 export default function CursorBubbles() {
   const canvasRef = useRef(null)
 
@@ -18,6 +26,27 @@ export default function CursorBubbles() {
     let lastY = 0
     let distAccum = 0
     let animId = 0
+    let currentColor = ACCENT_COLORS[0]
+
+    function updateColor() {
+      const sections = document.querySelectorAll('.zone-section')
+      const sy = window.scrollY
+      for (let i = 0; i < sections.length; i++) {
+        const top = sections[i].offsetTop
+        const height = sections[i].offsetHeight
+        if (sy < top + height || i === sections.length - 1) {
+          const progress = Math.min(1, Math.max(0, (sy - top) / height))
+          const from = ACCENT_COLORS[Math.min(i, ACCENT_COLORS.length - 1)]
+          const to = ACCENT_COLORS[Math.min(i + 1, ACCENT_COLORS.length - 1)]
+          currentColor = [
+            Math.round(from[0] + (to[0] - from[0]) * progress),
+            Math.round(from[1] + (to[1] - from[1]) * progress),
+            Math.round(from[2] + (to[2] - from[2]) * progress),
+          ]
+          break
+        }
+      }
+    }
 
     function resize() {
       canvas.width = window.innerWidth * dpr
@@ -48,6 +77,7 @@ export default function CursorBubbles() {
           bubbles.push({
             x: x + Math.cos(angle) * spawnDist,
             y: y + Math.sin(angle) * spawnDist,
+            color: currentColor,
             r: Math.random() * 2.2 + 1.2,
             vx: (Math.random() - 0.5) * 0.3 + Math.cos(angle) * speed * 0.02,
             vy: -(Math.random() * 0.5 + 0.25),
@@ -89,13 +119,16 @@ export default function CursorBubbles() {
 
         ctx.beginPath()
         ctx.arc(b.x, b.y, radius, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(200, 228, 245, ${alpha})`
+        ctx.fillStyle = `rgba(${b.color[0]}, ${b.color[1]}, ${b.color[2]}, ${alpha})`
         ctx.fill()
 
         if (radius > 1.5) {
           ctx.beginPath()
           ctx.arc(b.x - radius * 0.3, b.y - radius * 0.3, radius * 0.3, 0, Math.PI * 2)
-          ctx.fillStyle = `rgba(220, 240, 255, ${alpha * 0.5})`
+          const hr = Math.min(255, b.color[0] + 40)
+          const hg = Math.min(255, b.color[1] + 40)
+          const hb = Math.min(255, b.color[2] + 40)
+          ctx.fillStyle = `rgba(${hr}, ${hg}, ${hb}, ${alpha * 0.5})`
           ctx.fill()
         }
       }
@@ -104,11 +137,13 @@ export default function CursorBubbles() {
     }
 
     window.addEventListener('mousemove', onMove)
+    window.addEventListener('scroll', updateColor, { passive: true })
     animId = requestAnimationFrame(animate)
 
     return () => {
       window.removeEventListener('mousemove', onMove)
       window.removeEventListener('resize', resize)
+      window.removeEventListener('scroll', updateColor)
       cancelAnimationFrame(animId)
     }
   }, [])

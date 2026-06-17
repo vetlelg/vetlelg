@@ -13,7 +13,7 @@
   the zone real identity.
   _Done when: fish school drifts organically through the experience section, instanced mesh, 60fps on desktop._
 
-- [ ] **Zone-colored cursor bubbles**
+- [x] **Zone-colored cursor bubbles**
   CursorBubbles currently uses a fixed light blue color regardless of scroll position.
   Shift the bubble color to match the current zone's accent color as you scroll
   (surface cyan → sunlight blue → twilight purple → midnight teal → abyss pink).
