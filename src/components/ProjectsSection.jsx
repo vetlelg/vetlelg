@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState, useCallback } from 'react'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import projects from '../data/projects'
 
 const MidnightParticles = lazy(() => import('./MidnightParticles'))
@@ -95,16 +96,18 @@ export default function ProjectsSection() {
           const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
           if (prefersReduced) return
           gsap.from(cards, {
-            y: 30,
+            y: 20,
             opacity: 0,
-            duration: 0.5,
-            stagger: 0.1,
+            duration: 0.4,
+            stagger: 0.08,
             ease: 'power2.out',
+            delay: 0.15,
           })
         })
       }
       return next
     })
+    setTimeout(() => ScrollTrigger.refresh(), 550)
   }, [])
 
   return (
@@ -140,17 +143,22 @@ export default function ProjectsSection() {
           </span>
         </button>
 
-        {showArchive && (
-          <div ref={archiveRef} className="projects__grid projects__grid--archive">
-            {archiveProjects.map((project, i) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={featuredProjects.length + i}
-              />
-            ))}
+        <div
+          className={`projects__archive-wrapper ${showArchive ? 'projects__archive-wrapper--open' : ''}`}
+          aria-hidden={!showArchive}
+        >
+          <div className="projects__archive-inner">
+            <div ref={archiveRef} className="projects__grid projects__grid--archive">
+              {archiveProjects.map((project, i) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  index={featuredProjects.length + i}
+                />
+              ))}
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </section>
   )

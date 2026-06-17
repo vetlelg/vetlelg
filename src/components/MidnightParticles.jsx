@@ -392,7 +392,10 @@ export default function MidnightParticles() {
         gl={{ alpha: true, antialias: false }}
         style={{
           position: 'absolute',
-          inset: 0,
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '100vh',
           pointerEvents: 'none',
           zIndex: 0,
           WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',

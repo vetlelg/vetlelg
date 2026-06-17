@@ -147,16 +147,19 @@
 .projects__archive-toggle {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  justify-content: center;
+  gap: 0.75rem;
   margin-top: 3rem;
+  width: 100%;
+  max-width: 420px;
   position: relative;
-  padding: 0.6rem 1.4rem;
+  padding: 0.85rem 2rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   color: var(--accent-midnight);
-  background: rgba(0, 245, 212, 0.04);
-  border: 1px solid rgba(0, 245, 212, 0.15);
+  background: rgba(0, 245, 212, 0.06);
+  border: 1px solid rgba(0, 245, 212, 0.2);
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
@@ -168,25 +171,41 @@
   top: -1.5rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 60%;
+  width: 80%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 245, 212, 0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 245, 212, 0.2), transparent);
   pointer-events: none;
 }
 
 .projects__archive-toggle:hover {
-  background: rgba(0, 245, 212, 0.08);
-  border-color: rgba(0, 245, 212, 0.3);
-  box-shadow: 0 0 16px rgba(0, 245, 212, 0.08);
+  background: rgba(0, 245, 212, 0.1);
+  border-color: rgba(0, 245, 212, 0.35);
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.1);
 }
 
 .projects__archive-toggle-arrow {
-  font-size: 0.55rem;
+  font-size: 0.6rem;
   transition: transform 0.3s ease;
 }
 
 .projects__archive-toggle-arrow--open {
   transform: rotate(180deg);
+}
+
+.projects__archive-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s ease;
+  width: 100%;
+}
+
+.projects__archive-wrapper--open {
+  grid-template-rows: 1fr;
+}
+
+.projects__archive-inner {
+  overflow: hidden;
+  min-height: 0;
 }
 
 .projects__grid--archive {
@@ -265,6 +284,10 @@
   .projects__card {
     padding: 1.5rem;
   }
+
+  .projects__archive-toggle {
+    max-width: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -272,7 +295,8 @@
   .projects__link,
   .projects__link--github,
   .projects__archive-toggle,
-  .projects__archive-toggle-arrow {
+  .projects__archive-toggle-arrow,
+  .projects__archive-wrapper {
     transition: none;
   }
 }
