@@ -6,7 +6,7 @@
   The angler fish should be more visible. Maybe generate a GLB asset. Match the theme in the abyss.
   _Done when: a subtle fish is visible near the lure, doesn't overpower the scene._
 
-- [] **Hero section redesign**
+- [x] **Hero section redesign**
   Hero section shouldn't have skills. Should have title, about paragraph and profile picture. Make sure the profile picture fits in the underwater scene.
   _Done when: hero feels like a strong first impression, text is readable, nothing clutters._
 

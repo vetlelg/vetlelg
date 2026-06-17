@@ -1,14 +1,13 @@
-import { lazy, Suspense, useEffect, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const HeroCaustics = lazy(() => import('./HeroCaustics'))
 import './HeroSection.css'
 
-const readouts = ['Kotlin', 'Spring', 'React', 'Docker', 'PostgreSQL']
-
 export default function HeroSection() {
   const sectionRef = useRef(null)
+  const [imgFailed, setImgFailed] = useState(false)
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -20,18 +19,25 @@ export default function HeroSection() {
         duration: 0.8,
         ease: 'power2.out',
       })
+      gsap.from('.hero__portrait', {
+        scale: 0.9,
+        opacity: 0,
+        duration: 1,
+        delay: 0.15,
+        ease: 'power2.out',
+      })
       gsap.from('.hero__name', {
         y: 30,
         opacity: 0,
         duration: 1,
-        delay: 0.2,
+        delay: 0.3,
         ease: 'power2.out',
       })
       gsap.from('.hero__subtitle', {
         y: 20,
         opacity: 0,
         duration: 1,
-        delay: 0.4,
+        delay: 0.45,
         ease: 'power2.out',
       })
       gsap.from('.hero__divider', {
@@ -41,23 +47,17 @@ export default function HeroSection() {
         delay: 0.6,
         ease: 'power2.out',
       })
-      gsap.from('.hero__tagline', {
+      gsap.from('.hero__about', {
         y: 15,
         opacity: 0,
         duration: 0.8,
         delay: 0.7,
         ease: 'power2.out',
       })
-      gsap.from('.hero__readouts', {
-        opacity: 0,
-        duration: 1,
-        delay: 0.9,
-        ease: 'power2.out',
-      })
       gsap.from('.hero__scroll-indicator', {
         opacity: 0,
         duration: 1,
-        delay: 1.2,
+        delay: 1,
         ease: 'power2.out',
       })
 
@@ -89,22 +89,28 @@ export default function HeroSection() {
           <span className="hero__coord-sep" />
           <span className="hero__coord">DEPTH 0m</span>
         </div>
+        <div className="hero__portrait">
+          <div className="hero__portrait-ring" />
+          {imgFailed ? (
+            <div className="hero__portrait-fallback" aria-hidden="true">V</div>
+          ) : (
+            <img
+              className="hero__portrait-img"
+              src="/profile.jpg"
+              alt="Vetle Larsen Gundersen"
+              loading="eager"
+              onError={() => setImgFailed(true)}
+            />
+          )}
+        </div>
         <h1 className="hero__name">Vetle Larsen Gundersen</h1>
         <p className="hero__subtitle">Software Developer</p>
         <div className="hero__divider" aria-hidden="true" />
-        <p className="hero__tagline">
-          Consultant building event-driven systems and reactive backends
+        <p className="hero__about">
+          Consultant and master&apos;s student based in Oslo, building event-driven
+          systems and reactive backends. Background in IT operations with
+          international experience from Singapore and New Zealand.
         </p>
-        <div className="hero__readouts" aria-label="Key technologies">
-          <span className="hero__readouts-line" aria-hidden="true" />
-          {readouts.map((tech, i) => (
-            <span key={tech} className="hero__readout">
-              {i > 0 && <span className="hero__readout-dot" aria-hidden="true" />}
-              {tech}
-            </span>
-          ))}
-          <span className="hero__readouts-line" aria-hidden="true" />
-        </div>
         <div className="hero__scroll-indicator">
           <span className="hero__scroll-text">Scroll to descend</span>
           <svg className="hero__scroll-chevrons" width="20" height="16" viewBox="0 0 20 16" fill="none" aria-hidden="true">
