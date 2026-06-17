@@ -92,7 +92,7 @@ Used for experience entries, education entries, project cards:
 | ExperienceSection | `ExperienceSection.jsx` | SunlightParticles — instanced floating spheres + FishSchool (instanced ShapeGeometry fish with Boids flocking) |
 | EducationSection | `EducationSection.jsx` | TwilightParticles — bioluminescent particles + procedural Jellyfish (lathe geometry, sinusoidal tentacles) + Bloom |
 | ProjectsSection | `ProjectsSection.jsx` | MidnightParticles — flashing bioluminescent particles + procedural Squid + Bloom |
-| ContactSection | `ContactSection.jsx` | AbyssParticles — angler fish lure (point light + pulse glow) illuminating nearby particles + Bloom |
+| ContactSection | `ContactSection.jsx` | AbyssParticles — angler fish lure (pulse glow) + AnglerBody silhouette (ShapeGeometry, proximity-driven visibility) + instanced particles + Bloom |
 
 ### Global effects (fixed, always visible)
 | Component | File | Role |

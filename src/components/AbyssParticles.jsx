@@ -131,11 +131,90 @@ function Particles({ lurePositionRef }) {
   )
 }
 
+function AnglerBody({ lurePositionRef }) {
+  const groupRef = useRef()
+  const bodyMatRef = useRef()
+  const jawMatRef = useRef()
+  const smoothPos = useRef(new THREE.Vector3(0, -1.5, 2.5))
+
+  const bodyShape = useMemo(() => {
+    const s = new THREE.Shape()
+    s.moveTo(0, 1.2)
+    s.bezierCurveTo(0.85, 1.15, 1.0, 0.3, 0.9, -0.5)
+    s.bezierCurveTo(0.8, -1.1, 0.4, -1.5, 0, -1.6)
+    s.bezierCurveTo(-0.4, -1.5, -0.8, -1.1, -0.9, -0.5)
+    s.bezierCurveTo(-1.0, 0.3, -0.85, 1.15, 0, 1.2)
+    return s
+  }, [])
+
+  const jawShape = useMemo(() => {
+    const s = new THREE.Shape()
+    s.moveTo(-0.5, 0)
+    s.quadraticCurveTo(0, 0.4, 0.5, 0)
+    s.quadraticCurveTo(0, 0.2, -0.5, 0)
+    return s
+  }, [])
+
+  useFrame((state) => {
+    const t = state.clock.elapsedTime
+    const lp = lurePositionRef.current
+
+    const lag = 0.012
+    smoothPos.current.x += (lp.x * 0.25 - smoothPos.current.x) * lag
+    smoothPos.current.y += ((lp.y - 2.0) - smoothPos.current.y) * lag
+    smoothPos.current.z += (lp.z - smoothPos.current.z) * lag * 2
+
+    groupRef.current.position.copy(smoothPos.current)
+    groupRef.current.rotation.z = Math.sin(t * 0.05) * 0.03
+
+    const dx = lp.x - smoothPos.current.x
+    const dy = lp.y - smoothPos.current.y
+    const dz = lp.z - smoothPos.current.z
+    const dist = Math.sqrt(dx * dx + dy * dy + dz * dz)
+    const proximity = Math.max(0, 1 - dist / 4.0)
+
+    const pulse = Math.sin(t * 1.2) * 0.25 + 0.75
+    const vis = pulse * pulse * (0.15 + proximity * 0.85)
+    bodyMatRef.current.opacity = 0.006 + vis * 0.065
+    jawMatRef.current.opacity = 0.004 + vis * 0.04
+  })
+
+  return (
+    <group ref={groupRef} scale={[0.85, 0.85, 1]}>
+      <mesh>
+        <shapeGeometry args={[bodyShape]} />
+        <meshBasicMaterial
+          ref={bodyMatRef}
+          color="#350050"
+          transparent
+          opacity={0.05}
+          depthWrite={false}
+          side={THREE.DoubleSide}
+          toneMapped={false}
+        />
+      </mesh>
+      <mesh position={[0, 1.4, 0.005]}>
+        <shapeGeometry args={[jawShape]} />
+        <meshBasicMaterial
+          ref={jawMatRef}
+          color="#350050"
+          transparent
+          opacity={0.04}
+          depthWrite={false}
+          side={THREE.DoubleSide}
+          toneMapped={false}
+        />
+      </mesh>
+    </group>
+  )
+}
+
 function AbyssScene() {
   const lurePos = useRef(new THREE.Vector3(0, 0, 2.5))
 
   return (
     <>
+      <AnglerBody lurePositionRef={lurePos} />
       <Particles lurePositionRef={lurePos} />
       <AnglerLure positionRef={lurePos} />
       <EffectComposer multisampling={0}>

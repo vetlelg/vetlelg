@@ -28,7 +28,7 @@
   bridges the visual transition from bright surface to darker water.
   _Done when: faint light shafts are visible at the top of the experience section and fade out smoothly._
 
-- [ ] **Angler fish silhouette in the abyss**
+- [x] **Angler fish silhouette in the abyss**
   The angler fish is currently just a glowing sphere (the lure) — the most iconic
   deep-sea creature is unrecognizable. Add a faint body silhouette behind the lure:
   a dark, barely-visible shape (simple geometry — elongated body, hint of a jaw)
