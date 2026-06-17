@@ -156,7 +156,7 @@
 
 - [x] Review the entire project again and suggest improvements. Then add the improvements to the discovered issues list
 
-- [ ] CursorBubbles.jsx is untracked but actively imported in App.jsx. A fresh clone will fail to build because this file won't exist. Commit the component to git. Also add `test-results/` to `.gitignore` — it's an untracked artifact directory polluting git status.
+- [x] CursorBubbles.jsx is untracked but actively imported in App.jsx. A fresh clone will fail to build because this file won't exist. Commit the component to git. Also add `test-results/` to `.gitignore` — it's an untracked artifact directory polluting git status.
 
 - [ ] Dead CSS in HeroSection.css — `.hero__links` and `.hero__link` rules (~30 lines) are leftovers from when the hero section had social links. These styles are no longer used by any element. Remove them.
 
@@ -202,3 +202,4 @@
 - **Fix DepthFog z-index dimming text content** — 2026-06-16
 - **Replace OG image with proper 1200x630 branded design** — 2026-06-16
 - **Review entire project and suggest improvements (round 3)** — 2026-06-17
+- **Commit CursorBubbles.jsx and gitignore test-results** — 2026-06-17
