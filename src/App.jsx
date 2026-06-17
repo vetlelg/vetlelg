@@ -9,6 +9,7 @@ import EducationSection from './components/EducationSection'
 import ProjectsSection from './components/ProjectsSection'
 import ContactSection from './components/ContactSection'
 import DepthFog from './components/DepthFog'
+import CursorBubbles from './components/CursorBubbles'
 const MarineSnow = lazy(() => import('./components/MarineSnow'))
 import './App.css'
 
@@ -72,6 +73,7 @@ function App() {
       <Navbar />
       <DepthIndicator />
       <DepthFog />
+      <CursorBubbles />
       <Suspense fallback={null}>
         <MarineSnow />
       </Suspense>

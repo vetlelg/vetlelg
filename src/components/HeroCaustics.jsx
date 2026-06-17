@@ -111,7 +111,7 @@ function Bubbles() {
         speed: Math.random() * 0.25 + 0.08,
         wobbleSpeed: Math.random() * 1.0 + 0.5,
         wobbleAmp: Math.random() * 0.2 + 0.05,
-        scale: Math.random() * 0.018 + 0.004,
+        scale: Math.random() * 0.012 + 0.003,
         phase: Math.random() * Math.PI * 2,
       })
     }
@@ -139,7 +139,7 @@ function Bubbles() {
   return (
     <instancedMesh ref={meshRef} args={[null, null, BUBBLE_COUNT]}>
       <sphereGeometry args={[1, 10, 10]} />
-      <meshBasicMaterial color="#CAF0F8" transparent opacity={0.12} depthWrite={false} toneMapped={false} />
+      <meshBasicMaterial color="#CAF0F8" transparent opacity={0.08} depthWrite={false} toneMapped={false} />
     </instancedMesh>
   )
 }
