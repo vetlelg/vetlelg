@@ -1,3 +1,5 @@
+ALL_TASKS_COMPLETE
+
 # TODO.md — Deep Sea Dev Portfolio
 
 > Read this first every session. Pick the top incomplete task. Update before exiting.
@@ -160,7 +162,7 @@
 
 - [x] Dead CSS in HeroSection.css — `.hero__links` and `.hero__link` rules (~30 lines) are leftovers from when the hero section had social links. These styles are no longer used by any element. Remove them.
 
-- [ ] Unnecessary TypeScript type packages in devDependencies — `@types/react` and `@types/react-dom` are installed but the project is JavaScript-only (no TypeScript anywhere). These serve no purpose and can be removed with `npm uninstall @types/react @types/react-dom`.
+- [x] Unnecessary TypeScript type packages in devDependencies — `@types/react` and `@types/react-dom` are installed but the project is JavaScript-only (no TypeScript anywhere). These serve no purpose and can be removed with `npm uninstall @types/react @types/react-dom`.
 
 ## Completed
 
@@ -204,3 +206,4 @@
 - **Review entire project and suggest improvements (round 3)** — 2026-06-17
 - **Commit CursorBubbles.jsx and gitignore test-results** — 2026-06-17
 - **Remove dead CSS from HeroSection.css** — 2026-06-17
+- **Remove unused @types/react and @types/react-dom** — 2026-06-17
