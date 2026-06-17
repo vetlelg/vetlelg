@@ -1,4 +1,3 @@
-ALL_TASKS_COMPLETE
 # TODO.md — Deep Sea Dev Portfolio
 
 > Read this first every session. Pick the top incomplete task. Update before exiting.
@@ -155,6 +154,14 @@ ALL_TASKS_COMPLETE
 
 - [x] Open Graph image (`og-image.png`) is only 4KB — At this size the image is likely very small or low quality. For good social media previews (LinkedIn, Twitter/X), the image should be at least 1200x630px and clearly represent the site. Regenerate or replace with a proper screenshot/design.
 
+- [x] Review the entire project again and suggest improvements. Then add the improvements to the discovered issues list
+
+- [ ] CursorBubbles.jsx is untracked but actively imported in App.jsx. A fresh clone will fail to build because this file won't exist. Commit the component to git. Also add `test-results/` to `.gitignore` — it's an untracked artifact directory polluting git status.
+
+- [ ] Dead CSS in HeroSection.css — `.hero__links` and `.hero__link` rules (~30 lines) are leftovers from when the hero section had social links. These styles are no longer used by any element. Remove them.
+
+- [ ] Unnecessary TypeScript type packages in devDependencies — `@types/react` and `@types/react-dom` are installed but the project is JavaScript-only (no TypeScript anywhere). These serve no purpose and can be removed with `npm uninstall @types/react @types/react-dom`.
+
 ## Completed
 
 - **1.1 Setup and zone background system** — 2026-06-15
@@ -194,3 +201,4 @@ ALL_TASKS_COMPLETE
 - **Add year and organization context to project cards** — 2026-06-16
 - **Fix DepthFog z-index dimming text content** — 2026-06-16
 - **Replace OG image with proper 1200x630 branded design** — 2026-06-16
+- **Review entire project and suggest improvements (round 3)** — 2026-06-17
