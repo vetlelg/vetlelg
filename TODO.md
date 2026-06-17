@@ -1,209 +1,84 @@
-ALL_TASKS_COMPLETE
-
 # TODO.md — Deep Sea Dev Portfolio
 
 > Read this first every session. Pick the top incomplete task. Update before exiting.
 
-## Phase 1: Foundation
+## Effects
 
-- [x] **1.1 Setup and zone background system**
-  Add Google Fonts to index.html. Set up CSS custom properties in index.css
-  from CLAUDE.md. Global reset. Register ScrollTrigger in App.jsx.
-  Implement the background color transition: the page should smoothly
-  gradient through all five zone colors as you scroll. Create placeholder
-  sections (one per zone, 100vh each) so scrolling works.
-  _Done when: `npm run dev` shows a page that transitions through all zone colors on scroll._
+- [x] **Schooling fish in the sunlight zone**
+  SunlightParticles is the weakest zone — just floating spheres while every other
+  zone has a distinctive creature (jellyfish, squid, angler fish). Add a small school
+  of procedural fish (elongated shapes with tail oscillation) that move together with
+  simple flocking behavior. Keep the existing particles as ambient plankton alongside
+  the fish. The sunlight zone is where schools of fish actually live — this gives
+  the zone real identity.
+  _Done when: fish school drifts organically through the experience section, instanced mesh, 60fps on desktop._
 
-- [x] **1.2 Navbar and depth indicator**
-  Fixed navbar: name/logo left, section links right. Starts transparent,
-  gains a dark blur on scroll. Smooth-scroll links to each section.
-  Mobile hamburger at < 768px. Depth indicator on the right edge of
-  the viewport showing scroll-mapped depth in meters.
-  _Done when: nav links scroll correctly, depth reads 0m at top and ~11,000m at bottom._
+- [ ] **Zone-colored cursor bubbles**
+  CursorBubbles currently uses a fixed light blue color regardless of scroll position.
+  Shift the bubble color to match the current zone's accent color as you scroll
+  (surface cyan → sunlight blue → twilight purple → midnight teal → abyss pink).
+  Read scroll position and interpolate between zone accent colors.
+  _Done when: cursor bubbles smoothly shift color as you scroll through zones._
 
-## Phase 2: Sections
+- [ ] **Fading god rays into the experience zone**
+  The hero's caustic god rays stop abruptly at the section boundary because the
+  canvas is position-absolute within the hero. Add a separate, much dimmer god ray
+  element (a simple gradient overlay or minimal shader) that appears in the top
+  portion of the experience section and fades to nothing by mid-section. This
+  bridges the visual transition from bright surface to darker water.
+  _Done when: faint light shafts are visible at the top of the experience section and fade out smoothly._
 
-- [x] **2.1 Hero section**
-  Full viewport. Name, subtitle, scroll-to-descend indicator with a
-  gentle animation. A Three.js scene behind the text providing a caustic
-  light effect or shimmering water surface — something that says "ocean
-  surface" without being heavy. Canvas behind text, pointer-events none.
-  _Done when: hero renders with visible Three.js atmosphere, text is readable, 60fps._
+- [ ] **Angler fish silhouette in the abyss**
+  The angler fish is currently just a glowing sphere (the lure) — the most iconic
+  deep-sea creature is unrecognizable. Add a faint body silhouette behind the lure:
+  a dark, barely-visible shape (simple geometry — elongated body, hint of a jaw)
+  that becomes visible only when the lure's glow illuminates it. The body should
+  feel like you're catching a glimpse of something huge in the dark.
+  _Done when: a subtle fish shape is occasionally visible near the lure, doesn't overpower the scene._
 
-- [x] **2.2 Data files**
-  Create src/data/experience.js (3 entries), education.js (2 entries),
-  projects.js (4 entries) with realistic placeholder content. Each exports
-  an array of objects with all the fields the sections will need.
-  _Done when: all three files import cleanly and contain complete placeholder data._
+## Layout & design
 
-- [x] **2.3 Experience section**
-  Work history section in the sunlight zone. Timeline or structured layout
-  showing role, company, dates, and description for each entry. Cards use
-  the glassmorphism style. GSAP scroll animation to reveal entries.
-  Include a Three.js particle element that fits the sunlight zone — something
-  light, organic, ambient. Data from experience.js.
-  _Done when: section renders from data, animates on scroll, particles work, responsive._
+- [ ] **Hero section redesign**
+  The hero is name + subtitle + scroll indicator — functional but forgettable.
+  This is the first impression. Improve it with some combination of:
+  - A brief tagline or one-liner below "Software Developer" that adds personality
+  - Key competencies or tech displayed as subtle data readouts in mono font
+    (e.g. "Kotlin / Spring / React" faintly visible, fitting the underwater HUD feel)
+  - Better vertical rhythm — the name and subtitle are vertically centered but
+    the scroll indicator floats at the bottom, leaving a lot of dead space
+  Keep the existing Three.js caustics. Don't make the text compete with the effect.
+  _Done when: hero feels like a strong first impression, text is readable, nothing clutters._
 
-- [x] **2.4 Education section**
-  Credentials section in the twilight zone. Cards for each degree with
-  institution, degree, year, highlights. GSAP scroll reveal. Include a
-  Three.js element fitting the twilight zone — darker, bioluminescent,
-  something with purple/violet glow. Data from education.js.
-  _Done when: section renders from data, animates on scroll, Three.js element works, responsive._
+- [ ] **Project section structure**
+  13 project cards shown at once overwhelm the section. Restructure: show 4–6
+  featured/recent projects prominently, then a "More projects" toggle or collapsible
+  section for the rest. The featured projects should be the strongest ones
+  (bachelor's project, NAV, iipax Case, web applications). Older/simpler projects
+  (Snake, Fountain of Objects) can be in the collapsed section.
+  _Done when: projects section has a clear hierarchy, featured cards are prominent, remaining are accessible but not dominant._
 
-- [x] **2.5 Projects section**
-  Project showcase in the midnight zone. Grid layout (2 cols desktop,
-  1 mobile). Each card: title, description, tech tags, links to live site
-  and GitHub. Styled as specimen cards or deep-sea research records.
-  Hover: accent glow. GSAP stagger animation. Include a Three.js particle
-  field — dense, dark, with the occasional bioluminescent flash.
-  Data from projects.js.
-  _Done when: grid renders from data, hover states work, links clickable, particles work, responsive._
+- [ ] **Project card hover interaction**
+  Improve card hover states to fit the deep-sea specimen theme. The cards already
+  have SPECIMEN-001 / CATALOGUED labels. On hover: animate the border with a scan-line
+  effect or a sweeping light, brighten the specimen ID, make tech tags pulse slightly.
+  Keep it subtle — the effect should feel like a research station scanning a specimen,
+  not a flashy UI component.
+  _Done when: hover states feel thematic and polished, don't distract from readability._
 
-- [x] **2.6 Contact section**
-  Contact section in the abyss zone. "Send a transmission" or similar
-  heading. Email link as a glowing accent button. Social icon links
-  (GitHub, LinkedIn — inline SVG, no icon library). "Back to surface"
-  link that scrolls to top. GSAP entrance animation. A subtle Three.js
-  element — sparse, dim, end-of-the-line atmosphere. Footer with copyright.
-  _Done when: email works, social links open in new tab, back-to-top scrolls up, responsive._
+## Backlog
 
-## Phase 3: Polish and ship
+Ideas not yet prioritized. Pull from here when the above is done.
 
-- [x] **3.1 Integration and transitions**
-  Scroll the full page top to bottom and back. Fix any hard cuts between
-  zones — backgrounds, particle scenes, and content should blend smoothly.
-  Three.js canvases should fade at zone boundaries, not pop in/out.
-  Verify all GSAP animations reverse correctly on scroll-up.
-  _Done when: full-page scroll feels like one continuous descent, no jarring transitions._
-
-- [x] **3.2 Responsive and accessibility**
-  Test at 480px, 768px, 1440px. Fix overflow, text sizing, grid layouts.
-  Reduce Three.js complexity on mobile if needed. Add aria-labels to
-  interactive elements. Keyboard navigation. prefers-reduced-motion support.
-  Skip-to-content link.
-  _Done when: no horizontal scroll at any width, tab navigation works, reduced motion works._
-
-- [x] **3.3 Performance and final polish**
-  `npm run build` — check bundle size (aim for < 500KB gzipped). Verify
-  Three.js cleanup (dispose calls, no memory leaks on repeated scroll).
-  Add Suspense fallbacks for Three.js scenes. Favicon. Consistent spacing.
-  Make it feel finished.
-  _Done when: build passes, Lighthouse performance > 80, feels complete._
-
-- [x] **3.4 Deploy**
-  Production build. Deploy to Vercel, Netlify, or GitHub Pages. Verify
-  everything works in the deployed version.
-  _Done when: live URL works with no console errors._
-
----
-
-## Discovered issues
-- [x] When loading the page, the background is white first before it turns blue. It looks clunky when reloading or loading the page.
-
-- [x] The right bar showing depth moves with the meter number gaining width. It looks strange that the width changes when the number increases.
-
-- [x] Possibly add more effects or improve the existing one to make it clearer that this is actually water / the ocean. Maybe the hero should actually start above water? I'm not sure. But I think there's potential to make the effects more fancy.
-
-- [x] The navbar is a bit too distinct from the rest of the page when scrolling, especially in the beginning at the lighter parts of the page. Potentially change or remove the navbar. Do what you think looks better.
-
-- [x] Review everything and suggest improvements / more discovered issues to fix
-
-- [x] Contact section email uses work address (`vetle.larsen.gundersen@decisive.no`). This is a personal portfolio — should use a personal email address instead.
-
-- [x] No Open Graph / Twitter Card meta tags in `index.html`. The site won't preview well when shared on social media (e.g. LinkedIn, Twitter/X). Add `og:title`, `og:description`, `og:image`, and `twitter:card` tags.
-
-- [x] No active state on navbar links to indicate which section is currently in view. Add scroll-based highlighting (IntersectionObserver or ScrollTrigger) to show the current section in the nav.
-
-- [x] Bundle is 1,212KB (346KB gzipped) and Vite warns about chunk size. Code-split Three.js scenes with `React.lazy()` + dynamic `import()` so the initial bundle is lighter and canvases load on demand.
-
-- [x] `SunlightParticles` and `TwilightParticles` are missing `depthWrite={false}` on their material, while `HeroCaustics` Bubbles has it. This inconsistency could cause z-ordering artifacts with transparent particles. Add `depthWrite={false}` to all particle materials for consistency.
-
-- [x] `public/icons.svg` contains unused social icons (Bluesky, Discord, X/Twitter). Either add these as additional social links in the Contact section or remove the unused file.
-
-- [x] Hero section is a bit too bright. The text, github and linkedin links are not very visible. The education text in the hero section is weirdly placed. I don't know if this text or the links are necessary. Fix it, remove them or make other improvements to the hero section so it looks good.
-
-- [x] All the entries in database.js has to be included in the content of the portfolio. The content within each entry can be adjusted to fit to the page and make it look good.
-
-- [x] Jellyfish in the twilight zone — A procedural jellyfish (dome + sinusoidal tentacle curves) drifting slowly through
-  the education section would be a signature visual. Right now every zone is "spheres but different color." One
-  recognizable creature breaks the pattern and gives the twilight zone real identity.
-
-- [x] Marine snow — Thousands of tiny falling specks (a single Points geometry, very cheap to render) layered across the
-  deeper zones. Real deep ocean has this constant gentle snowfall of organic matter. It adds atmosphere and depth that
-  the current sparse particles miss.
-
-- [x] Angler fish lure in the abyss — A single bright point light with a subtle sway in the contact section, illuminating
-  nearby particles as it passes. Iconic deep-sea imagery, and it gives the abyss zone a focal point instead of just
-  sparse dots.
-
-- [x] Fog progression — Three.js fog that gets denser as you scroll deeper. Simple to add, reinforces the depth narrative
-  physically rather than just through color.
-
-- [x] Fix the nav bar menu on smaller screens
-
-- [x] Make sure the portfolio looks good on (almost) all screen sizes
-
-- [x] Review everything and suggest discovered issues (and improvements to the page). If you find any, add them to this document
-
-- [x] Unused asset files in `src/assets/` — `react.svg`, `vite.svg`, and `hero.png` are not referenced anywhere in the source code. These are leftover from the Vite scaffold and earlier development. Delete them.
-
-- [x] Orphaned `database.js` at project root — This file is untracked in git and not imported by any source file. All data has been integrated into `src/data/*.js`. Delete this file.
-
-- [x] Project cards lack year and organization context — The original data included `year` and `organization` fields (e.g., "Fall 2024 — Oslo Metropolitan University") that add useful context. Adding a small year/context line to each project card would make the section more informative and show career progression over time.
-
-- [x] DepthFog overlay sits above content and can dim text — The fog div is at z-index: 2, above the section content at z-index: 1. At deep scroll positions the edge darkening can reduce readability, especially in the contact section near viewport edges. Either lower the fog z-index to sit between background and content, or expand the clear radius to ensure text remains fully readable.
-
-- [x] Open Graph image (`og-image.png`) is only 4KB — At this size the image is likely very small or low quality. For good social media previews (LinkedIn, Twitter/X), the image should be at least 1200x630px and clearly represent the site. Regenerate or replace with a proper screenshot/design.
-
-- [x] Review the entire project again and suggest improvements. Then add the improvements to the discovered issues list
-
-- [x] CursorBubbles.jsx is untracked but actively imported in App.jsx. A fresh clone will fail to build because this file won't exist. Commit the component to git. Also add `test-results/` to `.gitignore` — it's an untracked artifact directory polluting git status.
-
-- [x] Dead CSS in HeroSection.css — `.hero__links` and `.hero__link` rules (~30 lines) are leftovers from when the hero section had social links. These styles are no longer used by any element. Remove them.
-
-- [x] Unnecessary TypeScript type packages in devDependencies — `@types/react` and `@types/react-dom` are installed but the project is JavaScript-only (no TypeScript anywhere). These serve no purpose and can be removed with `npm uninstall @types/react @types/react-dom`.
-
-## Completed
-
-- **1.1 Setup and zone background system** — 2026-06-15
-- **1.2 Navbar and depth indicator** — 2026-06-15
-- **2.1 Hero section** — 2026-06-15
-- **2.2 Data files** — 2026-06-15
-- **2.3 Experience section** — 2026-06-15
-- **2.4 Education section** — 2026-06-15
-- **2.5 Projects section** — 2026-06-15
-- **2.6 Contact section** — 2026-06-15
-- **3.1 Integration and transitions** — 2026-06-15
-- **3.2 Responsive and accessibility** — 2026-06-15
-- **3.3 Performance and final polish** — 2026-06-15
-- **3.4 Deploy** — 2026-06-15
-- **Fix white flash on page load** — 2026-06-16
-- **Fix depth indicator width shifting** — 2026-06-16
-- **Enhanced hero ocean effects (god rays + bubbles)** — 2026-06-16
-- **Fix navbar too distinct from page** — 2026-06-16
-- **Review everything and suggest improvements** — 2026-06-16
-- **Fix contact email to personal address** — 2026-06-16
-- **Add Open Graph / Twitter Card meta tags** — 2026-06-16
-- **Add active state highlighting to navbar links** — 2026-06-16
-- **Code-split Three.js scenes with React.lazy()** — 2026-06-16
-- **Add depthWrite={false} to all particle materials** — 2026-06-16
-- **Remove unused public/icons.svg** — 2026-06-16
-- **Fix hero section brightness and readability** — 2026-06-16
-- **Include all database.js entries in portfolio** — 2026-06-16
-- **Jellyfish in the twilight zone** — 2026-06-16
-- **Marine snow particle overlay** — 2026-06-16
-- **Angler fish lure in the abyss** — 2026-06-16
-- **Fog progression** — 2026-06-16
-- **Fix mobile nav menu** — 2026-06-16
-- **Responsive improvements for all screen sizes** — 2026-06-16
-- **Review everything and suggest discovered issues (round 2)** — 2026-06-16
-- **Remove unused asset files from src/assets/** — 2026-06-16
-- **Delete orphaned database.js from project root** — 2026-06-16
-- **Add year and organization context to project cards** — 2026-06-16
-- **Fix DepthFog z-index dimming text content** — 2026-06-16
-- **Replace OG image with proper 1200x630 branded design** — 2026-06-16
-- **Review entire project and suggest improvements (round 3)** — 2026-06-17
-- **Commit CursorBubbles.jsx and gitignore test-results** — 2026-06-17
-- **Remove dead CSS from HeroSection.css** — 2026-06-17
-- **Remove unused @types/react and @types/react-dom** — 2026-06-17
+- Water surface refraction at the top of the hero — a rippling distortion effect
+  suggesting the surface above (risky — hero already has a lot going on, easy to
+  overdo; requires careful subtlety)
+- Parallax depth layers for particles (foreground/midground/background at different
+  speeds) — adds depth but high implementation complexity for subtle payoff
+- Animated page transitions for initial load (a "diving in" animation)
+- Sound design — optional ambient ocean sounds that deepen as you scroll
+- Easter egg at the very bottom (deep sea creature, pressure reading, etc.)
+- Animated SVG section dividers (wave patterns between zones)
+- "Currently working on" indicator on the most recent project card
+- Preloader / loading screen with a diving animation while Three.js initializes
+- Subtle text distortion — 1-2px wobble on text as if seen through water (CSS animation)
+- Bioluminescence flashes near viewport edges during fast scrolling

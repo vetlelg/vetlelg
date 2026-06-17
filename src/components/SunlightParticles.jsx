@@ -1,9 +1,10 @@
-import { Suspense, useRef, useMemo } from 'react'
+import { Suspense, useRef, useMemo, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
 const PARTICLE_COUNT = IS_MOBILE ? 25 : 60
+const FISH_COUNT = IS_MOBILE ? 6 : 12
 
 function Particles() {
   const meshRef = useRef()
@@ -47,6 +48,142 @@ function Particles() {
   )
 }
 
+function FishSchool() {
+  const meshRef = useRef()
+  const dummy = useMemo(() => new THREE.Object3D(), [])
+
+  const fishGeom = useMemo(() => {
+    const shape = new THREE.Shape()
+    shape.moveTo(0.18, 0)
+    shape.lineTo(0.08, 0.024)
+    shape.lineTo(0, 0.028)
+    shape.lineTo(-0.06, 0.02)
+    shape.lineTo(-0.1, 0.006)
+    shape.lineTo(-0.16, 0.035)
+    shape.lineTo(-0.11, 0)
+    shape.lineTo(-0.16, -0.035)
+    shape.lineTo(-0.1, -0.006)
+    shape.lineTo(-0.06, -0.02)
+    shape.lineTo(0, -0.028)
+    shape.lineTo(0.08, -0.024)
+    shape.closePath()
+    return new THREE.ShapeGeometry(shape)
+  }, [])
+
+  const fish = useMemo(() => {
+    const arr = []
+    const startAngle = Math.random() * Math.PI * 2
+    const startX = (Math.random() - 0.5) * 4
+    const startY = (Math.random() - 0.5) * 2
+
+    for (let i = 0; i < FISH_COUNT; i++) {
+      const angle = startAngle + (Math.random() - 0.5) * 0.6
+      arr.push({
+        x: startX + (Math.random() - 0.5) * 2,
+        y: startY + (Math.random() - 0.5) * 1.5,
+        z: (Math.random() - 0.5) * 1.5,
+        vx: Math.cos(angle) * 0.5,
+        vy: Math.sin(angle) * 0.5,
+        scale: 0.6 + Math.random() * 0.35,
+        phase: Math.random() * Math.PI * 2,
+        wanderPhase: Math.random() * Math.PI * 2,
+      })
+    }
+    return arr
+  }, [])
+
+  useFrame((state, delta) => {
+    if (!meshRef.current) return
+    const t = state.clock.elapsedTime
+    const dt = Math.min(delta, 0.05)
+
+    fish.forEach((f, i) => {
+      let sepX = 0, sepY = 0
+      let aliX = 0, aliY = 0
+      let cohX = 0, cohY = 0
+      let n = 0
+
+      for (let j = 0; j < fish.length; j++) {
+        if (i === j) continue
+        const other = fish[j]
+        const dx = other.x - f.x
+        const dy = other.y - f.y
+        const dist = Math.sqrt(dx * dx + dy * dy)
+
+        if (dist < 2.0) {
+          n++
+          if (dist < 0.4 && dist > 0.001) {
+            sepX -= dx / dist
+            sepY -= dy / dist
+          }
+          aliX += other.vx
+          aliY += other.vy
+          cohX += other.x
+          cohY += other.y
+        }
+      }
+
+      const wanderX = Math.cos(t * 0.3 + f.wanderPhase) * 0.008
+      const wanderY = Math.sin(t * 0.25 + f.wanderPhase * 1.3) * 0.008
+
+      if (n > 0) {
+        aliX /= n
+        aliY /= n
+        cohX = cohX / n - f.x
+        cohY = cohY / n - f.y
+
+        f.vx += sepX * 0.05 + (aliX - f.vx) * 0.02 + cohX * 0.01 + wanderX
+        f.vy += sepY * 0.05 + (aliY - f.vy) * 0.02 + cohY * 0.01 + wanderY
+      } else {
+        f.vx += wanderX
+        f.vy += wanderY
+      }
+
+      if (f.x > 6) f.vx -= 0.02
+      if (f.x < -6) f.vx += 0.02
+      if (f.y > 3.5) f.vy -= 0.02
+      if (f.y < -3.5) f.vy += 0.02
+
+      const speed = Math.sqrt(f.vx * f.vx + f.vy * f.vy)
+      if (speed > 0.01) {
+        const ratio = 0.5 / speed
+        f.vx += (f.vx * ratio - f.vx) * 0.03
+        f.vy += (f.vy * ratio - f.vy) * 0.03
+      }
+
+      f.x += f.vx * dt
+      f.y += f.vy * dt
+
+      const heading = Math.atan2(f.vy, f.vx)
+      const waggle = Math.sin(t * 8 + f.phase) * 0.08
+
+      dummy.position.set(f.x, f.y, f.z)
+      dummy.rotation.set(0, 0, heading + waggle)
+      dummy.scale.setScalar(f.scale)
+      dummy.updateMatrix()
+      meshRef.current.setMatrixAt(i, dummy.matrix)
+    })
+
+    meshRef.current.instanceMatrix.needsUpdate = true
+  })
+
+  useEffect(() => {
+    return () => fishGeom.dispose()
+  }, [fishGeom])
+
+  return (
+    <instancedMesh ref={meshRef} args={[fishGeom, null, FISH_COUNT]}>
+      <meshBasicMaterial
+        color="#90E0EF"
+        transparent
+        opacity={0.35}
+        depthWrite={false}
+        side={THREE.DoubleSide}
+      />
+    </instancedMesh>
+  )
+}
+
 export default function SunlightParticles() {
   const prefersReduced =
     typeof window !== 'undefined' &&
@@ -70,6 +207,7 @@ export default function SunlightParticles() {
         }}
       >
         <Particles />
+        <FishSchool />
       </Canvas>
     </Suspense>
   )
