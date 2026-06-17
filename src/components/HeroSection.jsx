@@ -5,6 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 const HeroCaustics = lazy(() => import('./HeroCaustics'))
 import './HeroSection.css'
 
+const readouts = ['Kotlin', 'Spring', 'React', 'Docker', 'PostgreSQL']
+
 export default function HeroSection() {
   const sectionRef = useRef(null)
 
@@ -13,23 +15,49 @@ export default function HeroSection() {
     if (prefersReduced) return
 
     const ctx = gsap.context(() => {
+      gsap.from('.hero__coordinates', {
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+      })
       gsap.from('.hero__name', {
         y: 30,
         opacity: 0,
         duration: 1,
+        delay: 0.2,
         ease: 'power2.out',
       })
       gsap.from('.hero__subtitle', {
         y: 20,
         opacity: 0,
         duration: 1,
-        delay: 0.3,
+        delay: 0.4,
+        ease: 'power2.out',
+      })
+      gsap.from('.hero__divider', {
+        scaleX: 0,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.6,
+        ease: 'power2.out',
+      })
+      gsap.from('.hero__tagline', {
+        y: 15,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.7,
+        ease: 'power2.out',
+      })
+      gsap.from('.hero__readouts', {
+        opacity: 0,
+        duration: 1,
+        delay: 0.9,
         ease: 'power2.out',
       })
       gsap.from('.hero__scroll-indicator', {
         opacity: 0,
         duration: 1,
-        delay: 1.0,
+        delay: 1.2,
         ease: 'power2.out',
       })
 
@@ -54,16 +82,36 @@ export default function HeroSection() {
         <HeroCaustics />
       </Suspense>
       <div className="hero__content">
-        <span className="zone-label">0m — Surface Zone</span>
+        <div className="hero__coordinates" aria-hidden="true">
+          <span className="hero__coord">59.9°N</span>
+          <span className="hero__coord-sep" />
+          <span className="hero__coord">10.7°E</span>
+          <span className="hero__coord-sep" />
+          <span className="hero__coord">DEPTH 0m</span>
+        </div>
         <h1 className="hero__name">Vetle Larsen Gundersen</h1>
         <p className="hero__subtitle">Software Developer</p>
-      </div>
-      <div className="hero__scroll-indicator">
-        <span className="hero__scroll-text">Scroll to descend</span>
-        <svg className="hero__scroll-chevrons" width="20" height="16" viewBox="0 0 20 16" fill="none" aria-hidden="true">
-          <path d="M4 2L10 8L16 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.8" />
-          <path d="M4 8L10 14L16 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.4" />
-        </svg>
+        <div className="hero__divider" aria-hidden="true" />
+        <p className="hero__tagline">
+          Consultant building event-driven systems and reactive backends
+        </p>
+        <div className="hero__readouts" aria-label="Key technologies">
+          <span className="hero__readouts-line" aria-hidden="true" />
+          {readouts.map((tech, i) => (
+            <span key={tech} className="hero__readout">
+              {i > 0 && <span className="hero__readout-dot" aria-hidden="true" />}
+              {tech}
+            </span>
+          ))}
+          <span className="hero__readouts-line" aria-hidden="true" />
+        </div>
+        <div className="hero__scroll-indicator">
+          <span className="hero__scroll-text">Scroll to descend</span>
+          <svg className="hero__scroll-chevrons" width="20" height="16" viewBox="0 0 20 16" fill="none" aria-hidden="true">
+            <path d="M4 2L10 8L16 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.8" />
+            <path d="M4 8L10 14L16 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.4" />
+          </svg>
+        </div>
       </div>
     </section>
   )

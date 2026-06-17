@@ -111,7 +111,7 @@ All section content lives in `src/data/` and is imported by sections — never h
 
 Each section has a title and a depth label in mono (e.g. "1,000m — Twilight Zone").
 
-- **Hero:** Full viewport. Name, subtitle ("Software Developer"), "scroll to descend" indicator. HeroCaustics behind the text provides caustic light patterns and god rays.
+- **Hero:** Full viewport. Coordinate readout (lat/long/depth in mono), name, subtitle ("Software Developer"), thin divider, tagline, tech readouts (Kotlin/Spring/React/Docker/PostgreSQL in mono), "scroll to descend" indicator. All in one content flow (no absolute positioning). HeroCaustics behind the text provides caustic light patterns and god rays. Staggered GSAP entrance animations.
 - **Experience:** Work history timeline. Glassmorphism cards with company, role, dates, description. GSAP stagger reveal on scroll.
 - **Education:** Degrees and certifications. Cards with institution, degree, year, highlights. Procedural jellyfish drifting through the scene.
 - **Projects:** Grid of project cards (2 cols desktop, 1 mobile). Each card: title, year/org context line, description, tech tags, GitHub link. Styled as deep-sea specimen cards with a procedural squid.

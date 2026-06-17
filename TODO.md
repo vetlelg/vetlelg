@@ -38,7 +38,7 @@
 
 ## Layout & design
 
-- [ ] **Hero section redesign**
+- [x] **Hero section redesign**
   The hero is name + subtitle + scroll indicator — functional but forgettable.
   This is the first impression. Improve it with some combination of:
   - A brief tagline or one-liner below "Software Developer" that adds personality
