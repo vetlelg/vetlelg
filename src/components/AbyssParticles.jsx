@@ -1,4 +1,4 @@
-import { Suspense, useRef, useMemo } from 'react'
+import { Suspense, useRef, useMemo, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { EffectComposer, Bloom, ChromaticAberration, Vignette, Noise, HueSaturation } from '@react-three/postprocessing'
@@ -179,29 +179,100 @@ function Particles({ lurePositionRef }) {
   )
 }
 
+const STALK_SEGMENTS = 20
+
 function AnglerBody({ lurePositionRef }) {
   const groupRef = useRef()
+  const jawRef = useRef()
   const bodyMatRef = useRef()
   const jawMatRef = useRef()
+  const teethMatRef = useRef()
+  const eyeMatRef = useRef()
+  const tailMatRef = useRef()
   const smoothPos = useRef(new THREE.Vector3(0, -1.5, 2.5))
 
   const bodyShape = useMemo(() => {
     const s = new THREE.Shape()
-    s.moveTo(0, 1.2)
-    s.bezierCurveTo(0.85, 1.15, 1.0, 0.3, 0.9, -0.5)
-    s.bezierCurveTo(0.8, -1.1, 0.4, -1.5, 0, -1.6)
-    s.bezierCurveTo(-0.4, -1.5, -0.8, -1.1, -0.9, -0.5)
-    s.bezierCurveTo(-1.0, 0.3, -0.85, 1.15, 0, 1.2)
+    s.moveTo(0, 1.15)
+    s.bezierCurveTo(0.5, 1.1, 0.8, 0.85, 0.95, 0.5)
+    s.bezierCurveTo(1.1, 0.1, 1.1, -0.35, 1.0, -0.7)
+    s.bezierCurveTo(0.85, -1.05, 0.6, -1.35, 0.35, -1.55)
+    s.bezierCurveTo(0.15, -1.65, 0, -1.7, 0, -1.7)
+    s.bezierCurveTo(0, -1.7, -0.15, -1.65, -0.35, -1.55)
+    s.bezierCurveTo(-0.6, -1.35, -0.85, -1.05, -1.0, -0.7)
+    s.bezierCurveTo(-1.1, -0.35, -1.1, 0.1, -0.95, 0.5)
+    s.bezierCurveTo(-0.8, 0.85, -0.5, 1.1, 0, 1.15)
     return s
   }, [])
 
   const jawShape = useMemo(() => {
     const s = new THREE.Shape()
-    s.moveTo(-0.5, 0)
-    s.quadraticCurveTo(0, 0.4, 0.5, 0)
-    s.quadraticCurveTo(0, 0.2, -0.5, 0)
+    s.moveTo(-0.65, 0)
+    s.bezierCurveTo(-0.45, 0.45, 0.45, 0.45, 0.7, 0)
+    s.bezierCurveTo(0.35, 0.18, -0.3, 0.18, -0.65, 0)
     return s
   }, [])
+
+  const teethShape = useMemo(() => {
+    const s = new THREE.Shape()
+    const teeth = [
+      { x: -0.5, w: 0.04, h: 0.14 },
+      { x: -0.3, w: 0.035, h: 0.19 },
+      { x: -0.1, w: 0.04, h: 0.23 },
+      { x: 0.1, w: 0.04, h: 0.21 },
+      { x: 0.3, w: 0.035, h: 0.17 },
+      { x: 0.5, w: 0.035, h: 0.12 },
+    ]
+    s.moveTo(teeth[0].x - teeth[0].w, 0)
+    teeth.forEach(({ x, w, h }) => {
+      s.lineTo(x - w, 0)
+      s.lineTo(x, h)
+      s.lineTo(x + w, 0)
+    })
+    s.lineTo(teeth[0].x - teeth[0].w, 0)
+    return s
+  }, [])
+
+  const eyeShape = useMemo(() => {
+    const s = new THREE.Shape()
+    s.absarc(0, 0, 0.055, 0, Math.PI * 2, false)
+    return s
+  }, [])
+
+  const tailFinShape = useMemo(() => {
+    const s = new THREE.Shape()
+    s.moveTo(0, 0)
+    s.bezierCurveTo(0.1, 0.05, 0.3, 0.22, 0.4, 0.3)
+    s.bezierCurveTo(0.28, 0.15, 0.12, 0.03, 0.08, 0)
+    s.bezierCurveTo(0.12, -0.03, 0.28, -0.15, 0.35, -0.25)
+    s.bezierCurveTo(0.25, -0.18, 0.1, -0.05, 0, 0)
+    return s
+  }, [])
+
+  const stalkMatRef = useRef()
+  const stalkGeoRef = useRef()
+
+  const stalkLine = useMemo(() => {
+    const geo = new THREE.BufferGeometry()
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(STALK_SEGMENTS * 3), 3))
+    const mat = new THREE.LineBasicMaterial({
+      color: new THREE.Color('#250040'),
+      transparent: true,
+      opacity: 0.04,
+      depthWrite: false,
+      toneMapped: false,
+    })
+    return new THREE.Line(geo, mat)
+  }, [])
+
+  useEffect(() => {
+    stalkMatRef.current = stalkLine.material
+    stalkGeoRef.current = stalkLine.geometry
+    return () => {
+      stalkLine.geometry.dispose()
+      stalkLine.material.dispose()
+    }
+  }, [stalkLine])
 
   useFrame((state) => {
     const t = state.clock.elapsedTime
@@ -213,7 +284,7 @@ function AnglerBody({ lurePositionRef }) {
     smoothPos.current.z += (lp.z - smoothPos.current.z) * lag * 2
 
     groupRef.current.position.copy(smoothPos.current)
-    groupRef.current.rotation.z = Math.sin(t * 0.05) * 0.03
+    groupRef.current.rotation.z = Math.sin(t * 0.08) * 0.04
 
     const dx = lp.x - smoothPos.current.x
     const dy = lp.y - smoothPos.current.y
@@ -223,29 +294,92 @@ function AnglerBody({ lurePositionRef }) {
 
     const pulse = Math.sin(t * 1.2) * 0.25 + 0.75
     const vis = pulse * pulse * (0.15 + proximity * 0.85)
-    bodyMatRef.current.opacity = 0.006 + vis * 0.065
-    jawMatRef.current.opacity = 0.004 + vis * 0.04
+
+    bodyMatRef.current.opacity = 0.04 + vis * 0.14
+    jawMatRef.current.opacity = 0.035 + vis * 0.12
+    teethMatRef.current.opacity = 0.05 + vis * 0.18
+    eyeMatRef.current.opacity = 0.08 + vis * 0.3
+    tailMatRef.current.opacity = 0.025 + vis * 0.1
+    if (stalkMatRef.current) stalkMatRef.current.opacity = 0.015 + vis * 0.06
+
+    jawRef.current.position.y = 1.2 + Math.sin(t * 0.3) * 0.04
+
+    const lureLocalX = lp.x - smoothPos.current.x
+    const lureLocalY = lp.y - smoothPos.current.y
+    const lureLocalZ = lp.z - smoothPos.current.z
+    const cpX = (0.05 + lureLocalX) * 0.5
+    const cpY = Math.max(1.15, lureLocalY) + 0.6
+    const cpZ = lureLocalZ * 0.5
+
+    if (stalkGeoRef.current) {
+      const positions = stalkGeoRef.current.attributes.position.array
+      for (let i = 0; i < STALK_SEGMENTS; i++) {
+        const f = i / (STALK_SEGMENTS - 1)
+        const omt = 1 - f
+        positions[i * 3] = omt * omt * 0.05 + 2 * omt * f * cpX + f * f * lureLocalX
+        positions[i * 3 + 1] = omt * omt * 1.15 + 2 * omt * f * cpY + f * f * lureLocalY
+        positions[i * 3 + 2] = 2 * omt * f * cpZ + f * f * lureLocalZ
+      }
+      stalkGeoRef.current.attributes.position.needsUpdate = true
+    }
   })
 
+  const bodyColor = '#250040'
+
   return (
-    <group ref={groupRef} scale={[0.85, 0.85, 1]}>
+    <group ref={groupRef}>
       <mesh>
         <shapeGeometry args={[bodyShape]} />
         <meshBasicMaterial
           ref={bodyMatRef}
-          color="#350050"
+          color={bodyColor}
           transparent
-          opacity={0.05}
+          opacity={0.08}
           depthWrite={false}
           side={THREE.DoubleSide}
           toneMapped={false}
         />
       </mesh>
-      <mesh position={[0, 1.4, 0.005]}>
+      <mesh ref={jawRef} position={[0, 1.2, 0.005]}>
         <shapeGeometry args={[jawShape]} />
         <meshBasicMaterial
           ref={jawMatRef}
-          color="#350050"
+          color={bodyColor}
+          transparent
+          opacity={0.06}
+          depthWrite={false}
+          side={THREE.DoubleSide}
+          toneMapped={false}
+        />
+      </mesh>
+      <mesh position={[0, 1.12, 0.008]}>
+        <shapeGeometry args={[teethShape]} />
+        <meshBasicMaterial
+          ref={teethMatRef}
+          color="#350055"
+          transparent
+          opacity={0.08}
+          depthWrite={false}
+          side={THREE.DoubleSide}
+          toneMapped={false}
+        />
+      </mesh>
+      <mesh position={[0.4, 0.7, 0.01]}>
+        <shapeGeometry args={[eyeShape]} />
+        <meshBasicMaterial
+          ref={eyeMatRef}
+          color="#F72585"
+          transparent
+          opacity={0.12}
+          depthWrite={false}
+          toneMapped={false}
+        />
+      </mesh>
+      <mesh position={[0, -1.65, 0.003]}>
+        <shapeGeometry args={[tailFinShape]} />
+        <meshBasicMaterial
+          ref={tailMatRef}
+          color={bodyColor}
           transparent
           opacity={0.04}
           depthWrite={false}
@@ -253,6 +387,7 @@ function AnglerBody({ lurePositionRef }) {
           toneMapped={false}
         />
       </mesh>
+      <primitive object={stalkLine} />
     </group>
   )
 }
