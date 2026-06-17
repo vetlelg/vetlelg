@@ -101,6 +101,11 @@ Used for experience entries, education entries, project cards:
 | DepthFog | `DepthFog.jsx` | CSS radial-gradient overlay that darkens viewport edges as you scroll deeper |
 | CursorBubbles | `CursorBubbles.jsx` | 2D Canvas — small bubbles trail the mouse cursor |
 
+### Utilities
+| Component | File | Role |
+|-----------|------|------|
+| FrameloopControl | `FrameloopControl.jsx` | Placed inside R3F Canvas; uses IntersectionObserver to pause/resume the frame loop when its section enters/leaves the viewport (300px margin). Used by all section canvases. |
+
 ### Data
 All section content lives in `src/data/` and is imported by sections — never hardcoded.
 - `experience.js` — work history entries

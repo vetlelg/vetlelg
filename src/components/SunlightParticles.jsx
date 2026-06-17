@@ -2,6 +2,7 @@ import { Suspense, useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { EffectComposer, Bloom, ChromaticAberration, Vignette } from '@react-three/postprocessing'
+import FrameloopControl from './FrameloopControl'
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
 const PARTICLE_COUNT = IS_MOBILE ? 25 : 60
@@ -233,6 +234,7 @@ export default function SunlightParticles() {
           maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
         }}
       >
+        <FrameloopControl sectionId="experience" />
         <Particles />
         <FishSchool />
         <EffectComposer multisampling={0}>

@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { EffectComposer, Bloom, ChromaticAberration, Vignette, Noise, HueSaturation } from '@react-three/postprocessing'
 import { BlendFunction } from 'postprocessing'
+import FrameloopControl from './FrameloopControl'
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
 const PARTICLE_COUNT = IS_MOBILE ? 18 : 40
@@ -356,6 +357,7 @@ export default function TwilightParticles() {
           maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
         }}
       >
+        <FrameloopControl sectionId="education" />
         <Particles />
         <Jellyfish startPosition={[2, 0.5, -0.5]} jellyScale={1.2} />
         <Jellyfish startPosition={[-3.5, -1, -2.5]} jellyScale={0.55} />

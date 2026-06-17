@@ -75,6 +75,7 @@ function RaysMesh() {
   const materialRef = useRef()
   const scrollFade = useRef(1.0)
   const { size } = useThree()
+  const set = useThree((s) => s.set)
 
   const uniforms = useMemo(() => ({
     uTime: { value: 0 },
@@ -98,16 +99,20 @@ function RaysMesh() {
       },
       onUpdate: (self) => {
         const p = self.progress
-        scrollFade.current = p < 0.15 ? 1.0 : Math.max(0, 1.0 - ((p - 0.15) / 0.85) ** 0.6)
+        const prev = scrollFade.current
+        const next = p < 0.15 ? 1.0 : Math.max(0, 1.0 - ((p - 0.15) / 0.85) ** 0.6)
+        scrollFade.current = next
+        if (prev < 0.001 && next >= 0.001) set({ frameloop: 'always' })
       },
     })
     return () => trigger.kill()
-  }, [])
+  }, [set])
 
   useFrame((state) => {
     const mat = materialRef.current
     mat.uniforms.uTime.value = state.clock.elapsedTime
     mat.uniforms.uScrollFade.value = scrollFade.current
+    if (scrollFade.current < 0.001) set({ frameloop: 'never' })
   })
 
   return (

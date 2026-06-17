@@ -2,6 +2,7 @@ import { Suspense, useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
+import FrameloopControl from './FrameloopControl'
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
 const BUBBLE_COUNT = IS_MOBILE ? 12 : 30
@@ -73,6 +74,7 @@ export default function HeroCaustics() {
           zIndex: 0,
         }}
       >
+        <FrameloopControl sectionId="hero" />
         <Bubbles />
         <EffectComposer multisampling={0}>
           <Bloom mipmapBlur intensity={0.8} luminanceThreshold={0.2} luminanceSmoothing={0.4} />
