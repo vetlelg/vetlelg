@@ -158,7 +158,7 @@
 
 - [x] CursorBubbles.jsx is untracked but actively imported in App.jsx. A fresh clone will fail to build because this file won't exist. Commit the component to git. Also add `test-results/` to `.gitignore` — it's an untracked artifact directory polluting git status.
 
-- [ ] Dead CSS in HeroSection.css — `.hero__links` and `.hero__link` rules (~30 lines) are leftovers from when the hero section had social links. These styles are no longer used by any element. Remove them.
+- [x] Dead CSS in HeroSection.css — `.hero__links` and `.hero__link` rules (~30 lines) are leftovers from when the hero section had social links. These styles are no longer used by any element. Remove them.
 
 - [ ] Unnecessary TypeScript type packages in devDependencies — `@types/react` and `@types/react-dom` are installed but the project is JavaScript-only (no TypeScript anywhere). These serve no purpose and can be removed with `npm uninstall @types/react @types/react-dom`.
 
@@ -203,3 +203,4 @@
 - **Replace OG image with proper 1200x630 branded design** — 2026-06-16
 - **Review entire project and suggest improvements (round 3)** — 2026-06-17
 - **Commit CursorBubbles.jsx and gitignore test-results** — 2026-06-17
+- **Remove dead CSS from HeroSection.css** — 2026-06-17
