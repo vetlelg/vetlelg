@@ -11,6 +11,7 @@ import ContactSection from './components/ContactSection'
 import DepthFog from './components/DepthFog'
 import CursorBubbles from './components/CursorBubbles'
 const MarineSnow = lazy(() => import('./components/MarineSnow'))
+const GodRays = lazy(() => import('./components/GodRays'))
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -76,6 +77,9 @@ function App() {
       <CursorBubbles />
       <Suspense fallback={null}>
         <MarineSnow />
+      </Suspense>
+      <Suspense fallback={null}>
+        <GodRays />
       </Suspense>
       <main id="main-content">
       {zones.map((zone) => {

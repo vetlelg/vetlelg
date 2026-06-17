@@ -1,21 +1,75 @@
-import { lazy, Suspense, useEffect, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState, useCallback } from 'react'
 import { gsap } from 'gsap'
 import projects from '../data/projects'
 
 const MidnightParticles = lazy(() => import('./MidnightParticles'))
 import './ProjectsSection.css'
 
+const featuredProjects = projects.filter((p) => p.featured)
+const archiveProjects = projects.filter((p) => !p.featured)
+
+function ProjectCard({ project, index }) {
+  return (
+    <div className="projects__card">
+      <div className="projects__card-header">
+        <span className="projects__specimen-id">
+          SPECIMEN-{String(index + 1).padStart(3, '0')}
+        </span>
+        <span className="projects__status">CATALOGUED</span>
+      </div>
+      <span className="projects__context">
+        {project.year} — {project.organization}
+      </span>
+      <h3 className="projects__title">{project.title}</h3>
+      <p className="projects__description">{project.description}</p>
+      <div className="projects__tech">
+        {project.technologies.map((tech) => (
+          <span key={tech} className="projects__tech-tag">{tech}</span>
+        ))}
+      </div>
+      {(project.liveUrl || project.githubUrl) && (
+        <div className="projects__links">
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="projects__link"
+              aria-label={`Live demo of ${project.title}`}
+            >
+              Live Demo
+            </a>
+          )}
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="projects__link projects__link--github"
+              aria-label={`Source code for ${project.title}`}
+            >
+              Source
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function ProjectsSection() {
   const sectionRef = useRef(null)
+  const archiveRef = useRef(null)
+  const [showArchive, setShowArchive] = useState(false)
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReduced) return
 
     const ctx = gsap.context(() => {
-      gsap.from('.projects__card', {
+      gsap.from('.projects__grid--featured .projects__card', {
         scrollTrigger: {
-          trigger: '.projects__grid',
+          trigger: '.projects__grid--featured',
           start: 'top 80%',
           end: 'bottom 60%',
           toggleActions: 'play none none reverse',
@@ -31,6 +85,28 @@ export default function ProjectsSection() {
     return () => ctx.revert()
   }, [])
 
+  const toggleArchive = useCallback(() => {
+    setShowArchive((prev) => {
+      const next = !prev
+      if (next) {
+        requestAnimationFrame(() => {
+          const cards = archiveRef.current?.querySelectorAll('.projects__card')
+          if (!cards?.length) return
+          const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          if (prefersReduced) return
+          gsap.from(cards, {
+            y: 30,
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: 'power2.out',
+          })
+        })
+      }
+      return next
+    })
+  }, [])
+
   return (
     <section ref={sectionRef} id="projects" className="zone-section projects">
       <Suspense fallback={null}>
@@ -41,54 +117,40 @@ export default function ProjectsSection() {
         <h2 className="zone-title" style={{ color: 'var(--accent-midnight)' }}>
           Projects
         </h2>
-        <div className="projects__grid">
-          {projects.map((project, index) => (
-            <div key={project.id} className="projects__card">
-              <div className="projects__card-header">
-                <span className="projects__specimen-id">
-                  SPECIMEN-{String(index + 1).padStart(3, '0')}
-                </span>
-                <span className="projects__status">CATALOGUED</span>
-              </div>
-              <span className="projects__context">
-                {project.year} — {project.organization}
-              </span>
-              <h3 className="projects__title">{project.title}</h3>
-              <p className="projects__description">{project.description}</p>
-              <div className="projects__tech">
-                {project.technologies.map((tech) => (
-                  <span key={tech} className="projects__tech-tag">{tech}</span>
-                ))}
-              </div>
-              {(project.liveUrl || project.githubUrl) && (
-                <div className="projects__links">
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="projects__link"
-                      aria-label={`Live demo of ${project.title}`}
-                    >
-                      Live Demo
-                    </a>
-                  )}
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="projects__link projects__link--github"
-                      aria-label={`Source code for ${project.title}`}
-                    >
-                      Source
-                    </a>
-                  )}
-                </div>
-              )}
-            </div>
+        <div className="projects__grid projects__grid--featured">
+          {featuredProjects.map((project, i) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={i}
+            />
           ))}
         </div>
+
+        <button
+          className="projects__archive-toggle"
+          onClick={toggleArchive}
+          aria-expanded={showArchive}
+        >
+          <span className="projects__archive-toggle-text">
+            {showArchive ? 'COLLAPSE ARCHIVE' : `VIEW ARCHIVE — ${archiveProjects.length} MORE SPECIMENS`}
+          </span>
+          <span className={`projects__archive-toggle-arrow ${showArchive ? 'projects__archive-toggle-arrow--open' : ''}`}>
+            &#9660;
+          </span>
+        </button>
+
+        {showArchive && (
+          <div ref={archiveRef} className="projects__grid projects__grid--archive">
+            {archiveProjects.map((project, i) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={featuredProjects.length + i}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )

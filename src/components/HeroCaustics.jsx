@@ -3,97 +3,6 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 
-const vertexShader = `
-  varying vec2 vUv;
-  void main() {
-    vUv = uv;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-  }
-`
-
-const fragmentShader = `
-  uniform float uTime;
-  uniform vec3 uAccent;
-  varying vec2 vUv;
-
-  float causticLayer(vec2 uv, float scale, float speed, float seed) {
-    vec2 p = uv * scale;
-    p += vec2(
-      sin(uTime * speed + seed) * 0.4,
-      cos(uTime * speed * 0.7 + seed * 1.3) * 0.4
-    );
-    p.x += sin(p.y * 0.5 + uTime * 0.2 + seed) * 0.4;
-    p.y += cos(p.x * 0.4 + uTime * 0.15 + seed * 0.7) * 0.4;
-
-    float a = abs(sin(p.x));
-    float b = abs(sin(p.y * 1.1));
-    return min(a, b);
-  }
-
-  float godRay(vec2 uv, float angle, float width, float speed, float offset) {
-    float s = sin(angle);
-    float c = cos(angle);
-    float projected = uv.x * c + uv.y * s + offset;
-    projected += sin(uTime * speed) * 0.2;
-    float ray = smoothstep(width, 0.0, abs(fract(projected) - 0.5));
-    return ray * ray;
-  }
-
-  void main() {
-    float c = 0.0;
-    c += causticLayer(vUv, 4.0, 0.12, 0.0);
-    c += causticLayer(vUv, 6.0, 0.09, 2.5);
-    c += causticLayer(vUv, 8.0, 0.07, 5.0);
-    c /= 3.0;
-
-    float brightness = exp(-c * 5.0);
-
-    float rays = 0.0;
-    rays += godRay(vUv, 0.35, 0.12, 0.02, 0.0) * 0.5;
-    rays += godRay(vUv, 0.55, 0.08, 0.015, 1.7) * 0.35;
-    rays += godRay(vUv, 0.25, 0.15, 0.025, 3.2) * 0.25;
-    float depthFade = smoothstep(0.0, 0.8, vUv.y);
-    rays *= depthFade;
-
-    vec2 center = vUv - 0.5;
-    float vignette = 1.0 - dot(center, center) * 2.0;
-    vignette = clamp(vignette, 0.0, 1.0);
-
-    float finalAlpha = (brightness * 0.18 + rays * 0.08) * vignette;
-    gl_FragColor = vec4(uAccent, finalAlpha);
-  }
-`
-
-function CausticMesh() {
-  const materialRef = useRef()
-
-  const uniforms = useMemo(
-    () => ({
-      uTime: { value: 0 },
-      uAccent: { value: new THREE.Color('#CAF0F8') },
-    }),
-    []
-  )
-
-  useFrame((state) => {
-    materialRef.current.uniforms.uTime.value = state.clock.elapsedTime
-  })
-
-  return (
-    <mesh>
-      <planeGeometry args={[16, 10]} />
-      <shaderMaterial
-        ref={materialRef}
-        uniforms={uniforms}
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
-        transparent
-        toneMapped={false}
-      />
-    </mesh>
-  )
-}
-
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
 const BUBBLE_COUNT = IS_MOBILE ? 12 : 30
 
@@ -162,14 +71,11 @@ export default function HeroCaustics() {
           inset: 0,
           pointerEvents: 'none',
           zIndex: 0,
-          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)',
-          maskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)',
         }}
       >
-        <CausticMesh />
         <Bubbles />
         <EffectComposer multisampling={0}>
-          <Bloom mipmapBlur intensity={0.5} luminanceThreshold={0.2} luminanceSmoothing={0.3} />
+          <Bloom mipmapBlur intensity={0.8} luminanceThreshold={0.2} luminanceSmoothing={0.4} />
         </EffectComposer>
       </Canvas>
     </Suspense>

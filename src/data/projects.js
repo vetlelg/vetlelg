@@ -8,6 +8,7 @@ const projects = [
       'Consulting at Ida Infront, working on upgrades, installation, and maintenance of the iipax case management and archiving system for the Swedish public sector.',
     technologies: ['Java', 'JEE', 'WildFly', 'Linux', 'Jira'],
     githubUrl: null,
+    featured: true,
   },
   {
     id: 'nav-frikort',
@@ -18,6 +19,7 @@ const projects = [
       'Developed microservices for automatic handling of health reimbursements at NAV. Event-driven architecture with a focus on observability and CI/CD.',
     technologies: ['Kotlin', 'Spring', 'Microservices', 'Docker', 'Kubernetes', 'Grafana'],
     githubUrl: null,
+    featured: true,
   },
   {
     id: 'bachelor',
@@ -28,6 +30,7 @@ const projects = [
       'Push-based message distribution for event-driven architecture. Evaluated R2DBC, long polling, and server-sent events to replace a pull-based HTTP solution.',
     technologies: ['Kotlin', 'Spring WebFlux', 'PostgreSQL', 'R2DBC', 'Docker'],
     githubUrl: null,
+    featured: true,
   },
   {
     id: '3d-world',
@@ -58,6 +61,7 @@ const projects = [
       'Map application for registering markers with location data, images, and comments. Full-stack with React, ASP.NET Web API, Google Maps, and cookie-based auth.',
     technologies: ['React', 'ASP.NET', 'C#', 'EF Core', 'SQLite'],
     githubUrl: 'https://github.com/vetlelg/ITPE3200-Web-Applications',
+    featured: true,
   },
   {
     id: 'app-development',
@@ -68,6 +72,7 @@ const projects = [
       'Android apps including math exercises, birthday management with automatic SMS, and a map marker app using the Google Maps Android SDK.',
     technologies: ['Java', 'Android', 'Google Maps SDK'],
     githubUrl: 'https://github.com/vetlelg/DAVE3600-App-Development',
+    featured: true,
   },
   {
     id: 'vetlelg-com',
@@ -88,6 +93,7 @@ const projects = [
       'File transfer application implementing TCP-like reliability over UDP. Features a three-way handshake, Go-Back-N sliding window protocol, and graceful connection termination.',
     technologies: ['Python', 'Socket Programming'],
     githubUrl: 'https://github.com/vetlelg/DATA2410-DRTP',
+    featured: true,
   },
   {
     id: 'webprogramming',

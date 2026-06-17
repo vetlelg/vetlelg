@@ -1,15 +1,58 @@
 import { Suspense, useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import { EffectComposer, Bloom } from '@react-three/postprocessing'
+import { EffectComposer, Bloom, ChromaticAberration, Vignette, Noise, HueSaturation } from '@react-three/postprocessing'
+import { BlendFunction } from 'postprocessing'
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
 const PARTICLE_COUNT = IS_MOBILE ? 20 : 45
 const LURE_RADIUS = 4.5
+const CA_OFFSET = new THREE.Vector2(0.003, 0.0015)
+
+const lureGlowVertex = `
+  varying vec3 vNormal;
+  varying vec3 vWorldPos;
+
+  void main() {
+    vNormal = normalize(normalMatrix * normal);
+    vec4 wp = modelMatrix * vec4(position, 1.0);
+    vWorldPos = wp.xyz;
+    gl_Position = projectionMatrix * viewMatrix * wp;
+  }
+`
+
+const lureGlowFragment = `
+  varying vec3 vNormal;
+  varying vec3 vWorldPos;
+  uniform float uTime;
+  uniform float uPulse;
+  uniform vec3 uColor;
+
+  void main() {
+    vec3 viewDir = normalize(cameraPosition - vWorldPos);
+    float facing = abs(dot(vNormal, viewDir));
+
+    float glow = pow(facing, 1.5);
+    float flicker = 1.0 + sin(uTime * 7.0) * 0.06 + sin(uTime * 11.3) * 0.04;
+
+    float intensity = glow * uPulse * flicker;
+    vec3 color = uColor * (1.0 + intensity * 3.0);
+    float alpha = intensity * 0.3;
+
+    gl_FragColor = vec4(color, alpha);
+  }
+`
 
 function AnglerLure({ positionRef }) {
   const groupRef = useRef()
   const glowRef = useRef()
+  const glowMatRef = useRef()
+
+  const glowUniforms = useMemo(() => ({
+    uTime: { value: 0 },
+    uPulse: { value: 0.75 },
+    uColor: { value: new THREE.Color('#F72585') },
+  }), [])
 
   useFrame((state) => {
     const t = state.clock.elapsedTime
@@ -22,7 +65,10 @@ function AnglerLure({ positionRef }) {
 
     const pulse = Math.sin(t * 1.2) * 0.25 + 0.75
     glowRef.current.scale.setScalar(pulse)
-    glowRef.current.material.opacity = 0.1 + pulse * 0.08
+    if (glowMatRef.current) {
+      glowMatRef.current.uniforms.uTime.value = t
+      glowMatRef.current.uniforms.uPulse.value = pulse
+    }
   })
 
   return (
@@ -33,10 +79,12 @@ function AnglerLure({ positionRef }) {
       </mesh>
       <mesh ref={glowRef}>
         <sphereGeometry args={[0.25, 10, 10]} />
-        <meshBasicMaterial
-          color="#F72585"
+        <shaderMaterial
+          ref={glowMatRef}
+          uniforms={glowUniforms}
+          vertexShader={lureGlowVertex}
+          fragmentShader={lureGlowFragment}
           transparent
-          opacity={0.15}
           toneMapped={false}
           depthWrite={false}
         />
@@ -219,6 +267,10 @@ function AbyssScene() {
       <AnglerLure positionRef={lurePos} />
       <EffectComposer multisampling={0}>
         <Bloom mipmapBlur intensity={3.0} luminanceThreshold={0.0} luminanceSmoothing={0.15} />
+        {!IS_MOBILE && <ChromaticAberration offset={CA_OFFSET} radialModulation />}
+        <Vignette darkness={0.6} offset={0.4} />
+        {!IS_MOBILE && <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} opacity={0.05} />}
+        <HueSaturation saturation={-0.15} />
       </EffectComposer>
     </>
   )

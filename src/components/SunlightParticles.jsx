@@ -1,10 +1,13 @@
-import { Suspense, useRef, useMemo, useEffect } from 'react'
+import { Suspense, useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
+import { EffectComposer, Bloom, ChromaticAberration, Vignette } from '@react-three/postprocessing'
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
 const PARTICLE_COUNT = IS_MOBILE ? 25 : 60
 const FISH_COUNT = IS_MOBILE ? 6 : 12
+const FISH_COLOR = new THREE.Color('#90E0EF')
+const CA_OFFSET = new THREE.Vector2(0.0006, 0.0003)
 
 function Particles() {
   const meshRef = useRef()
@@ -52,7 +55,7 @@ function FishSchool() {
   const meshRef = useRef()
   const dummy = useMemo(() => new THREE.Object3D(), [])
 
-  const fishGeom = useMemo(() => {
+  const fishShape = useMemo(() => {
     const shape = new THREE.Shape()
     shape.moveTo(0.18, 0)
     shape.lineTo(0.08, 0.024)
@@ -67,8 +70,20 @@ function FishSchool() {
     shape.lineTo(0, -0.028)
     shape.lineTo(0.08, -0.024)
     shape.closePath()
-    return new THREE.ShapeGeometry(shape)
+    return shape
   }, [])
+
+  const colorArr = useMemo(() => {
+    const arr = new Float32Array(FISH_COUNT * 3)
+    for (let i = 0; i < FISH_COUNT; i++) {
+      arr[i * 3] = FISH_COLOR.r
+      arr[i * 3 + 1] = FISH_COLOR.g
+      arr[i * 3 + 2] = FISH_COLOR.b
+    }
+    return arr
+  }, [])
+
+  const colorAttrRef = useRef()
 
   const fish = useMemo(() => {
     const arr = []
@@ -162,23 +177,35 @@ function FishSchool() {
       dummy.scale.setScalar(f.scale)
       dummy.updateMatrix()
       meshRef.current.setMatrixAt(i, dummy.matrix)
+
+      const glint = Math.abs(waggle) / 0.08
+      const shimmer = Math.sin(t * 1.5 + f.phase * 2.7) * 0.2 + 0.85
+      const brightness = shimmer + glint * 0.35
+      colorArr[i * 3] = FISH_COLOR.r * brightness
+      colorArr[i * 3 + 1] = FISH_COLOR.g * brightness
+      colorArr[i * 3 + 2] = FISH_COLOR.b * brightness
     })
 
     meshRef.current.instanceMatrix.needsUpdate = true
+    if (colorAttrRef.current) colorAttrRef.current.needsUpdate = true
   })
 
-  useEffect(() => {
-    return () => fishGeom.dispose()
-  }, [fishGeom])
-
   return (
-    <instancedMesh ref={meshRef} args={[fishGeom, null, FISH_COUNT]}>
+    <instancedMesh ref={meshRef} args={[null, null, FISH_COUNT]}>
+      <shapeGeometry args={[fishShape]}>
+        <instancedBufferAttribute
+          ref={colorAttrRef}
+          attach="attributes-color"
+          args={[colorArr, 3]}
+        />
+      </shapeGeometry>
       <meshBasicMaterial
-        color="#90E0EF"
+        vertexColors
         transparent
         opacity={0.35}
         depthWrite={false}
         side={THREE.DoubleSide}
+        toneMapped={false}
       />
     </instancedMesh>
   )
@@ -208,6 +235,11 @@ export default function SunlightParticles() {
       >
         <Particles />
         <FishSchool />
+        <EffectComposer multisampling={0}>
+          <Bloom mipmapBlur intensity={1.2} luminanceThreshold={0.1} luminanceSmoothing={0.3} />
+          {!IS_MOBILE && <ChromaticAberration offset={CA_OFFSET} />}
+          <Vignette darkness={0.25} offset={0.6} />
+        </EffectComposer>
       </Canvas>
     </Suspense>
   )
