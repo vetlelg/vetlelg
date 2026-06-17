@@ -17,8 +17,8 @@
 - [] **Performance improvements**
 	Review code and look for performance improvements. Add the tasks to this list.
   - [x] Pause off-screen Three.js canvases — use IntersectionObserver + R3F frameloop control to stop GPU rendering when sections aren't visible. Also pause GodRays when fully faded out.
-  - [] Pause CursorBubbles animation loop when no bubbles are on screen (currently runs requestAnimationFrame continuously)
-  - [] Debounce CursorBubbles canvas resize handler to prevent GPU buffer reallocation on every resize event
+  - [x] Pause CursorBubbles animation loop when no bubbles are on screen (currently runs requestAnimationFrame continuously)
+  - [x] Debounce CursorBubbles canvas resize handler to prevent GPU buffer reallocation on every resize event
 
 - [] **Technical debt**
 	Review code and look for technical debt. Add the tasks to this list.

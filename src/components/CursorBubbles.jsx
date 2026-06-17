@@ -26,6 +26,8 @@ export default function CursorBubbles() {
     let lastY = 0
     let distAccum = 0
     let animId = 0
+    let animating = false
+    let resizeTimer = 0
     let currentColor = ACCENT_COLORS[0]
 
     function updateColor() {
@@ -48,12 +50,17 @@ export default function CursorBubbles() {
       }
     }
 
-    function resize() {
+    function applyResize() {
       canvas.width = window.innerWidth * dpr
       canvas.height = window.innerHeight * dpr
       ctx.scale(dpr, dpr)
     }
-    resize()
+    applyResize()
+
+    function resize() {
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(applyResize, 200)
+    }
     window.addEventListener('resize', resize)
 
     function onMove(e) {
@@ -70,6 +77,7 @@ export default function CursorBubbles() {
       if (count > 0 && bubbles.length < MAX_BUBBLES) {
         distAccum = distAccum % SPAWN_DISTANCE
         const toSpawn = Math.min(count, 3)
+        const wasEmpty = bubbles.length === 0
 
         for (let i = 0; i < toSpawn; i++) {
           const angle = Math.atan2(dy, dx) + Math.PI + (Math.random() - 0.5) * 1.6
@@ -87,6 +95,11 @@ export default function CursorBubbles() {
             life: 0,
             maxLife: Math.random() * 80 + 50,
           })
+        }
+
+        if (wasEmpty && !animating) {
+          animating = true
+          animId = requestAnimationFrame(animate)
         }
       }
 
@@ -133,18 +146,22 @@ export default function CursorBubbles() {
         }
       }
 
+      if (bubbles.length === 0) {
+        animating = false
+        return
+      }
       animId = requestAnimationFrame(animate)
     }
 
     window.addEventListener('mousemove', onMove)
     window.addEventListener('scroll', updateColor, { passive: true })
-    animId = requestAnimationFrame(animate)
 
     return () => {
       window.removeEventListener('mousemove', onMove)
       window.removeEventListener('resize', resize)
       window.removeEventListener('scroll', updateColor)
       cancelAnimationFrame(animId)
+      clearTimeout(resizeTimer)
     }
   }, [])
 
