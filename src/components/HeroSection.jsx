@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
+import { SplitText } from 'gsap/SplitText'
 
 const HeroCaustics = lazy(() => import('./HeroCaustics'))
 import './HeroSection.css'
@@ -25,38 +26,52 @@ export default function HeroSection() {
         delay: 0.15,
         ease: 'power2.out',
       })
-      gsap.from('.hero__name', {
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        delay: 0.3,
-        ease: 'power2.out',
+      SplitText.create('.hero__name', {
+        type: 'chars',
+        mask: 'chars',
+        aria: 'auto',
+        onSplit(self) {
+          return gsap.from(self.chars, {
+            y: '100%',
+            stagger: 0.03,
+            duration: 0.6,
+            delay: 0.3,
+            ease: 'power2.out',
+          })
+        },
       })
-      gsap.from('.hero__subtitle', {
-        y: 20,
-        opacity: 0,
-        duration: 1,
-        delay: 0.45,
-        ease: 'power2.out',
+      SplitText.create('.hero__subtitle', {
+        type: 'words',
+        mask: 'words',
+        aria: 'auto',
+        onSplit(self) {
+          return gsap.from(self.words, {
+            y: '100%',
+            stagger: 0.1,
+            duration: 0.5,
+            delay: 0.6,
+            ease: 'power2.out',
+          })
+        },
       })
       gsap.from('.hero__divider', {
         scaleX: 0,
         opacity: 0,
         duration: 0.8,
-        delay: 0.6,
+        delay: 0.8,
         ease: 'power2.out',
       })
       gsap.from('.hero__about', {
         y: 15,
         opacity: 0,
         duration: 0.8,
-        delay: 0.7,
+        delay: 0.95,
         ease: 'power2.out',
       })
       gsap.from('.hero__scroll-indicator', {
         opacity: 0,
         duration: 1,
-        delay: 1,
+        delay: 1.2,
         ease: 'power2.out',
       })
 

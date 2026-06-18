@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
+import { SplitText } from 'gsap/SplitText'
 import experience from '../data/experience'
 
 const SunlightParticles = lazy(() => import('./SunlightParticles'))
@@ -13,6 +14,24 @@ export default function ExperienceSection() {
     if (prefersReduced) return
 
     const ctx = gsap.context(() => {
+      SplitText.create('.zone-title--sunlight', {
+        type: 'chars',
+        aria: 'auto',
+        onSplit(self) {
+          return gsap.from(self.chars, {
+            scrollTrigger: {
+              trigger: '.experience__content',
+              start: 'top 85%',
+              toggleActions: 'play none none reverse',
+            },
+            y: 20,
+            opacity: 0,
+            stagger: 0.03,
+            duration: 0.5,
+            ease: 'power2.out',
+          })
+        },
+      })
       gsap.from('.experience__card', {
         scrollTrigger: {
           trigger: '.experience__timeline',

@@ -1,0 +1,357 @@
+- generic [ref=e3]:
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#experience"
+  - navigation "Main navigation" [ref=e5]:
+    - link "VLG" [ref=e6] [cursor=pointer]:
+      - /url: "#hero"
+    - list [ref=e7]:
+      - listitem [ref=e8]:
+        - link "Surface" [ref=e9] [cursor=pointer]:
+          - /url: "#hero"
+      - listitem [ref=e10]:
+        - link "Experience" [ref=e11] [cursor=pointer]:
+          - /url: "#experience"
+      - listitem [ref=e12]:
+        - link "Education" [ref=e13] [cursor=pointer]:
+          - /url: "#education"
+      - listitem [ref=e14]:
+        - link "Projects" [ref=e15] [cursor=pointer]:
+          - /url: "#projects"
+      - listitem [ref=e16]:
+        - link "Contact" [ref=e17] [cursor=pointer]:
+          - /url: "#contact"
+  - generic:
+    - generic: 0m
+  - main [ref=e18]:
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]: 59.9°N
+        - generic [ref=e24]: 10.7°E
+        - generic [ref=e26]: DEPTH 0m
+      - generic [ref=e29]: V
+      - heading "Vetle Larsen Gundersen" [level=1] [ref=e30]:
+        - generic [ref=e32]: V
+        - generic [ref=e34]: e
+        - generic [ref=e36]: t
+        - generic [ref=e38]: l
+        - generic [ref=e40]: e
+        - generic [ref=e42]: L
+        - generic [ref=e44]: a
+        - generic [ref=e46]: r
+        - generic [ref=e48]: s
+        - generic [ref=e50]: e
+        - generic [ref=e52]: "n"
+        - generic [ref=e54]: G
+        - generic [ref=e56]: u
+        - generic [ref=e58]: "n"
+        - generic [ref=e60]: d
+        - generic [ref=e62]: e
+        - generic [ref=e64]: r
+        - generic [ref=e66]: s
+        - generic [ref=e68]: e
+        - generic [ref=e70]: "n"
+      - paragraph [ref=e71]:
+        - generic [ref=e73]: Software
+        - generic [ref=e75]: Developer
+      - paragraph [ref=e76]: Consultant and master's student based in Oslo, building event-driven systems and reactive backends. Background in IT operations with international experience from Singapore and New Zealand.
+      - generic [ref=e77]:
+        - generic [ref=e78]: Scroll to descend
+        - img [ref=e79]
+    - generic [ref=e83]:
+      - generic [ref=e84]: 200m — Sunlight Zone
+      - heading "Experience" [level=2] [ref=e85]:
+        - generic [ref=e86]: E
+        - generic [ref=e87]: x
+        - generic [ref=e88]: p
+        - generic [ref=e89]: e
+        - generic [ref=e90]: r
+        - generic [ref=e91]: i
+        - generic [ref=e92]: e
+        - generic [ref=e93]: "n"
+        - generic [ref=e94]: c
+        - generic [ref=e95]: e
+      - generic [ref=e96]:
+        - generic [ref=e97]:
+          - generic [ref=e98]:
+            - heading "Consultant" [level=3] [ref=e99]
+            - generic [ref=e100]: 2025 — Present
+          - generic [ref=e101]: Decisive AS
+          - paragraph [ref=e102]: Software development consulting for clients working with event-driven architecture and reactive systems.
+          - generic [ref=e103]:
+            - generic [ref=e104]: Kotlin
+            - generic [ref=e105]: Spring WebFlux
+            - generic [ref=e106]: PostgreSQL
+            - generic [ref=e107]: R2DBC
+            - generic [ref=e108]: Docker
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - heading "Incident Responder" [level=3] [ref=e111]
+            - generic [ref=e112]: 2017 — 2022
+          - generic [ref=e113]: Intility
+          - paragraph [ref=e114]: Monitoring and incident management of network and server infrastructure. Troubleshooting, resolving, or escalating critical issues across networks, servers, and business applications.
+          - generic [ref=e115]:
+            - generic [ref=e116]: Windows Server
+            - generic [ref=e117]: Linux
+            - generic [ref=e118]: VMware
+            - generic [ref=e119]: Azure
+            - generic [ref=e120]: Cisco
+        - generic [ref=e121]:
+          - generic [ref=e122]:
+            - heading "Senior Technician" [level=3] [ref=e123]
+            - generic [ref=e124]: 2015 — 2017
+          - generic [ref=e125]: Intility
+          - paragraph [ref=e126]: Technical escalation and mentoring. 3 months in Auckland and 12 months at the Singapore office, establishing 24/7 support and monitoring. On-site client support in Singapore and Hong Kong.
+          - generic [ref=e127]:
+            - generic [ref=e128]: IT Operations
+            - generic [ref=e129]: Mentoring
+            - generic [ref=e130]: Global Support
+        - generic [ref=e131]:
+          - generic [ref=e132]:
+            - heading "Technician" [level=3] [ref=e133]
+            - generic [ref=e134]: 2014 — 2015
+          - generic [ref=e135]: Intility
+          - paragraph [ref=e136]: Technical support specializing in business applications. Training of apprentices and new employees.
+          - generic [ref=e137]:
+            - generic [ref=e138]: IT Support
+            - generic [ref=e139]: Business Applications
+        - generic [ref=e140]:
+          - generic [ref=e141]:
+            - heading "Technical Apprentice" [level=3] [ref=e142]
+            - generic [ref=e143]: 2012 — 2014
+          - generic [ref=e144]: Intility
+          - paragraph [ref=e145]: Apprenticeship providing technical support via phone, email, and chat.
+          - generic [ref=e147]: IT Support
+    - generic [ref=e149]:
+      - generic [ref=e150]: 1,000m — Twilight Zone
+      - heading "Education" [level=2] [ref=e151]:
+        - generic [ref=e152]: E
+        - generic [ref=e153]: d
+        - generic [ref=e154]: u
+        - generic [ref=e155]: c
+        - generic [ref=e156]: a
+        - generic [ref=e157]: t
+        - generic [ref=e158]: i
+        - generic [ref=e159]: o
+        - generic [ref=e160]: "n"
+      - generic [ref=e161]:
+        - generic [ref=e162]:
+          - generic [ref=e163]: 2025 — 2028
+          - heading "MSc Informatics" [level=3] [ref=e164]
+          - generic [ref=e165]: University of Oslo
+          - list [ref=e166]:
+            - listitem [ref=e167]: Programming and Systems Architecture
+        - generic [ref=e168]:
+          - generic [ref=e169]: 2022 — 2025
+          - heading "B.Eng Software Engineering" [level=3] [ref=e170]
+          - generic [ref=e171]: Oslo Metropolitan University
+          - list [ref=e172]:
+            - listitem [ref=e173]: Programming, algorithms, databases, web and app development
+            - listitem [ref=e174]: Software testing, cyber security, computer networks
+        - generic [ref=e175]:
+          - generic [ref=e176]: 2019 — 2020
+          - heading "Pre-Engineering" [level=3] [ref=e177]
+          - generic [ref=e178]: Oslo Metropolitan University
+          - list [ref=e179]:
+            - listitem [ref=e180]: Mathematics and physics prerequisites for engineering
+        - generic [ref=e181]:
+          - generic [ref=e182]: 2009 — 2014
+          - heading "Trade Certificate — Computer Electronics" [level=3] [ref=e183]
+          - generic [ref=e184]: Elvebakken VGS / Sogn VGS / Intility
+          - list [ref=e185]:
+            - listitem [ref=e186]: Electronics, programming, servers, and computer networks
+            - listitem [ref=e187]: 18-month apprenticeship at Intility
+    - generic [ref=e189]:
+      - generic [ref=e190]: 4,000m — Midnight Zone
+      - heading "Projects" [level=2] [ref=e191]:
+        - generic [ref=e192]: P
+        - generic [ref=e193]: r
+        - generic [ref=e194]: o
+        - generic [ref=e195]: j
+        - generic [ref=e196]: e
+        - generic [ref=e197]: c
+        - generic [ref=e198]: t
+        - generic [ref=e199]: s
+      - generic [ref=e200]:
+        - generic [ref=e201]:
+          - generic [ref=e202]:
+            - generic [ref=e203]: SPECIMEN-001
+            - generic [ref=e204]: CATALOGUED
+          - generic [ref=e205]: 2025 — Decisive — Ida Infront
+          - heading "iipax Case" [level=3] [ref=e206]
+          - paragraph [ref=e207]: Consulting at Ida Infront, working on upgrades, installation, and maintenance of the iipax case management and archiving system for the Swedish public sector.
+          - generic [ref=e208]:
+            - generic [ref=e209]: Java
+            - generic [ref=e210]: JEE
+            - generic [ref=e211]: WildFly
+            - generic [ref=e212]: Linux
+            - generic [ref=e213]: Jira
+        - generic [ref=e214]:
+          - generic [ref=e215]:
+            - generic [ref=e216]: SPECIMEN-002
+            - generic [ref=e217]: CATALOGUED
+          - generic [ref=e218]: 2025 — Decisive — NAV
+          - heading "NAV — Exemption Card" [level=3] [ref=e219]
+          - paragraph [ref=e220]: Developed microservices for automatic handling of health reimbursements at NAV. Event-driven architecture with a focus on observability and CI/CD.
+          - generic [ref=e221]:
+            - generic [ref=e222]: Kotlin
+            - generic [ref=e223]: Spring
+            - generic [ref=e224]: Microservices
+            - generic [ref=e225]: Docker
+            - generic [ref=e226]: Kubernetes
+            - generic [ref=e227]: Grafana
+        - generic [ref=e228]:
+          - generic [ref=e229]:
+            - generic [ref=e230]: SPECIMEN-003
+            - generic [ref=e231]: CATALOGUED
+          - generic [ref=e232]: Spring 2025 — Oslo Metropolitan University
+          - heading "Bachelor's Project" [level=3] [ref=e233]
+          - paragraph [ref=e234]: Push-based message distribution for event-driven architecture. Evaluated R2DBC, long polling, and server-sent events to replace a pull-based HTTP solution.
+          - generic [ref=e235]:
+            - generic [ref=e236]: Kotlin
+            - generic [ref=e237]: Spring WebFlux
+            - generic [ref=e238]: PostgreSQL
+            - generic [ref=e239]: R2DBC
+            - generic [ref=e240]: Docker
+        - generic [ref=e241]:
+          - generic [ref=e242]:
+            - generic [ref=e243]: SPECIMEN-004
+            - generic [ref=e244]: CATALOGUED
+          - generic [ref=e245]: Fall 2024 — Oslo Metropolitan University
+          - heading "Web Applications" [level=3] [ref=e246]
+          - paragraph [ref=e247]: Map application for registering markers with location data, images, and comments. Full-stack with React, ASP.NET Web API, Google Maps, and cookie-based auth.
+          - generic [ref=e248]:
+            - generic [ref=e249]: React
+            - generic [ref=e250]: ASP.NET
+            - generic [ref=e251]: C#
+            - generic [ref=e252]: EF Core
+            - generic [ref=e253]: SQLite
+          - link "Source code for Web Applications" [ref=e255] [cursor=pointer]:
+            - /url: https://github.com/vetlelg/ITPE3200-Web-Applications
+            - text: Source
+        - generic [ref=e256]:
+          - generic [ref=e257]:
+            - generic [ref=e258]: SPECIMEN-005
+            - generic [ref=e259]: CATALOGUED
+          - generic [ref=e260]: Fall 2024 — Oslo Metropolitan University
+          - heading "App Development" [level=3] [ref=e261]
+          - paragraph [ref=e262]: Android apps including math exercises, birthday management with automatic SMS, and a map marker app using the Google Maps Android SDK.
+          - generic [ref=e263]:
+            - generic [ref=e264]: Java
+            - generic [ref=e265]: Android
+            - generic [ref=e266]: Google Maps SDK
+          - link "Source code for App Development" [ref=e268] [cursor=pointer]:
+            - /url: https://github.com/vetlelg/DAVE3600-App-Development
+            - text: Source
+        - generic [ref=e269]:
+          - generic [ref=e270]:
+            - generic [ref=e271]: SPECIMEN-006
+            - generic [ref=e272]: CATALOGUED
+          - generic [ref=e273]: Spring 2024 — Oslo Metropolitan University
+          - heading "Networking" [level=3] [ref=e274]
+          - paragraph [ref=e275]: File transfer application implementing TCP-like reliability over UDP. Features a three-way handshake, Go-Back-N sliding window protocol, and graceful connection termination.
+          - generic [ref=e276]:
+            - generic [ref=e277]: Python
+            - generic [ref=e278]: Socket Programming
+          - link "Source code for Networking" [ref=e280] [cursor=pointer]:
+            - /url: https://github.com/vetlelg/DATA2410-DRTP
+            - text: Source
+      - button "VIEW ARCHIVE — 7 MORE SPECIMENS ▼" [ref=e281] [cursor=pointer]:
+        - generic [ref=e282]: VIEW ARCHIVE — 7 MORE SPECIMENS
+        - generic [ref=e283]: ▼
+      - generic [ref=e284]:
+        - generic [ref=e285]:
+          - generic [ref=e286]: Fall 2023 — Oslo Metropolitan University
+          - heading [level=3] [ref=e287]: 3D World
+          - paragraph [ref=e288]: An open 3D world built in Unity, exploring terrain generation, player mechanics, and 3D game development.
+          - generic [ref=e289]:
+            - generic [ref=e290]: Unity
+            - generic [ref=e291]: C#
+          - link [ref=e293] [cursor=pointer]:
+            - /url: https://github.com/vetlelg/3D-World
+            - text: Source
+        - generic [ref=e294]:
+          - generic [ref=e295]: Fall 2023 — Oslo Metropolitan University
+          - heading [level=3] [ref=e296]: Top Down Shooter
+          - paragraph [ref=e297]: A 2D top-down shooter game made with Unity.
+          - generic [ref=e298]:
+            - generic [ref=e299]: Unity
+            - generic [ref=e300]: C#
+          - link [ref=e302] [cursor=pointer]:
+            - /url: https://github.com/vetlelg/TopDownShooter
+            - text: Source
+        - generic [ref=e303]:
+          - generic [ref=e304]: 2023 — Personal Project
+          - heading [level=3] [ref=e305]: vetlelg.com
+          - paragraph [ref=e306]: Previous iteration of my personal website. Built with React and Bootstrap, hosted on Azure with automatic deployment via GitHub Actions.
+          - generic [ref=e307]:
+            - generic [ref=e308]: React
+            - generic [ref=e309]: Bootstrap
+            - generic [ref=e310]: JavaScript
+            - generic [ref=e311]: Azure
+          - link [ref=e313] [cursor=pointer]:
+            - /url: https://github.com/vetlelg/vetlelg-frontend
+            - text: Source
+        - generic [ref=e314]:
+          - generic [ref=e315]: Spring 2023 — Oslo Metropolitan University
+          - heading [level=3] [ref=e316]: Web Programming
+          - paragraph [ref=e317]: Full-stack web development projects with Java Spring Boot. Covered input validation, error handling, logging, cookie-based authentication, and password hashing.
+          - generic [ref=e318]:
+            - generic [ref=e319]: Java
+            - generic [ref=e320]: Spring Boot
+            - generic [ref=e321]: SQLite
+            - generic [ref=e322]: JavaScript
+            - generic [ref=e323]: Bootstrap
+          - link [ref=e325] [cursor=pointer]:
+            - /url: https://github.com/vetlelg/DATA1700-Webprogramming
+            - text: Source
+        - generic [ref=e326]:
+          - generic [ref=e327]: Fall 2022 — Oslo Metropolitan University
+          - heading [level=3] [ref=e328]: Inclusive Web Design
+          - paragraph [ref=e329]: Web development project focused on inclusive design principles, accessibility, and WCAG compliance.
+          - generic [ref=e330]:
+            - generic [ref=e331]: HTML
+            - generic [ref=e332]: CSS
+          - link [ref=e334] [cursor=pointer]:
+            - /url: https://github.com/vetlelg/final-assignment
+            - text: Source
+        - generic [ref=e335]:
+          - generic [ref=e336]: 2022 — Personal Project
+          - heading [level=3] [ref=e337]: The Fountain of Objects
+          - paragraph [ref=e338]: A console-based adventure game created while learning C#, based on challenges from "The C# Player's Guide" by RB Whitaker.
+          - generic [ref=e340]: C#
+          - link [ref=e342] [cursor=pointer]:
+            - /url: https://github.com/vetlelg/csharpplayersguide/tree/main/bossbattles/TheFountainOfObjects
+            - text: Source
+        - generic [ref=e343]:
+          - generic [ref=e344]: 2020 — Personal Project
+          - heading [level=3] [ref=e345]: Snake
+          - paragraph [ref=e346]: A classic Snake game — my first object-oriented programming project, created while learning C++ with the SFML graphics library.
+          - generic [ref=e347]:
+            - generic [ref=e348]: C++
+            - generic [ref=e349]: SFML
+          - link [ref=e351] [cursor=pointer]:
+            - /url: https://github.com/vetlelg/sfml-snake
+            - text: Source
+    - generic [ref=e352]:
+      - generic [ref=e353]:
+        - generic [ref=e354]: 6,000m — Abyssal Zone
+        - heading "Send a Transmission" [level=2] [ref=e355]:
+          - generic [ref=e356]: Send
+          - generic [ref=e357]: a
+          - generic [ref=e358]: Transmission
+        - paragraph [ref=e359]: Signals still reach down here. Whether you have a project in mind, want to collaborate, or just want to say hello — I'd love to hear from you.
+        - link "Send email to vetle.larsen.gundersen@gmail.com" [ref=e360] [cursor=pointer]:
+          - /url: mailto:vetle.larsen.gundersen@gmail.com
+          - text: vetle.larsen.gundersen@gmail.com
+        - generic [ref=e361]:
+          - link "GitHub" [ref=e362] [cursor=pointer]:
+            - /url: https://github.com/vetlelg
+            - img [ref=e363]
+          - link "LinkedIn" [ref=e365] [cursor=pointer]:
+            - /url: https://linkedin.com/in/vetlelg
+            - img [ref=e366]
+        - link "Scroll back to top of page" [ref=e368] [cursor=pointer]:
+          - /url: "#hero"
+          - generic [ref=e369]: ↑
+          - text: Back to surface
+      - generic [ref=e371]: © 2026 Vetle Larsen Gundersen

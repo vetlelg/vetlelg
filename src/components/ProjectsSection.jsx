@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState, useCallback } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { SplitText } from 'gsap/SplitText'
 import projects from '../data/projects'
 
 const MidnightParticles = lazy(() => import('./MidnightParticles'))
@@ -69,6 +70,24 @@ export default function ProjectsSection() {
     if (prefersReduced) return
 
     const ctx = gsap.context(() => {
+      SplitText.create('.zone-title--midnight', {
+        type: 'chars',
+        aria: 'auto',
+        onSplit(self) {
+          return gsap.from(self.chars, {
+            scrollTrigger: {
+              trigger: '.projects__content',
+              start: 'top 85%',
+              toggleActions: 'play none none reverse',
+            },
+            y: 20,
+            opacity: 0,
+            stagger: 0.03,
+            duration: 0.5,
+            ease: 'power2.out',
+          })
+        },
+      })
       gsap.from('.projects__grid--featured .projects__card', {
         scrollTrigger: {
           trigger: '.projects__grid--featured',

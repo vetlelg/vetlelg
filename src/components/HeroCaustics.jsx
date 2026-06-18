@@ -1,5 +1,6 @@
-import { Suspense, useRef, useMemo } from 'react'
+import { Suspense, useRef, useMemo, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
+import { useGLTF, useAnimations } from '@react-three/drei'
 import * as THREE from 'three'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import FrameloopControl from './FrameloopControl'
@@ -50,6 +51,47 @@ function Bubbles() {
   )
 }
 
+function Whale() {
+  const groupRef = useRef()
+  const { scene, animations } = useGLTF(`${import.meta.env.BASE_URL}models/whale.glb`)
+  const { actions } = useAnimations(animations, groupRef)
+
+  useEffect(() => {
+    const first = Object.values(actions)[0]
+    if (first) first.play()
+  }, [actions])
+
+  useMemo(() => {
+    scene.traverse((child) => {
+      if (child.isMesh) {
+        child.material = child.material.clone()
+        child.material.transparent = true
+        child.material.opacity = 0.35
+        child.material.depthWrite = false
+        child.material.toneMapped = false
+      }
+    })
+  }, [scene])
+
+  useFrame((state) => {
+    if (!groupRef.current) return
+    const t = state.clock.elapsedTime
+    groupRef.current.position.x = Math.sin(t * 0.1) * 2.5
+    groupRef.current.position.y = -0.3 + Math.sin(t * 0.13) * 0.8
+    groupRef.current.position.z = Math.sin(t * 0.07) * 0.5
+    const vx = Math.cos(t * 0.1)
+    const vz = Math.cos(t * 0.07) * 0.2
+    groupRef.current.rotation.y = Math.atan2(-vz, vx) - Math.PI / 4
+    groupRef.current.rotation.z = -vx * 0.05
+  })
+
+  return (
+    <group ref={groupRef} scale={0.6}>
+      <primitive object={scene} />
+    </group>
+  )
+}
+
 export default function HeroCaustics() {
   const prefersReduced =
     typeof window !== 'undefined' &&
@@ -71,7 +113,10 @@ export default function HeroCaustics() {
         }}
       >
         <FrameloopControl sectionId="hero" />
+        <ambientLight intensity={0.3} />
+        <directionalLight position={[0, 5, 3]} intensity={0.5} color="#CAF0F8" />
         <Bubbles />
+        {!IS_MOBILE && <Whale />}
         <EffectComposer multisampling={0}>
           <Bloom mipmapBlur intensity={0.8} luminanceThreshold={0.2} luminanceSmoothing={0.4} />
         </EffectComposer>

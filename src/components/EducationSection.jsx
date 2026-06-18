@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
+import { SplitText } from 'gsap/SplitText'
 import education from '../data/education'
 
 const TwilightParticles = lazy(() => import('./TwilightParticles'))
@@ -13,6 +14,24 @@ export default function EducationSection() {
     if (prefersReduced) return
 
     const ctx = gsap.context(() => {
+      SplitText.create('.zone-title--twilight', {
+        type: 'chars',
+        aria: 'auto',
+        onSplit(self) {
+          return gsap.from(self.chars, {
+            scrollTrigger: {
+              trigger: '.education__content',
+              start: 'top 85%',
+              toggleActions: 'play none none reverse',
+            },
+            y: 20,
+            opacity: 0,
+            stagger: 0.03,
+            duration: 0.5,
+            ease: 'power2.out',
+          })
+        },
+      })
       gsap.from('.education__card', {
         scrollTrigger: {
           trigger: '.education__grid',

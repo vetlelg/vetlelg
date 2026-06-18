@@ -1,6 +1,9 @@
 import { lazy, Suspense, useEffect, useRef } from 'react'
+import { ReactLenis } from 'lenis/react'
+import 'lenis/dist/lenis.css'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { SplitText } from 'gsap/SplitText'
 import Navbar from './components/Navbar'
 import DepthIndicator from './components/DepthIndicator'
 import HeroSection from './components/HeroSection'
@@ -14,7 +17,9 @@ const MarineSnow = lazy(() => import('./components/MarineSnow'))
 const GodRays = lazy(() => import('./components/GodRays'))
 import './App.css'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, SplitText)
+
+const PREFERS_REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 const zones = [
   { id: 'hero', label: '0m — Surface Zone', title: 'Hero', accent: '--accent-surface' },
@@ -33,12 +38,29 @@ const bgColors = [
   '#000000',
 ]
 
+const lenisOptions = {
+  autoRaf: false,
+  lerp: 0.07,
+  wheelMultiplier: 0.8,
+  smoothWheel: !PREFERS_REDUCED,
+}
+
 function App() {
   const containerRef = useRef(null)
+  const lenisRef = useRef(null)
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReduced) return
+    function update(time) {
+      lenisRef.current?.lenis?.raf(time * 1000)
+    }
+    gsap.ticker.add(update)
+    gsap.ticker.lagSmoothing(0)
+
+    return () => gsap.ticker.remove(update)
+  }, [])
+
+  useEffect(() => {
+    if (PREFERS_REDUCED) return
 
     const sections = containerRef.current.querySelectorAll('.zone-section')
     const triggers = []
@@ -67,31 +89,33 @@ function App() {
   }, [])
 
   return (
-    <div ref={containerRef}>
-      <a href="#experience" className="skip-link">
-        Skip to content
-      </a>
-      <Navbar />
-      <DepthIndicator />
-      <DepthFog />
-      <CursorBubbles />
-      <Suspense fallback={null}>
-        <MarineSnow />
-      </Suspense>
-      <Suspense fallback={null}>
-        <GodRays />
-      </Suspense>
-      <main id="main-content">
-      {zones.map((zone) => {
-        if (zone.id === 'hero') return <HeroSection key={zone.id} />
-        if (zone.id === 'experience') return <ExperienceSection key={zone.id} />
-        if (zone.id === 'education') return <EducationSection key={zone.id} />
-        if (zone.id === 'projects') return <ProjectsSection key={zone.id} />
-        if (zone.id === 'contact') return <ContactSection key={zone.id} />
-        return null
-      })}
-      </main>
-    </div>
+    <ReactLenis root options={lenisOptions} ref={lenisRef}>
+      <div ref={containerRef}>
+        <a href="#experience" className="skip-link">
+          Skip to content
+        </a>
+        <Navbar />
+        <DepthIndicator />
+        <DepthFog />
+        <CursorBubbles />
+        <Suspense fallback={null}>
+          <MarineSnow />
+        </Suspense>
+        <Suspense fallback={null}>
+          <GodRays />
+        </Suspense>
+        <main id="main-content">
+        {zones.map((zone) => {
+          if (zone.id === 'hero') return <HeroSection key={zone.id} />
+          if (zone.id === 'experience') return <ExperienceSection key={zone.id} />
+          if (zone.id === 'education') return <EducationSection key={zone.id} />
+          if (zone.id === 'projects') return <ProjectsSection key={zone.id} />
+          if (zone.id === 'contact') return <ContactSection key={zone.id} />
+          return null
+        })}
+        </main>
+      </div>
+    </ReactLenis>
   )
 }
 

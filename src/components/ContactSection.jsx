@@ -1,27 +1,37 @@
 import { lazy, Suspense, useEffect, useRef } from 'react'
+import { useLenis } from 'lenis/react'
 import { gsap } from 'gsap'
+import { SplitText } from 'gsap/SplitText'
 
 const AbyssParticles = lazy(() => import('./AbyssParticles'))
 import './ContactSection.css'
 
 export default function ContactSection() {
   const sectionRef = useRef(null)
+  const lenis = useLenis()
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReduced) return
 
     const ctx = gsap.context(() => {
-      gsap.from('.contact__heading', {
-        scrollTrigger: {
-          trigger: '.contact__inner',
-          start: 'top 80%',
-          toggleActions: 'play none none reverse',
+      SplitText.create('.contact__heading', {
+        type: 'words',
+        aria: 'auto',
+        onSplit(self) {
+          return gsap.from(self.words, {
+            scrollTrigger: {
+              trigger: '.contact__inner',
+              start: 'top 80%',
+              toggleActions: 'play none none reverse',
+            },
+            y: 25,
+            opacity: 0,
+            stagger: 0.12,
+            duration: 0.6,
+            ease: 'power2.out',
+          })
         },
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.out',
       })
 
       gsap.from('.contact__text', {
@@ -82,7 +92,7 @@ export default function ContactSection() {
 
   const handleBackToSurface = (e) => {
     e.preventDefault()
-    document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })
+    lenis?.scrollTo('#hero')
   }
 
   return (

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useLenis } from 'lenis/react'
 import './Navbar.css'
 
 const navLinks = [
@@ -16,6 +17,7 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('hero')
   const navRef = useRef(null)
   const lastScrollY = useRef(0)
+  const lenis = useLenis()
 
   useEffect(() => {
     const sectionEls = navLinks.map((l) => ({
@@ -53,9 +55,18 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [menuOpen])
+    if (menuOpen) {
+      lenis?.stop()
+      document.body.style.overflow = 'hidden'
+    } else {
+      lenis?.start()
+      document.body.style.overflow = ''
+    }
+    return () => {
+      lenis?.start()
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen, lenis])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -94,7 +105,7 @@ export default function Navbar() {
     e.preventDefault()
     const el = document.getElementById(id)
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
+      lenis?.scrollTo(el)
     }
     setMenuOpen(false)
   }
