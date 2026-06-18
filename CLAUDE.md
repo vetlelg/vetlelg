@@ -82,13 +82,13 @@ Used for experience entries, education entries, project cards:
 | Component | File | Role |
 |-----------|------|------|
 | App | `App.jsx` | Root. Registers ScrollTrigger, drives background color interpolation, renders all zones |
-| Navbar | `Navbar.jsx` | Fixed nav with scroll-hide, mobile hamburger, active section highlighting |
-| DepthIndicator | `DepthIndicator.jsx` | Fixed right-edge depth meter (0–11,000m) mapped to scroll position |
+| Navbar | `Navbar.jsx` | Fixed nav with scroll-hide, mobile hamburger, active section highlighting with zone-colored underline |
+| DepthIndicator | `DepthIndicator.jsx` | Fixed right-edge depth meter (0–11,000m) mapped to scroll position. Marker color interpolates through zone accent colors |
 
 ### Sections (one per depth zone)
 | Component | File | Three.js scene |
 |-----------|------|----------------|
-| HeroSection | `HeroSection.jsx` | HeroCaustics (lazy) — custom caustic shader + god rays + instanced bubbles + Bloom |
+| HeroSection | `HeroSection.jsx` | HeroCaustics (lazy) — custom caustic shader + instanced bubbles + Bloom |
 | ExperienceSection | `ExperienceSection.jsx` | SunlightParticles — instanced floating spheres + FishSchool (instanced ShapeGeometry fish with Boids flocking) |
 | EducationSection | `EducationSection.jsx` | TwilightParticles — bioluminescent particles + procedural Jellyfish (lathe geometry, sinusoidal tentacles) + Bloom |
 | ProjectsSection | `ProjectsSection.jsx` | MidnightParticles — flashing bioluminescent particles + procedural Squid + Bloom |
@@ -97,9 +97,10 @@ Used for experience entries, education entries, project cards:
 ### Global effects (fixed, always visible)
 | Component | File | Role |
 |-----------|------|------|
-| MarineSnow | `MarineSnow.jsx` | Lazy-loaded. Thousands of falling Points, fades in from education zone. Includes Three.js FogExp2 that increases with scroll depth |
+| GodRays | `GodRays.jsx` | Lazy-loaded. Full-viewport R3F Canvas with volumetric light shafts that fade out as you scroll past the hero section |
+| MarineSnow | `MarineSnow.jsx` | Lazy-loaded. Thousands of falling Points, fades in from education zone. Pauses rendering when above education zone. Includes Three.js FogExp2 that increases with scroll depth |
 | DepthFog | `DepthFog.jsx` | CSS radial-gradient overlay that darkens viewport edges as you scroll deeper |
-| CursorBubbles | `CursorBubbles.jsx` | 2D Canvas — small bubbles trail the mouse cursor |
+| CursorBubbles | `CursorBubbles.jsx` | 2D Canvas — small bubbles trail the mouse cursor. Color interpolates through zone accents. Skipped on touch-only devices. Pauses when idle |
 
 ### Utilities
 | Component | File | Role |
@@ -114,13 +115,13 @@ All section content lives in `src/data/` and is imported by sections — never h
 
 ## Section content
 
-Each section has a title and a depth label in mono (e.g. "1,000m — Twilight Zone").
+Each section has a title and a depth label in mono (e.g. "1,000m — Twilight Zone"). Section headings have a subtle text-shadow glow matching their zone accent color.
 
-- **Hero:** Full viewport. Coordinate readout (lat/long/depth in mono), name, subtitle ("Software Developer"), thin divider, tagline, tech readouts (Kotlin/Spring/React/Docker/PostgreSQL in mono), "scroll to descend" indicator. All in one content flow (no absolute positioning). HeroCaustics behind the text provides caustic light patterns and god rays. Staggered GSAP entrance animations.
+- **Hero:** Full viewport. Coordinate readout (lat/long/depth in mono), circular portrait photo with ring border (falls back to initial on error), name, subtitle ("Software Developer"), thin divider, about paragraph, "scroll to descend" indicator with double chevron. HeroCaustics behind the text provides caustic light patterns. GodRays rendered at App level. Staggered GSAP entrance animations.
 - **Experience:** Work history timeline. Glassmorphism cards with company, role, dates, description. GSAP stagger reveal on scroll.
 - **Education:** Degrees and certifications. Cards with institution, degree, year, highlights. Procedural jellyfish drifting through the scene.
-- **Projects:** Grid of project cards (2 cols desktop, 1 mobile). Each card: title, year/org context line, description, tech tags, GitHub link. Styled as deep-sea specimen cards with a procedural squid.
-- **Contact:** Centered. "Send a Transmission" heading. Email button. GitHub + LinkedIn social links (inline SVG). "Back to surface" scroll-to-top. Angler fish lure as focal point.
+- **Projects:** Featured projects shown by default in a grid (2 cols desktop, 1 mobile), with a collapsible "Archive" section for older projects (smooth height transition via GSAP). Each card: specimen ID, status badge, title, year/org context line, description, tech tags, GitHub link. Styled as deep-sea specimen cards with a procedural squid.
+- **Contact:** Centered. "Send a Transmission" heading. Email button. GitHub + LinkedIn social links (32px inline SVG with touch-friendly hit targets). "Back to surface" scroll-to-top with animated upward chevron. Angler fish lure as focal point with detailed AnglerBody silhouette.
 
 ## Conventions
 - One component per file, default export

@@ -1,3 +1,4 @@
+ALL_TASKS_COMPLETE
 # TODO.md — Deep Sea Dev Portfolio
 
 > Read this first every session. Pick the top incomplete task. Update with an X before exiting.
@@ -36,7 +37,7 @@
   - [x] CursorBubbles can spawn past MAX_BUBBLES limit — spawn loop doesn't re-check limit per bubble
   - [x] GodRays scrollFade starts at 1.0 — rays flash at full intensity if page loads scrolled past hero
 
-- [] **Visual improvements**
+- [x] **Visual improvements**
 	Review project and look for visual improvements. Don't do anything drastic and very risky. Add the tasks to this list.
   - [x] DepthIndicator marker color interpolates through zone accent colors as you scroll — currently always white
   - [x] Section headings get a subtle text-shadow glow matching their zone accent color
@@ -44,7 +45,7 @@
   - [x] "Back to surface" link gets an upward chevron animation
   - [x] Navbar active link gets a subtle underline indicator
 
-- [] **Update CLAUDE.md**
+- [x] **Update CLAUDE.md**
 	Update CLAUDE.md to document the current state of the project. It may be other changes done previously as well.
 
   
