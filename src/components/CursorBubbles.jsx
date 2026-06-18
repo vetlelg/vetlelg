@@ -82,7 +82,7 @@ export default function CursorBubbles() {
         const toSpawn = Math.min(count, 3)
         const wasEmpty = bubbles.length === 0
 
-        for (let i = 0; i < toSpawn; i++) {
+        for (let i = 0; i < toSpawn && bubbles.length < MAX_BUBBLES; i++) {
           const angle = Math.atan2(dy, dx) + Math.PI + (Math.random() - 0.5) * 1.6
           const spawnDist = Math.random() * 6
           bubbles.push({
@@ -158,6 +158,7 @@ export default function CursorBubbles() {
 
     window.addEventListener('mousemove', onMove)
     window.addEventListener('scroll', updateColor, { passive: true })
+    updateColor()
 
     return () => {
       window.removeEventListener('mousemove', onMove)

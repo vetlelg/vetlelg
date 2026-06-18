@@ -29,8 +29,12 @@
   - [x] Move inline zone-title color styles to CSS classes (ExperienceSection, EducationSection, ProjectsSection, ContactSection)
   - [x] Clean up uncaptured setTimeout in ProjectsSection toggleArchive
 
-- [] **Bug fixes**
+- [x] **Bug fixes**
 	Review code and look for bugs. Add the tasks to this list.
+  - [x] CursorBubbles color doesn't update on initial load if page is scrolled — bubbles always start as surface accent
+  - [x] ContactSection footer year is hardcoded to 2026 — should use current year dynamically
+  - [x] CursorBubbles can spawn past MAX_BUBBLES limit — spawn loop doesn't re-check limit per bubble
+  - [x] GodRays scrollFade starts at 1.0 — rays flash at full intensity if page loads scrolled past hero
 
 - [] **Visual improvements**
 	Review project and look for visual improvements. Don't do anything drastic and very risky. Add the tasks to this list.

@@ -140,7 +140,7 @@ export default function ContactSection() {
         </a>
       </div>
       <footer className="contact__footer">
-        <span>&copy; 2026 Vetle Larsen Gundersen</span>
+        <span>&copy; {new Date().getFullYear()} Vetle Larsen Gundersen</span>
       </footer>
     </section>
   )
