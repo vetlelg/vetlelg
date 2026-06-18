@@ -18,6 +18,11 @@ export default function Navbar() {
   const lastScrollY = useRef(0)
 
   useEffect(() => {
+    const sectionEls = navLinks.map((l) => ({
+      id: l.id,
+      el: document.getElementById(l.id),
+    }))
+
     const handleScroll = () => {
       const currentY = window.scrollY
       const delta = currentY - lastScrollY.current
@@ -31,11 +36,11 @@ export default function Navbar() {
         setHidden(false)
       }
 
-      let current = navLinks[0].id
-      for (const link of navLinks) {
-        const el = document.getElementById(link.id)
-        if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.35) {
-          current = link.id
+      const threshold = window.innerHeight * 0.35
+      let current = sectionEls[0].id
+      for (const s of sectionEls) {
+        if (s.el && s.el.getBoundingClientRect().top <= threshold) {
+          current = s.id
         }
       }
       setActiveSection(current)

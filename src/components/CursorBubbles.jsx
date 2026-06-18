@@ -11,6 +11,9 @@ const ACCENT_COLORS = [
   [247, 37, 133],
 ]
 
+const CAN_HOVER =
+  typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches
+
 export default function CursorBubbles() {
   const canvasRef = useRef(null)
 
@@ -29,9 +32,9 @@ export default function CursorBubbles() {
     let animating = false
     let resizeTimer = 0
     let currentColor = ACCENT_COLORS[0]
+    const sections = document.querySelectorAll('.zone-section')
 
     function updateColor() {
-      const sections = document.querySelectorAll('.zone-section')
       const sy = window.scrollY
       for (let i = 0; i < sections.length; i++) {
         const top = sections[i].offsetTop
@@ -164,6 +167,8 @@ export default function CursorBubbles() {
       clearTimeout(resizeTimer)
     }
   }, [])
+
+  if (!CAN_HOVER) return null
 
   return (
     <canvas

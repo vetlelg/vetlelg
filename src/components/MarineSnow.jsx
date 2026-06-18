@@ -1,5 +1,5 @@
 import { Suspense, useRef, useEffect } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -68,6 +68,27 @@ function Snow() {
       />
     </points>
   )
+}
+
+function SnowVisibility() {
+  const set = useThree((s) => s.set)
+
+  useEffect(() => {
+    set({ frameloop: 'never' })
+
+    const trigger = ScrollTrigger.create({
+      trigger: '#education',
+      start: 'top bottom',
+      onEnter: () => set({ frameloop: 'always' }),
+      onLeaveBack: () => set({ frameloop: 'never' }),
+    })
+
+    if (trigger.isActive) set({ frameloop: 'always' })
+
+    return () => trigger.kill()
+  }, [set])
+
+  return null
 }
 
 function SceneFog({ densityRef }) {
@@ -149,6 +170,7 @@ export default function MarineSnow() {
           dpr={1}
           gl={{ alpha: true, antialias: false }}
         >
+          <SnowVisibility />
           <Snow />
           <SceneFog densityRef={fogDensityRef} />
         </Canvas>

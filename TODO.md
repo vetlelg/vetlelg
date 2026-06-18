@@ -14,11 +14,14 @@
    Collapsable project section is not visible, too vague. The squid changes size when it uncollapsed/collapsed. It also looks strange that the abyss section moves with the uncollapse/collapse - I'm not sure if it's possible/easy to solve that part.
   _Done when: Projects are collapsable and it looks and functions well._
 
-- [] **Performance improvements**
+- [x] **Performance improvements**
 	Review code and look for performance improvements. Add the tasks to this list.
   - [x] Pause off-screen Three.js canvases — use IntersectionObserver + R3F frameloop control to stop GPU rendering when sections aren't visible. Also pause GodRays when fully faded out.
   - [x] Pause CursorBubbles animation loop when no bubbles are on screen (currently runs requestAnimationFrame continuously)
   - [x] Debounce CursorBubbles canvas resize handler to prevent GPU buffer reallocation on every resize event
+  - [x] Cache DOM queries in scroll handlers — CursorBubbles and Navbar now query section elements once at mount instead of on every scroll event
+  - [x] Pause MarineSnow canvas when above education zone — snow is invisible above education, so skip GPU rendering entirely
+  - [x] Skip CursorBubbles on touch-only devices — no mouse cursor means no bubbles, so avoid mounting the canvas and scroll listeners
 
 - [x] **Technical debt**
 	Review code and look for technical debt. Add the tasks to this list.
