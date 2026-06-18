@@ -40,7 +40,7 @@
 	Review project and look for visual improvements. Don't do anything drastic and very risky. Add the tasks to this list.
   - [x] DepthIndicator marker color interpolates through zone accent colors as you scroll — currently always white
   - [x] Section headings get a subtle text-shadow glow matching their zone accent color
-  - [] Contact social icons larger (24px → 32px) with better hit targets on mobile
+  - [x] Contact social icons larger (24px → 32px) with better hit targets on mobile
   - [] "Back to surface" link gets an upward chevron animation
   - [] Navbar active link gets a subtle underline indicator
 
