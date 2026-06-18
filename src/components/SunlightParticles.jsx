@@ -10,25 +10,40 @@ const FISH_COUNT = IS_MOBILE ? 6 : 12
 const FISH_COLOR = new THREE.Color('#90E0EF')
 const CA_OFFSET = new THREE.Vector2(0.0006, 0.0003)
 
+const PARTICLE_DATA = Array.from({ length: PARTICLE_COUNT }, () => ({
+  x: (Math.random() - 0.5) * 14,
+  y: (Math.random() - 0.5) * 8,
+  z: (Math.random() - 0.5) * 4,
+  speedX: (Math.random() - 0.5) * 0.08,
+  speedY: Math.random() * 0.04 + 0.01,
+  scale: Math.random() * 0.03 + 0.01,
+  phase: Math.random() * Math.PI * 2,
+}))
+
+const FISH_DATA = (() => {
+  const startAngle = Math.random() * Math.PI * 2
+  const startX = (Math.random() - 0.5) * 4
+  const startY = (Math.random() - 0.5) * 2
+  return Array.from({ length: FISH_COUNT }, () => {
+    const angle = startAngle + (Math.random() - 0.5) * 0.6
+    return {
+      x: startX + (Math.random() - 0.5) * 2,
+      y: startY + (Math.random() - 0.5) * 1.5,
+      z: (Math.random() - 0.5) * 1.5,
+      vx: Math.cos(angle) * 0.5,
+      vy: Math.sin(angle) * 0.5,
+      scale: 0.6 + Math.random() * 0.35,
+      phase: Math.random() * Math.PI * 2,
+      wanderPhase: Math.random() * Math.PI * 2,
+    }
+  })
+})()
+
 function Particles() {
   const meshRef = useRef()
   const dummy = useMemo(() => new THREE.Object3D(), [])
 
-  const particles = useMemo(() => {
-    const arr = []
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      arr.push({
-        x: (Math.random() - 0.5) * 14,
-        y: (Math.random() - 0.5) * 8,
-        z: (Math.random() - 0.5) * 4,
-        speedX: (Math.random() - 0.5) * 0.08,
-        speedY: Math.random() * 0.04 + 0.01,
-        scale: Math.random() * 0.03 + 0.01,
-        phase: Math.random() * Math.PI * 2,
-      })
-    }
-    return arr
-  }, [])
+  const particles = PARTICLE_DATA
 
   useFrame((state) => {
     const t = state.clock.elapsedTime
@@ -86,27 +101,7 @@ function FishSchool() {
 
   const colorAttrRef = useRef()
 
-  const fish = useMemo(() => {
-    const arr = []
-    const startAngle = Math.random() * Math.PI * 2
-    const startX = (Math.random() - 0.5) * 4
-    const startY = (Math.random() - 0.5) * 2
-
-    for (let i = 0; i < FISH_COUNT; i++) {
-      const angle = startAngle + (Math.random() - 0.5) * 0.6
-      arr.push({
-        x: startX + (Math.random() - 0.5) * 2,
-        y: startY + (Math.random() - 0.5) * 1.5,
-        z: (Math.random() - 0.5) * 1.5,
-        vx: Math.cos(angle) * 0.5,
-        vy: Math.sin(angle) * 0.5,
-        scale: 0.6 + Math.random() * 0.35,
-        phase: Math.random() * Math.PI * 2,
-        wanderPhase: Math.random() * Math.PI * 2,
-      })
-    }
-    return arr
-  }, [])
+  const fish = FISH_DATA
 
   useFrame((state, delta) => {
     if (!meshRef.current) return

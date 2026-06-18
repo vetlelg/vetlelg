@@ -38,7 +38,7 @@ export default function EducationSection() {
       </Suspense>
       <div className="education__content">
         <span className="zone-label">1,000m — Twilight Zone</span>
-        <h2 className="zone-title" style={{ color: 'var(--accent-twilight)' }}>
+        <h2 className="zone-title zone-title--twilight">
           Education
         </h2>
         <div className="education__grid">

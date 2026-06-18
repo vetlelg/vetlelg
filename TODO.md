@@ -20,8 +20,11 @@
   - [x] Pause CursorBubbles animation loop when no bubbles are on screen (currently runs requestAnimationFrame continuously)
   - [x] Debounce CursorBubbles canvas resize handler to prevent GPU buffer reallocation on every resize event
 
-- [] **Technical debt**
+- [x] **Technical debt**
 	Review code and look for technical debt. Add the tasks to this list.
+  - [x] Fix 63 ESLint errors: move Math.random() particle initialization from useMemo to module scope (AbyssParticles, MidnightParticles, SunlightParticles, TwilightParticles, MarineSnow)
+  - [x] Move inline zone-title color styles to CSS classes (ExperienceSection, EducationSection, ProjectsSection, ContactSection)
+  - [x] Clean up uncaptured setTimeout in ProjectsSection toggleArchive
 
 - [] **Bug fixes**
 	Review code and look for bugs. Add the tasks to this list.

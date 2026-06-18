@@ -12,28 +12,24 @@ const ARM_SEGS = IS_MOBILE ? 12 : 20
 const LONG_TENT_SEGS = IS_MOBILE ? 18 : 28
 const CA_OFFSET = new THREE.Vector2(0.002, 0.001)
 
+const PARTICLE_DATA = Array.from({ length: PARTICLE_COUNT }, () => ({
+  x: (Math.random() - 0.5) * 18,
+  y: (Math.random() - 0.5) * 12,
+  z: (Math.random() - 0.5) * 6,
+  driftX: (Math.random() - 0.5) * 0.02,
+  driftY: (Math.random() - 0.5) * 0.015,
+  baseScale: Math.random() * 0.03 + 0.008,
+  phase: Math.random() * Math.PI * 2,
+  pulseSpeed: Math.random() * 0.4 + 0.1,
+  flashPhase: Math.random() * Math.PI * 2,
+  flashInterval: Math.random() * 8 + 6,
+}))
+
 function Particles() {
   const meshRef = useRef()
   const dummy = useMemo(() => new THREE.Object3D(), [])
 
-  const particles = useMemo(() => {
-    const arr = []
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      arr.push({
-        x: (Math.random() - 0.5) * 18,
-        y: (Math.random() - 0.5) * 12,
-        z: (Math.random() - 0.5) * 6,
-        driftX: (Math.random() - 0.5) * 0.02,
-        driftY: (Math.random() - 0.5) * 0.015,
-        baseScale: Math.random() * 0.03 + 0.008,
-        phase: Math.random() * Math.PI * 2,
-        pulseSpeed: Math.random() * 0.4 + 0.1,
-        flashPhase: Math.random() * Math.PI * 2,
-        flashInterval: Math.random() * 8 + 6,
-      })
-    }
-    return arr
-  }, [])
+  const particles = PARTICLE_DATA
 
   const colorBase = useMemo(() => new THREE.Color('#00F5D4'), [])
   const colorArr = useMemo(() => {

@@ -61,6 +61,7 @@ function ProjectCard({ project, index }) {
 export default function ProjectsSection() {
   const sectionRef = useRef(null)
   const archiveRef = useRef(null)
+  const refreshTimerRef = useRef(null)
   const [showArchive, setShowArchive] = useState(false)
 
   useEffect(() => {
@@ -83,7 +84,10 @@ export default function ProjectsSection() {
       })
     }, sectionRef)
 
-    return () => ctx.revert()
+    return () => {
+      ctx.revert()
+      clearTimeout(refreshTimerRef.current)
+    }
   }, [])
 
   const toggleArchive = useCallback(() => {
@@ -107,7 +111,8 @@ export default function ProjectsSection() {
       }
       return next
     })
-    setTimeout(() => ScrollTrigger.refresh(), 550)
+    clearTimeout(refreshTimerRef.current)
+    refreshTimerRef.current = setTimeout(() => ScrollTrigger.refresh(), 550)
   }, [])
 
   return (
@@ -117,7 +122,7 @@ export default function ProjectsSection() {
       </Suspense>
       <div className="projects__content">
         <span className="zone-label">4,000m — Midnight Zone</span>
-        <h2 className="zone-title" style={{ color: 'var(--accent-midnight)' }}>
+        <h2 className="zone-title zone-title--midnight">
           Projects
         </h2>
         <div className="projects__grid projects__grid--featured">

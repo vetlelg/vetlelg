@@ -8,26 +8,22 @@ import FrameloopControl from './FrameloopControl'
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
 const PARTICLE_COUNT = IS_MOBILE ? 18 : 40
 
+const PARTICLE_DATA = Array.from({ length: PARTICLE_COUNT }, () => ({
+  x: (Math.random() - 0.5) * 16,
+  y: (Math.random() - 0.5) * 10,
+  z: (Math.random() - 0.5) * 5,
+  driftX: (Math.random() - 0.5) * 0.04,
+  driftY: (Math.random() - 0.5) * 0.02,
+  baseScale: Math.random() * 0.04 + 0.015,
+  phase: Math.random() * Math.PI * 2,
+  pulseSpeed: Math.random() * 0.8 + 0.3,
+}))
+
 function Particles() {
   const meshRef = useRef()
   const dummy = useMemo(() => new THREE.Object3D(), [])
 
-  const particles = useMemo(() => {
-    const arr = []
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      arr.push({
-        x: (Math.random() - 0.5) * 16,
-        y: (Math.random() - 0.5) * 10,
-        z: (Math.random() - 0.5) * 5,
-        driftX: (Math.random() - 0.5) * 0.04,
-        driftY: (Math.random() - 0.5) * 0.02,
-        baseScale: Math.random() * 0.04 + 0.015,
-        phase: Math.random() * Math.PI * 2,
-        pulseSpeed: Math.random() * 0.8 + 0.3,
-      })
-    }
-    return arr
-  }, [])
+  const particles = PARTICLE_DATA
 
   useFrame((state) => {
     const t = state.clock.elapsedTime

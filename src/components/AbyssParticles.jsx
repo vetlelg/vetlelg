@@ -10,6 +10,17 @@ const PARTICLE_COUNT = IS_MOBILE ? 20 : 45
 const LURE_RADIUS = 4.5
 const CA_OFFSET = new THREE.Vector2(0.003, 0.0015)
 
+const PARTICLE_DATA = Array.from({ length: PARTICLE_COUNT }, () => ({
+  x: (Math.random() - 0.5) * 20,
+  y: (Math.random() - 0.5) * 14,
+  z: (Math.random() - 0.5) * 6,
+  driftX: (Math.random() - 0.5) * 0.006,
+  driftY: Math.random() * 0.008 + 0.002,
+  baseScale: Math.random() * 0.02 + 0.005,
+  phase: Math.random() * Math.PI * 2,
+  pulseSpeed: Math.random() * 0.15 + 0.05,
+}))
+
 const lureGlowVertex = `
   varying vec3 vNormal;
   varying vec3 vWorldPos;
@@ -98,22 +109,7 @@ function Particles({ lurePositionRef }) {
   const meshRef = useRef()
   const dummy = useMemo(() => new THREE.Object3D(), [])
 
-  const particles = useMemo(() => {
-    const arr = []
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      arr.push({
-        x: (Math.random() - 0.5) * 20,
-        y: (Math.random() - 0.5) * 14,
-        z: (Math.random() - 0.5) * 6,
-        driftX: (Math.random() - 0.5) * 0.006,
-        driftY: Math.random() * 0.008 + 0.002,
-        baseScale: Math.random() * 0.02 + 0.005,
-        phase: Math.random() * Math.PI * 2,
-        pulseSpeed: Math.random() * 0.15 + 0.05,
-      })
-    }
-    return arr
-  }, [])
+  const particles = PARTICLE_DATA
 
   const colorBase = useMemo(() => new THREE.Color('#F72585'), [])
   const colorArr = useMemo(() => {

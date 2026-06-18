@@ -1,32 +1,34 @@
-import { Suspense, useRef, useMemo, useEffect } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Suspense, useRef, useEffect } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
 const SNOW_COUNT = IS_MOBILE ? 800 : 2000
 
+const SNOW_DATA = (() => {
+  const pos = new Float32Array(SNOW_COUNT * 3)
+  const speeds = new Float32Array(SNOW_COUNT)
+  const phases = new Float32Array(SNOW_COUNT)
+  const amps = new Float32Array(SNOW_COUNT)
+
+  for (let i = 0; i < SNOW_COUNT; i++) {
+    pos[i * 3] = (Math.random() - 0.5) * 22
+    pos[i * 3 + 1] = (Math.random() - 0.5) * 16
+    pos[i * 3 + 2] = Math.random() * -8
+
+    speeds[i] = Math.random() * 0.008 + 0.002
+    phases[i] = Math.random() * Math.PI * 2
+    amps[i] = Math.random() * 0.15 + 0.05
+  }
+
+  return { positions: pos, fallSpeeds: speeds, driftPhases: phases, driftAmps: amps }
+})()
+
 function Snow() {
   const pointsRef = useRef()
 
-  const { positions, fallSpeeds, driftPhases, driftAmps } = useMemo(() => {
-    const pos = new Float32Array(SNOW_COUNT * 3)
-    const speeds = new Float32Array(SNOW_COUNT)
-    const phases = new Float32Array(SNOW_COUNT)
-    const amps = new Float32Array(SNOW_COUNT)
-
-    for (let i = 0; i < SNOW_COUNT; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 22
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 16
-      pos[i * 3 + 2] = Math.random() * -8
-
-      speeds[i] = Math.random() * 0.008 + 0.002
-      phases[i] = Math.random() * Math.PI * 2
-      amps[i] = Math.random() * 0.15 + 0.05
-    }
-
-    return { positions: pos, fallSpeeds: speeds, driftPhases: phases, driftAmps: amps }
-  }, [])
+  const { positions, fallSpeeds, driftPhases, driftAmps } = SNOW_DATA
 
   useFrame(({ clock }) => {
     const t = clock.elapsedTime
@@ -69,20 +71,23 @@ function Snow() {
 }
 
 function SceneFog({ densityRef }) {
-  const { scene } = useThree()
+  const fogRef = useRef(null)
+  const sceneRef = useRef(null)
+
+  useFrame((state) => {
+    if (!fogRef.current) {
+      fogRef.current = new THREE.FogExp2('#000000', 0)
+      state.scene.fog = fogRef.current
+      sceneRef.current = state.scene
+    }
+    fogRef.current.density = densityRef.current
+  })
 
   useEffect(() => {
-    scene.fog = new THREE.FogExp2('#000000', 0)
     return () => {
-      scene.fog = null
+      if (sceneRef.current) sceneRef.current.fog = null
     }
-  }, [scene])
-
-  useFrame(() => {
-    if (scene.fog) {
-      scene.fog.density = densityRef.current
-    }
-  })
+  }, [])
 
   return null
 }

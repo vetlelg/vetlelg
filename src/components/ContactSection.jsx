@@ -92,7 +92,7 @@ export default function ContactSection() {
       </Suspense>
       <div className="contact__inner">
         <span className="zone-label">6,000m — Abyssal Zone</span>
-        <h2 className="contact__heading zone-title" style={{ color: 'var(--accent-abyss)' }}>
+        <h2 className="contact__heading zone-title zone-title--abyss">
           Send a Transmission
         </h2>
         <p className="contact__text">

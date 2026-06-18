@@ -7,26 +7,22 @@ import FrameloopControl from './FrameloopControl'
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
 const BUBBLE_COUNT = IS_MOBILE ? 12 : 30
 
+const BUBBLE_DATA = Array.from({ length: BUBBLE_COUNT }, () => ({
+  x: (Math.random() - 0.5) * 5,
+  y: Math.random() * 6 - 3,
+  z: Math.random() * 1.2 + 0.3,
+  speed: Math.random() * 0.25 + 0.08,
+  wobbleSpeed: Math.random() * 1.0 + 0.5,
+  wobbleAmp: Math.random() * 0.2 + 0.05,
+  scale: Math.random() * 0.012 + 0.003,
+  phase: Math.random() * Math.PI * 2,
+}))
+
 function Bubbles() {
   const meshRef = useRef()
   const dummy = useMemo(() => new THREE.Object3D(), [])
 
-  const bubbles = useMemo(() => {
-    const arr = []
-    for (let i = 0; i < BUBBLE_COUNT; i++) {
-      arr.push({
-        x: (Math.random() - 0.5) * 5,
-        y: Math.random() * 6 - 3,
-        z: Math.random() * 1.2 + 0.3,
-        speed: Math.random() * 0.25 + 0.08,
-        wobbleSpeed: Math.random() * 1.0 + 0.5,
-        wobbleAmp: Math.random() * 0.2 + 0.05,
-        scale: Math.random() * 0.012 + 0.003,
-        phase: Math.random() * Math.PI * 2,
-      })
-    }
-    return arr
-  }, [])
+  const bubbles = BUBBLE_DATA
 
   useFrame((state) => {
     const t = state.clock.elapsedTime

@@ -23,6 +23,11 @@
   margin-bottom: 1rem;
 }
 
+.zone-title--sunlight { color: var(--accent-sunlight); }
+.zone-title--twilight { color: var(--accent-twilight); }
+.zone-title--midnight { color: var(--accent-midnight); }
+.zone-title--abyss { color: var(--accent-abyss); }
+
 .zone-subtitle {
   font-size: 1.125rem;
   color: var(--text-secondary);

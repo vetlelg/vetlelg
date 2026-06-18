@@ -1,6 +1,5 @@
 import { useRef, useMemo, useEffect } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import * as THREE from 'three'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
