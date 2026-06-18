@@ -88,6 +88,22 @@
   padding: 0.5rem 1rem;
   transition: color 0.25s ease;
   pointer-events: auto;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.contact__surface-chevron {
+  display: block;
+  font-size: 1rem;
+  line-height: 1;
+  animation: chevron-bob 2s ease-in-out infinite;
+}
+
+@keyframes chevron-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }
 
 .contact__surface-link:hover {
@@ -130,6 +146,10 @@
   .contact__social-link,
   .contact__surface-link {
     transition: none;
+  }
+
+  .contact__surface-chevron {
+    animation: none;
   }
 }
 

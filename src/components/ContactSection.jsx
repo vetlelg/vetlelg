@@ -136,6 +136,7 @@ export default function ContactSection() {
           className="contact__surface-link"
           aria-label="Scroll back to top of page"
         >
+          <span className="contact__surface-chevron" aria-hidden="true">&#8593;</span>
           Back to surface
         </a>
       </div>
