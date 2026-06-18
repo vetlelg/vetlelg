@@ -42,7 +42,7 @@
   - [x] Section headings get a subtle text-shadow glow matching their zone accent color
   - [x] Contact social icons larger (24px → 32px) with better hit targets on mobile
   - [x] "Back to surface" link gets an upward chevron animation
-  - [] Navbar active link gets a subtle underline indicator
+  - [x] Navbar active link gets a subtle underline indicator
 
 - [] **Update CLAUDE.md**
 	Update CLAUDE.md to document the current state of the project. It may be other changes done previously as well.
