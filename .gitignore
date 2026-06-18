@@ -41,3 +41,9 @@ blob-report/
 
 # Claude Code
 .claude/settings.local.json
+
+# Playwright MCP
+.playwright-mcp/
+
+# Loop logs
+.loop-logs/
