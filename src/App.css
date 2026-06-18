@@ -23,10 +23,26 @@
   margin-bottom: 1rem;
 }
 
-.zone-title--sunlight { color: var(--accent-sunlight); }
-.zone-title--twilight { color: var(--accent-twilight); }
-.zone-title--midnight { color: var(--accent-midnight); }
-.zone-title--abyss { color: var(--accent-abyss); }
+.zone-title--sunlight {
+  color: var(--accent-sunlight);
+  text-shadow: 0 0 30px color-mix(in srgb, var(--accent-sunlight) 25%, transparent),
+               0 0 60px color-mix(in srgb, var(--accent-sunlight) 10%, transparent);
+}
+.zone-title--twilight {
+  color: var(--accent-twilight);
+  text-shadow: 0 0 30px color-mix(in srgb, var(--accent-twilight) 35%, transparent),
+               0 0 60px color-mix(in srgb, var(--accent-twilight) 15%, transparent);
+}
+.zone-title--midnight {
+  color: var(--accent-midnight);
+  text-shadow: 0 0 30px color-mix(in srgb, var(--accent-midnight) 25%, transparent),
+               0 0 60px color-mix(in srgb, var(--accent-midnight) 10%, transparent);
+}
+.zone-title--abyss {
+  color: var(--accent-abyss);
+  text-shadow: 0 0 30px color-mix(in srgb, var(--accent-abyss) 35%, transparent),
+               0 0 60px color-mix(in srgb, var(--accent-abyss) 15%, transparent);
+}
 
 .zone-subtitle {
   font-size: 1.125rem;
