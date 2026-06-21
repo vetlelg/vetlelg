@@ -11,7 +11,8 @@ Single page, vertical scroll, no routing.
 ## Tech stack
 - Vite + React 19 (functional components, hooks)
 - Three.js via @react-three/fiber + @react-three/drei + @react-three/postprocessing
-- GSAP + ScrollTrigger (registered once in App.jsx)
+- GSAP + ScrollTrigger + SplitText (registered once in App.jsx)
+- Lenis smooth scroll (integrated with GSAP ticker in App.jsx)
 - Plain CSS with custom properties
 - JavaScript (no TypeScript)
 
@@ -81,18 +82,18 @@ Used for experience entries, education entries, project cards:
 ### Layout & navigation
 | Component | File | Role |
 |-----------|------|------|
-| App | `App.jsx` | Root. Registers ScrollTrigger, drives background color interpolation, renders all zones |
+| App | `App.jsx` | Root. Registers ScrollTrigger + SplitText, wraps app in ReactLenis, drives background color interpolation, renders all zones |
 | Navbar | `Navbar.jsx` | Fixed nav with scroll-hide, mobile hamburger, active section highlighting with zone-colored underline |
 | DepthIndicator | `DepthIndicator.jsx` | Fixed right-edge depth meter (0–11,000m) mapped to scroll position. Marker color interpolates through zone accent colors |
 
 ### Sections (one per depth zone)
 | Component | File | Three.js scene |
 |-----------|------|----------------|
-| HeroSection | `HeroSection.jsx` | HeroCaustics (lazy) — custom caustic shader + instanced bubbles + Bloom |
-| ExperienceSection | `ExperienceSection.jsx` | SunlightParticles — instanced floating spheres + FishSchool (instanced ShapeGeometry fish with Boids flocking) |
-| EducationSection | `EducationSection.jsx` | TwilightParticles — bioluminescent particles + procedural Jellyfish (lathe geometry, sinusoidal tentacles) + Bloom |
-| ProjectsSection | `ProjectsSection.jsx` | MidnightParticles — flashing bioluminescent particles + procedural Squid + Bloom |
-| ContactSection | `ContactSection.jsx` | AbyssParticles — angler fish lure (pulse glow) + AnglerBody silhouette (ShapeGeometry, proximity-driven visibility) + instanced particles + Bloom |
+| HeroSection | `HeroSection.jsx` | HeroCaustics (lazy) — custom caustic shader + instanced bubbles + Bloom + WaterDistortion |
+| ExperienceSection | `ExperienceSection.jsx` | SunlightParticles — instanced floating spheres + FishSchool (instanced ShapeGeometry fish with Boids flocking) + Bloom + ChromaticAberration + Vignette + WaterDistortion |
+| EducationSection | `EducationSection.jsx` | TwilightParticles — bioluminescent particles + procedural Jellyfish (lathe geometry, sinusoidal tentacles) + Bloom + ChromaticAberration + Vignette + Noise + HueSaturation + WaterDistortion |
+| ProjectsSection | `ProjectsSection.jsx` | MidnightParticles — flashing bioluminescent particles + procedural Squid + Bloom + ChromaticAberration + Vignette + Noise + HueSaturation + WaterDistortion |
+| ContactSection | `ContactSection.jsx` | AbyssParticles — angler fish lure (pulse glow) + AnglerBody silhouette (ShapeGeometry, proximity-driven visibility) + instanced particles + Bloom + ChromaticAberration + Vignette + Noise + HueSaturation + WaterDistortion |
 
 ### Global effects (fixed, always visible)
 | Component | File | Role |
@@ -102,16 +103,27 @@ Used for experience entries, education entries, project cards:
 | DepthFog | `DepthFog.jsx` | CSS radial-gradient overlay that darkens viewport edges as you scroll deeper |
 | CursorBubbles | `CursorBubbles.jsx` | 2D Canvas — small bubbles trail the mouse cursor. Color interpolates through zone accents. Skipped on touch-only devices. Pauses when idle |
 
+### Effects (`src/effects/`)
+| File | Role |
+|------|------|
+| `WaterDistortion.jsx` | R3F wrapper (via `wrapEffect`) for the custom post-processing effect |
+| `WaterDistortionEffect.js` | Custom `postprocessing` Effect — wave-based UV distortion fragment shader. Used in all R3F scene canvases |
+
 ### Utilities
 | Component | File | Role |
 |-----------|------|------|
-| FrameloopControl | `FrameloopControl.jsx` | Placed inside R3F Canvas; uses IntersectionObserver to pause/resume the frame loop when its section enters/leaves the viewport (300px margin). Used by all section canvases. |
+| FrameloopControl | `FrameloopControl.jsx` | Placed inside R3F Canvas; uses IntersectionObserver to pause/resume the frame loop when its section enters/leaves the viewport (300px margin). Used by all section canvases |
 
 ### Data
 All section content lives in `src/data/` and is imported by sections — never hardcoded.
 - `experience.js` — work history entries
 - `education.js` — degrees and certifications
-- `projects.js` — project cards with tech tags, years, organizations
+- `projects.js` — project cards with tech tags, years, organizations, optional `liveUrl` and `githubUrl` links
+
+### Static assets (`public/`)
+- `profile.jpg` — hero portrait photo
+- `favicon.svg`, `og-image.png` — metadata assets
+- `models/whale.glb`, `models/fishschool.glb`, `models/anglerfish.glb` — GLB models (not yet integrated, pending TODO tasks)
 
 ## Section content
 
@@ -120,12 +132,13 @@ Each section has a title and a depth label in mono (e.g. "1,000m — Twilight Zo
 - **Hero:** Full viewport. Coordinate readout (lat/long/depth in mono), circular portrait photo with ring border (falls back to initial on error), name, subtitle ("Software Developer"), thin divider, about paragraph, "scroll to descend" indicator with double chevron. HeroCaustics behind the text provides caustic light patterns. GodRays rendered at App level. Staggered GSAP entrance animations.
 - **Experience:** Work history timeline. Glassmorphism cards with company, role, dates, description. GSAP stagger reveal on scroll.
 - **Education:** Degrees and certifications. Cards with institution, degree, year, highlights. Procedural jellyfish drifting through the scene.
-- **Projects:** Featured projects shown by default in a grid (2 cols desktop, 1 mobile), with a collapsible "Archive" section for older projects (smooth height transition via GSAP). Each card: specimen ID, status badge, title, year/org context line, description, tech tags, GitHub link. Styled as deep-sea specimen cards with a procedural squid.
+- **Projects:** Featured projects shown by default in a grid (2 cols desktop, 1 mobile), with a collapsible "Archive" section for older projects (CSS max-height transition, GSAP stagger on cards). Each card: specimen ID, status badge, title, year/org context line, description, tech tags, optional GitHub/live-demo links. Styled as deep-sea specimen cards with a procedural squid.
 - **Contact:** Centered. "Send a Transmission" heading. Email button. GitHub + LinkedIn social links (32px inline SVG with touch-friendly hit targets). "Back to surface" scroll-to-top with animated upward chevron. Angler fish lure as focal point with detailed AnglerBody silhouette.
 
 ## Conventions
 - One component per file, default export
 - useRef for GSAP targets, never animate via React state
+- Lenis handles smooth scrolling — use `useLenis()` for programmatic scroll, never native `scrollTo`
 - useEffect cleanup for every GSAP timeline, ScrollTrigger, and Three.js resource
 - Use instanced meshes for particle systems (not individual meshes per particle)
 - Suspense boundary with fallback around every R3F Canvas
