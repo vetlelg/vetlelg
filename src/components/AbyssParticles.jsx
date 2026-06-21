@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { EffectComposer, Bloom, ChromaticAberration, Vignette, Noise, HueSaturation } from '@react-three/postprocessing'
 import { BlendFunction } from 'postprocessing'
+import { WaterDistortion } from '../effects/WaterDistortion'
 import FrameloopControl from './FrameloopControl'
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
@@ -399,6 +400,7 @@ function AbyssScene() {
       <Particles lurePositionRef={lurePos} />
       <AnglerLure positionRef={lurePos} />
       <EffectComposer multisampling={0}>
+        {!IS_MOBILE && <WaterDistortion strength={0.001} speed={0.3} />}
         <Bloom mipmapBlur intensity={3.0} luminanceThreshold={0.0} luminanceSmoothing={0.15} />
         {!IS_MOBILE && <ChromaticAberration offset={CA_OFFSET} radialModulation />}
         <Vignette darkness={0.6} offset={0.4} />

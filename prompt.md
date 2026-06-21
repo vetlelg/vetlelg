@@ -20,11 +20,10 @@ Your job is to make it better — one task at a time.
 Rules:
 - One task per iteration. If it's too big, break it into sub-tasks in TODO.md
   and complete the first one.
+- Always follow the research, plan and implement strategy for each iteration
 - Don't refactor code outside the current task's scope.
 - Prioritize looking good over technical cleverness. If an effect doesn't look
   right, iterate on it before moving on.
-- Keep particle scales conservative and effects organic — avoid things that
-  look too big, too bright, or too artificial.
 - Test at both desktop (1440px) and mobile (375px) before committing.
 
 When every task is done, write ALL_TASKS_COMPLETE as the first line of TODO.md.

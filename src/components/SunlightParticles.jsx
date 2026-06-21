@@ -2,6 +2,7 @@ import { Suspense, useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { EffectComposer, Bloom, ChromaticAberration, Vignette } from '@react-three/postprocessing'
+import { WaterDistortion } from '../effects/WaterDistortion'
 import FrameloopControl from './FrameloopControl'
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
@@ -233,6 +234,7 @@ export default function SunlightParticles() {
         <Particles />
         <FishSchool />
         <EffectComposer multisampling={0}>
+          {!IS_MOBILE && <WaterDistortion strength={0.003} speed={0.8} />}
           <Bloom mipmapBlur intensity={1.2} luminanceThreshold={0.1} luminanceSmoothing={0.3} />
           {!IS_MOBILE && <ChromaticAberration offset={CA_OFFSET} />}
           <Vignette darkness={0.25} offset={0.6} />

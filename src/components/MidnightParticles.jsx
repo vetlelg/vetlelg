@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { EffectComposer, Bloom, ChromaticAberration, Vignette, Noise, HueSaturation } from '@react-three/postprocessing'
 import { BlendFunction } from 'postprocessing'
+import { WaterDistortion } from '../effects/WaterDistortion'
 import FrameloopControl from './FrameloopControl'
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
@@ -403,6 +404,7 @@ export default function MidnightParticles() {
         <Particles />
         <Squid startPosition={[2, 0.5, -0.5]} squidScale={1.3} />
         <EffectComposer multisampling={0}>
+          {!IS_MOBILE && <WaterDistortion strength={0.0015} speed={0.4} />}
           <Bloom mipmapBlur intensity={2.5} luminanceThreshold={0.0} luminanceSmoothing={0.2} />
           {!IS_MOBILE && <ChromaticAberration offset={CA_OFFSET} radialModulation />}
           <Vignette darkness={0.5} offset={0.45} />

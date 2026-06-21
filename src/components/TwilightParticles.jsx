@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { EffectComposer, Bloom, ChromaticAberration, Vignette, Noise, HueSaturation } from '@react-three/postprocessing'
 import { BlendFunction } from 'postprocessing'
+import { WaterDistortion } from '../effects/WaterDistortion'
 import FrameloopControl from './FrameloopControl'
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
@@ -358,6 +359,7 @@ export default function TwilightParticles() {
         <Jellyfish startPosition={[2, 0.5, -0.5]} jellyScale={1.2} />
         <Jellyfish startPosition={[-3.5, -1, -2.5]} jellyScale={0.55} />
         <EffectComposer multisampling={0}>
+          {!IS_MOBILE && <WaterDistortion strength={0.002} speed={0.6} />}
           <Bloom mipmapBlur intensity={1.8} luminanceThreshold={0.0} luminanceSmoothing={0.2} />
           {!IS_MOBILE && <ChromaticAberration offset={CA_OFFSET} radialModulation />}
           <Vignette darkness={0.35} offset={0.5} />
