@@ -36,6 +36,7 @@ function Bubbles() {
   const bubbles = BUBBLE_DATA
 
   useFrame((state) => {
+    if (!meshRef.current) return
     const t = state.clock.elapsedTime
     bubbles.forEach((b, i) => {
       let y = b.y + t * b.speed
@@ -121,6 +122,7 @@ function WhaleBubbleWake({ whalePositionRef }) {
 
 function Whale({ positionRef }) {
   const groupRef = useRef()
+  const materialsRef = useRef([])
   const { scene, animations } = useGLTF(`${import.meta.env.BASE_URL}models/whale.glb`)
   const { actions } = useAnimations(animations, groupRef)
 
@@ -191,9 +193,14 @@ function Whale({ positionRef }) {
         mat.customProgramCacheKey = () => 'whale-fresnel'
         mat.needsUpdate = true
         child.material = mat
+        materialsRef.current.push(mat)
       }
     })
   }, [scene])
+
+  useEffect(() => {
+    return () => materialsRef.current.forEach((mat) => mat.dispose())
+  }, [])
 
   useFrame((state) => {
     if (!groupRef.current) return

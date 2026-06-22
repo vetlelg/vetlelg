@@ -68,6 +68,7 @@ function AnglerLure() {
   }), [])
 
   useFrame((state) => {
+    if (!glowRef.current) return
     const t = state.clock.elapsedTime
     const pulse = Math.sin(t * 1.2) * 0.25 + 0.75
     glowRef.current.scale.setScalar(pulse)
@@ -119,6 +120,7 @@ function Particles({ lurePositionRef }) {
   const colorAttrRef = useRef()
 
   useFrame((state) => {
+    if (!meshRef.current) return
     const t = state.clock.elapsedTime
     const lurePos = lurePositionRef.current
 
@@ -256,7 +258,12 @@ function Anglerfish({ lurePositionRef }) {
     materialsRef.current = mats
   }, [scene])
 
+  useEffect(() => {
+    return () => materialsRef.current.forEach((mat) => mat.dispose())
+  }, [])
+
   useFrame((state) => {
+    if (!bodyRef.current || !lureRef.current) return
     const t = state.clock.elapsedTime
 
     const bodyX = IS_MOBILE

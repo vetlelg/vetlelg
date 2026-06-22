@@ -27,6 +27,7 @@ function Particles() {
   const particles = PARTICLE_DATA
 
   useFrame((state) => {
+    if (!meshRef.current) return
     const t = state.clock.elapsedTime
     particles.forEach((p, i) => {
       const x = p.x + Math.sin(t * 0.3 + p.phase) * 0.5
@@ -51,6 +52,7 @@ function Particles() {
 function FishSchool() {
   const groupRef = useRef()
   const localTime = useRef(Math.random() * 100)
+  const materialsRef = useRef([])
   const { scene, animations } = useGLTF(`${import.meta.env.BASE_URL}models/fishschool.glb`)
 
   // Strip position tracks to prevent loop-induced teleportation;
@@ -134,9 +136,14 @@ function FishSchool() {
         mat.customProgramCacheKey = () => 'fish-fresnel'
         mat.needsUpdate = true
         child.material = mat
+        materialsRef.current.push(mat)
       }
     })
   }, [scene])
+
+  useEffect(() => {
+    return () => materialsRef.current.forEach((mat) => mat.dispose())
+  }, [])
 
   useFrame((state, delta) => {
     if (!groupRef.current) return

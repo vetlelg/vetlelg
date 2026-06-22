@@ -52,9 +52,13 @@ _Done when: All the visual improvement tasks are done._
   - [x] **Improve footer presence** — increase footer text from 0.65rem to 0.7rem and add a subtle top gradient separator for visual closure
   - [x] **Add glow to navbar active links** — active nav links are colored but have no glow; adding a subtle text-shadow matching the zone accent ties the nav into the theme
 
-- [] **Suggest technical debt improvements**
+- [x] **Suggest technical debt improvements**
 Suggest technical debt improvements. Add tasks to this list.
 _Done when: All the technical debt tasks are done._
+
+  - [x] **Dispose cloned materials in GLB model components** — Whale (HeroCaustics), FishSchool (SunlightParticles), and Anglerfish (AbyssParticles) clone materials from GLTF models but never dispose them on unmount. The procedural Jellyfish/Squid components already do this correctly. Add useEffect cleanup that disposes cloned materials.
+  - [x] **Add null guards to useFrame callbacks** — AbyssParticles Particles and AnglerLure, HeroCaustics Bubbles access refs without null checks, while FishSchool and WhaleBubbleWake correctly guard. Make all useFrame callbacks consistent.
+  - [x] **Reset frameloop on FrameloopControl unmount** — If FrameloopControl unmounts while section is off-screen, frameloop stays 'never'. Add cleanup to reset to 'always'.
 
 - [] **Suggest performance improvements**
 Suggest performance improvements, without making the visuals worse. Add tasks to this list.
