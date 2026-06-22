@@ -17,9 +17,8 @@ Audited the full codebase for performance. Key findings: GLB models total 12.2 M
 - [x] **Compress GLB models**
 Applied meshopt geometry compression + WebP texture compression via @gltf-transform/cli. Results: anglerfish 7.5 MB → 947 KB, fishschool 1.1 MB → 226 KB, whale 4.0 MB → 474 KB. Total 12.6 MB → 1.6 MB (87% reduction). drei's useGLTF handles meshopt decompression automatically.
 
-- [] **Split vendor chunks in Vite**
-The Three.js ecosystem (three + fiber + drei + postprocessing) is a single 880 KB chunk. Configure Vite manualChunks to split into three-core, drei, postprocessing, and gsap. Improves cache granularity and parallel loading.
-_Done when: build produces separate vendor chunks, no build errors, site works normally._
+- [x] **Split vendor chunks in Vite**
+Used Rolldown's `codeSplitting.groups` (Vite 8's native API) instead of legacy `manualChunks`. Split the 880 KB monolithic chunk into five independently cacheable chunks: three-core (723 KB), react-three-fiber (168 KB), drei (72 KB), postprocessing (75 KB), gsap (120 KB). Build passes clean with no warnings.
 
 - [] **DepthIndicator: compute track gradient once**
 The track gradient is 5 fixed colors that never change, but it's recomputed on every scroll event. Set it once on mount.
