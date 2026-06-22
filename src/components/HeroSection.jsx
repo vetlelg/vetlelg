@@ -14,16 +14,10 @@ export default function HeroSection() {
     if (prefersReduced) return
 
     const ctx = gsap.context(() => {
-      gsap.from('.hero__coordinates', {
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-      })
       gsap.from('.hero__portrait', {
         scale: 0.9,
         opacity: 0,
         duration: 1,
-        delay: 0.15,
         ease: 'power2.out',
       })
       SplitText.create('.hero__name', {
@@ -35,7 +29,7 @@ export default function HeroSection() {
             y: '100%',
             stagger: 0.03,
             duration: 0.6,
-            delay: 0.3,
+            delay: 0.2,
             ease: 'power2.out',
           })
         },
@@ -49,10 +43,16 @@ export default function HeroSection() {
             y: '100%',
             stagger: 0.1,
             duration: 0.5,
-            delay: 0.6,
+            delay: 0.5,
             ease: 'power2.out',
           })
         },
+      })
+      gsap.from('.hero__coordinates', {
+        opacity: 0,
+        duration: 0.6,
+        delay: 0.7,
+        ease: 'power2.out',
       })
       gsap.from('.hero__divider', {
         scaleX: 0,
@@ -96,35 +96,39 @@ export default function HeroSection() {
         <HeroCaustics />
       </Suspense>
       <div className="hero__content">
-        <div className="hero__coordinates" aria-hidden="true">
-          <span className="hero__coord">59.9°N</span>
-          <span className="hero__coord-sep" />
-          <span className="hero__coord">10.7°E</span>
-          <span className="hero__coord-sep" />
-          <span className="hero__coord">DEPTH 0m</span>
+        <div className="hero__profile">
+          <div className="hero__portrait">
+            <div className="hero__portrait-ring" />
+            {imgFailed ? (
+              <div className="hero__portrait-fallback" aria-hidden="true">V</div>
+            ) : (
+              <img
+                className="hero__portrait-img"
+                src="/profile.jpg"
+                alt="Vetle L. Gundersen"
+                loading="eager"
+                onError={() => setImgFailed(true)}
+              />
+            )}
+          </div>
+          <div className="hero__info">
+            <h1 className="hero__name">Vetle L. Gundersen</h1>
+            <p className="hero__subtitle">Software Developer</p>
+            <div className="hero__coordinates" aria-hidden="true">
+              <span className="hero__coord">59.9°N</span>
+              <span className="hero__coord-sep" />
+              <span className="hero__coord">10.7°E</span>
+              <span className="hero__coord-sep" />
+              <span className="hero__coord">DEPTH 0m</span>
+            </div>
+            <div className="hero__divider" aria-hidden="true" />
+            <p className="hero__about">
+              Consultant and master&apos;s student based in Oslo, building event-driven
+              systems and reactive backends. Background in IT operations with
+              international experience from Singapore and New Zealand.
+            </p>
+          </div>
         </div>
-        <div className="hero__portrait">
-          <div className="hero__portrait-ring" />
-          {imgFailed ? (
-            <div className="hero__portrait-fallback" aria-hidden="true">V</div>
-          ) : (
-            <img
-              className="hero__portrait-img"
-              src="/profile.jpg"
-              alt="Vetle Larsen Gundersen"
-              loading="eager"
-              onError={() => setImgFailed(true)}
-            />
-          )}
-        </div>
-        <h1 className="hero__name">Vetle Larsen Gundersen</h1>
-        <p className="hero__subtitle">Software Developer</p>
-        <div className="hero__divider" aria-hidden="true" />
-        <p className="hero__about">
-          Consultant and master&apos;s student based in Oslo, building event-driven
-          systems and reactive backends. Background in IT operations with
-          international experience from Singapore and New Zealand.
-        </p>
         <div className="hero__scroll-indicator">
           <span className="hero__scroll-text">Scroll to descend</span>
           <svg className="hero__scroll-chevrons" width="20" height="16" viewBox="0 0 20 16" fill="none" aria-hidden="true">
