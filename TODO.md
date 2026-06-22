@@ -27,6 +27,6 @@ Precomputed the static 5-color gradient as a module-level constant (`TRACK_GRADI
 Skip Vignette and HueSaturation effects on mobile for TwilightParticles, MidnightParticles, and AbyssParticles. Bloom stays (core to the aesthetic). Saves GPU passes per frame on constrained devices.
 _Done when: mobile scenes render without Vignette/HueSaturation, visuals still look good._
 
-- [] **Preload GLB models**
-Add useGLTF.preload() calls so fishschool.glb, anglerfish.glb, and whale.glb start downloading before the user scrolls to those sections.
+- [x] **Preload GLB models**
+Added useGLTF.preload() calls at module scope in App.jsx for fishschool.glb, anglerfish.glb, and whale.glb. Models now start downloading on page load instead of waiting for lazy-loaded section components to mount.
 _Done when: preload calls added, models load earlier in network waterfall._

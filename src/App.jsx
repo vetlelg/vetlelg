@@ -13,6 +13,7 @@ import ProjectsSection from './components/ProjectsSection'
 import ContactSection from './components/ContactSection'
 import DepthFog from './components/DepthFog'
 import CursorBubbles from './components/CursorBubbles'
+import { useGLTF } from '@react-three/drei'
 const MarineSnow = lazy(() => import('./components/MarineSnow'))
 const GodRays = lazy(() => import('./components/GodRays'))
 import './App.css'
@@ -44,6 +45,10 @@ const lenisOptions = {
   wheelMultiplier: 0.8,
   smoothWheel: !PREFERS_REDUCED,
 }
+
+useGLTF.preload(`${import.meta.env.BASE_URL}models/fishschool.glb`)
+useGLTF.preload(`${import.meta.env.BASE_URL}models/anglerfish.glb`)
+useGLTF.preload(`${import.meta.env.BASE_URL}models/whale.glb`)
 
 function App() {
   const containerRef = useRef(null)
