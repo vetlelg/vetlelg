@@ -14,13 +14,29 @@ _Done when: The school of fish glb model has been implemented and it looks good.
 Replace the anglerfish in the abyssal zone with "C:\repos\vetlelg\public\models\anglerfish.glb" and implement it. Add effects if you think it will make it look better, to match the theme in the abyssal zone.
 _Done when: The anglerfish glb model has been implemented and it looks good._
 
-- [] **Fix uncollapsed projects in midnight section**
+- [x] **Fix uncollapsed projects in midnight section**
 The uncollapsed projects in the midnight section is impossible to see. They have the same opacity as the other projects when they have been uncollapsed. Should be completely visible, just like all the other projects.
 _Done when: Uncollapsed projects are completely visible and looks good._
 
-- [] **Change hero section layout**
+- [x] **Change hero section layout**
 The layout in the hero section now looks very symmetrical with a big headline with my name. The name should change to Vetle L. Gundersen. The layout should change. It should look more like a profile view, with the profile picture on the left and the text and information on the right. Or whatever looks good, but something like that.
 _Done when: The layout looks more like a profile layout and looks good._
+
+- [] **Reconsider transparent glb models**
+Reconsider if this is the best looking approach. It could be, or maybe not. Use your own judgement.
+_Done when: You have made a decision and it looks good._
+
+- [] **Anglerfish improvements**
+Anglerfish is too big. The glowing lure is also not in front of it at the correct position. Maybe the glowing lure should light up its face and the rest of the body should be less visible / shadowy. Like how an anglerfish would look like in reality.
+_Done when: Improvements has been made and it looks good._
+
+- [] **School of fish improvements**
+School of fish movement animation suddenly resets and the fish appear out of nowhere. Not exactly sure how this should be solved. School of fish should be visible on mobile.
+_Done when: Problem is fixed._
+
+- [] **Whale improvements**
+I want it to look like the whale is swimming more in the background. Maybe add some blur or similar effects / depth of field. Or make it very slightly smaller.
+_Done when: Improvement has been made and it looks good._
 
 - [] **Suggest visual improvements**
 Suggest visual improvements. Add tasks to this list. Don't do anything crazy. Just do things that you are fairly certain will look better.
