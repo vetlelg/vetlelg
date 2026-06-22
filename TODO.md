@@ -23,7 +23,7 @@ Used Rolldown's `codeSplitting.groups` (Vite 8's native API) instead of legacy `
 - [x] **DepthIndicator: compute track gradient once**
 Precomputed the static 5-color gradient as a module-level constant (`TRACK_GRADIENT`). Applied once on mount in useEffect, removed from the scroll handler entirely. Scroll handler no longer touches trackRef.
 
-- [] **Reduce mobile post-processing**
+- [x] **Reduce mobile post-processing**
 Skip Vignette and HueSaturation effects on mobile for TwilightParticles, MidnightParticles, and AbyssParticles. Bloom stays (core to the aesthetic). Saves GPU passes per frame on constrained devices.
 _Done when: mobile scenes render without Vignette/HueSaturation, visuals still look good._
 
