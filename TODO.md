@@ -5,9 +5,8 @@
 - [x] **School of fish**
 Reverted position-track stripping (restored original GLB animation). Added opacity fade near animation loop boundaries — fish and their point light fade to transparent before the position resets, then fade back in, hiding the teleport.
 
-- [] **Collapse-button in projects section**
-The collapse-button is not too close to the project-cards above it, almost overlapping them.
-_Done when: It's fixed and it looks good._
+- [x] **Collapse-button in projects section**
+Increased `margin-top` on `.projects__archive-toggle` from 3rem to 4.5rem, giving comfortable clearance between the last featured card and the button (especially on mobile where the overlap was most visible).
 
 - [] **Anglerfish light**
 The light of the anglerfish isn't placed at the lure. Its position seems to be south of the anglerfish's current position, but the lure/front of the anglerfish is facing east. The light seems to be correctly placed in the up/down direction, but not in the south/north and east/west direction. It needs to be in the middle (in the north/south direction) and to the east in the east/west direction. It's currently approximately in the middle in the east/west direction and to the south in the north/south direction. I also think the anglerfish can be slightly transparent like it was before.
