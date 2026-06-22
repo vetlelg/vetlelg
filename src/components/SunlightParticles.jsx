@@ -53,17 +53,9 @@ function FishSchool() {
   const groupRef = useRef()
   const localTime = useRef(Math.random() * 100)
   const materialsRef = useRef([])
+  const actionRef = useRef(null)
+  const pointLightRef = useRef()
   const { scene, animations } = useGLTF(`${import.meta.env.BASE_URL}models/fishschool.glb`)
-
-  // Strip position tracks to prevent loop-induced teleportation;
-  // swimming rotation/morph tracks still loop seamlessly.
-  // Must run before useAnimations creates clipActions from these clips.
-  useMemo(() => {
-    animations.forEach(clip => {
-      clip.tracks = clip.tracks.filter(track => !track.name.endsWith('.position'))
-    })
-  }, [animations])
-
   const { actions } = useAnimations(animations, groupRef)
 
   useEffect(() => {
@@ -71,6 +63,7 @@ function FishSchool() {
     if (first) {
       first.timeScale = 0.6
       first.play()
+      actionRef.current = first
     }
   }, [actions])
 
@@ -147,6 +140,28 @@ function FishSchool() {
 
   useFrame((state, delta) => {
     if (!groupRef.current) return
+
+    if (actionRef.current) {
+      const action = actionRef.current
+      const duration = action.getClip().duration
+      const time = action.time % duration
+      const fadeDuration = Math.min(1.0, duration * 0.15)
+
+      let fade = 1.0
+      if (time < fadeDuration) {
+        fade = time / fadeDuration
+      } else if (time > duration - fadeDuration) {
+        fade = (duration - time) / fadeDuration
+      }
+
+      materialsRef.current.forEach(mat => {
+        mat.opacity = 0.25 * fade
+      })
+      if (pointLightRef.current) {
+        pointLightRef.current.intensity = 0.3 * fade
+      }
+    }
+
     localTime.current += delta
     const t = localTime.current
     const driftX = IS_MOBILE ? 1.5 : 2.5
@@ -168,7 +183,7 @@ function FishSchool() {
   return (
     <group ref={groupRef} scale={IS_MOBILE ? 3.5 : 5}>
       <primitive object={scene} />
-      <pointLight color="#90E0EF" intensity={0.3} distance={8} decay={2} />
+      <pointLight ref={pointLightRef} color="#90E0EF" intensity={0.3} distance={8} decay={2} />
     </group>
   )
 }
