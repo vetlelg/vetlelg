@@ -22,9 +22,10 @@ _Done when: Uncollapsed projects are completely visible and looks good._
 The layout in the hero section now looks very symmetrical with a big headline with my name. The name should change to Vetle L. Gundersen. The layout should change. It should look more like a profile view, with the profile picture on the left and the text and information on the right. Or whatever looks good, but something like that.
 _Done when: The layout looks more like a profile layout and looks good._
 
-- [] **Reconsider transparent glb models**
+- [x] **Reconsider transparent glb models**
 Reconsider if this is the best looking approach. It could be, or maybe not. Use your own judgement.
 _Done when: You have made a decision and it looks good._
+_Decision: Transparent Fresnel rim approach is correct — matches the deep-sea theme with graduated visibility by depth. Tuned whale and fish school parameters (slightly higher opacity, wider/softer rim, more emissive glow) to better reflect their brighter depth zones. Anglerfish left as-is for its dedicated task._
 
 - [] **Anglerfish improvements**
 Anglerfish is too big. The glowing lure is also not in front of it at the correct position. Maybe the glowing lure should light up its face and the rest of the body should be less visible / shadowy. Like how an anglerfish would look like in reality.

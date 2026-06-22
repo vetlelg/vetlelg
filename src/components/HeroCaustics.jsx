@@ -137,22 +137,22 @@ function Whale({ positionRef }) {
       if (child.isMesh) {
         const mat = child.material.clone()
         mat.transparent = true
-        mat.opacity = 0.15
+        mat.opacity = 0.2
         mat.depthWrite = false
         mat.toneMapped = false
 
         if (mat.isMeshStandardMaterial || mat.isMeshPhysicalMaterial) {
           mat.color = baseColor.clone()
           mat.emissive = baseColor.clone()
-          mat.emissiveIntensity = 0.25
+          mat.emissiveIntensity = 0.35
           mat.metalness = 0
           mat.roughness = 1
         }
 
         mat.onBeforeCompile = (shader) => {
           shader.uniforms.uRimColor = { value: rimColor }
-          shader.uniforms.uRimPower = { value: 2.5 }
-          shader.uniforms.uRimIntensity = { value: 0.7 }
+          shader.uniforms.uRimPower = { value: 2.0 }
+          shader.uniforms.uRimIntensity = { value: 0.8 }
 
           shader.vertexShader = shader.vertexShader.replace(
             'void main() {',
