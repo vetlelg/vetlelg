@@ -114,7 +114,7 @@ function WhaleBubbleWake({ whalePositionRef }) {
   return (
     <instancedMesh ref={meshRef} args={[null, null, WAKE_BUBBLE_COUNT]}>
       <sphereGeometry args={[1, 6, 6]} />
-      <meshBasicMaterial color="#CAF0F8" transparent opacity={0.12} depthWrite={false} toneMapped={false} />
+      <meshBasicMaterial color="#CAF0F8" transparent opacity={0.05} depthWrite={false} toneMapped={false} />
     </instancedMesh>
   )
 }
@@ -137,22 +137,22 @@ function Whale({ positionRef }) {
       if (child.isMesh) {
         const mat = child.material.clone()
         mat.transparent = true
-        mat.opacity = 0.2
+        mat.opacity = 0.13
         mat.depthWrite = false
         mat.toneMapped = false
 
         if (mat.isMeshStandardMaterial || mat.isMeshPhysicalMaterial) {
           mat.color = baseColor.clone()
           mat.emissive = baseColor.clone()
-          mat.emissiveIntensity = 0.35
+          mat.emissiveIntensity = 0.12
           mat.metalness = 0
           mat.roughness = 1
         }
 
         mat.onBeforeCompile = (shader) => {
           shader.uniforms.uRimColor = { value: rimColor }
-          shader.uniforms.uRimPower = { value: 2.0 }
-          shader.uniforms.uRimIntensity = { value: 0.8 }
+          shader.uniforms.uRimPower = { value: 3.0 }
+          shader.uniforms.uRimIntensity = { value: 0.3 }
 
           shader.vertexShader = shader.vertexShader.replace(
             'void main() {',
@@ -199,16 +199,14 @@ function Whale({ positionRef }) {
     if (!groupRef.current) return
     const t = state.clock.elapsedTime
 
-    // Figure-8 in the x-z plane: z at 2x frequency ensures the whale
-    // sweeps through a broad arc at each edge instead of snapping heading
-    const x = Math.sin(t * 0.08) * 3.2 + Math.sin(t * 0.19) * 0.3
-    const y = -0.3 + Math.sin(t * 0.11) * 0.7 + Math.sin(t * 0.27) * 0.12
-    const z = Math.sin(t * 0.16) * 0.6 + Math.sin(t * 0.14) * 0.15
+    const x = Math.sin(t * 0.08) * 3.5 + Math.sin(t * 0.19) * 0.4
+    const y = -0.3 + Math.sin(t * 0.11) * 0.6 + Math.sin(t * 0.27) * 0.1
+    const z = -2 + Math.sin(t * 0.16) * 0.5 + Math.sin(t * 0.14) * 0.15
     groupRef.current.position.set(x, y, z)
 
-    const vx = Math.cos(t * 0.08) * 0.256 + Math.cos(t * 0.19) * 0.057
-    const vy = Math.cos(t * 0.11) * 0.077 + Math.cos(t * 0.27) * 0.0324
-    const vz = Math.cos(t * 0.16) * 0.096 + Math.cos(t * 0.14) * 0.021
+    const vx = Math.cos(t * 0.08) * 0.28 + Math.cos(t * 0.19) * 0.076
+    const vy = Math.cos(t * 0.11) * 0.066 + Math.cos(t * 0.27) * 0.027
+    const vz = Math.cos(t * 0.16) * 0.08 + Math.cos(t * 0.14) * 0.021
     const hSpeed = Math.sqrt(vx * vx + vz * vz)
 
     const targetY = Math.atan2(-vz, vx) - Math.PI / 2
@@ -220,15 +218,15 @@ function Whale({ positionRef }) {
     groupRef.current.rotation.z = -vx * 0.05
 
     const breathe = 1 + Math.sin(t * 0.4) * 0.02
-    groupRef.current.scale.setScalar(0.6 * breathe)
+    groupRef.current.scale.setScalar(0.8 * breathe)
 
     if (positionRef) positionRef.current.set(x, y, z)
   })
 
   return (
-    <group ref={groupRef} scale={0.6}>
+    <group ref={groupRef} scale={0.8}>
       <primitive object={scene} />
-      <pointLight color="#CAF0F8" intensity={0.4} distance={6} decay={2} />
+      <pointLight color="#CAF0F8" intensity={0.08} distance={4} decay={2} />
     </group>
   )
 }
