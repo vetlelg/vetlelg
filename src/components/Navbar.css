@@ -84,22 +84,27 @@
 
 .navbar__links a.navbar__link--active[data-section="hero"] {
   color: var(--accent-surface);
+  text-shadow: 0 0 12px rgba(202, 240, 248, 0.4);
 }
 
 .navbar__links a.navbar__link--active[data-section="experience"] {
   color: var(--accent-sunlight);
+  text-shadow: 0 0 12px rgba(144, 224, 239, 0.4);
 }
 
 .navbar__links a.navbar__link--active[data-section="education"] {
   color: var(--accent-twilight);
+  text-shadow: 0 0 12px rgba(123, 47, 190, 0.4);
 }
 
 .navbar__links a.navbar__link--active[data-section="projects"] {
   color: var(--accent-midnight);
+  text-shadow: 0 0 12px rgba(0, 245, 212, 0.4);
 }
 
 .navbar__links a.navbar__link--active[data-section="contact"] {
   color: var(--accent-abyss);
+  text-shadow: 0 0 12px rgba(247, 37, 133, 0.4);
 }
 
 .navbar__hamburger {

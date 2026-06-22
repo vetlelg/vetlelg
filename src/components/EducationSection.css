@@ -32,12 +32,13 @@
   border-radius: var(--card-radius);
   padding: 2rem;
   position: relative;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .education__card:hover {
   border-color: var(--accent-twilight);
   box-shadow: 0 0 24px rgba(123, 47, 190, 0.12);
+  transform: translateY(-2px);
 }
 
 .education__year {

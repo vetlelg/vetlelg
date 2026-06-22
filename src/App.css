@@ -11,11 +11,12 @@
 
 .zone-label {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-dim);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
+  opacity: 0.5;
 }
 
 .zone-title {

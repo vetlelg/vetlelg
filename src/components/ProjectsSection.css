@@ -33,12 +33,13 @@
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .projects__card:hover {
   border-color: var(--accent-midnight);
   box-shadow: 0 0 28px rgba(0, 245, 212, 0.1);
+  transform: translateY(-2px);
 }
 
 .projects__card-header {

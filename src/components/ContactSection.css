@@ -64,7 +64,7 @@
 
 .contact__social-link {
   color: var(--text-dim);
-  transition: color 0.25s ease, filter 0.25s ease;
+  transition: color 0.25s ease, filter 0.25s ease, transform 0.25s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,6 +76,7 @@
 .contact__social-link:hover {
   color: var(--accent-abyss);
   filter: drop-shadow(0 0 8px rgba(247, 37, 133, 0.4));
+  transform: scale(1.15);
 }
 
 .contact__surface-link {
@@ -117,9 +118,19 @@
   text-align: center;
   padding: 2rem 0 1rem;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   color: var(--text-dim);
   letter-spacing: 0.08em;
+}
+
+.contact__footer::before {
+  content: '';
+  display: block;
+  width: 60%;
+  max-width: 200px;
+  height: 1px;
+  margin: 0 auto 2rem;
+  background: linear-gradient(90deg, transparent, rgba(247, 37, 133, 0.15), transparent);
 }
 
 @media (max-width: 768px) {
