@@ -23,12 +23,18 @@ function getZoneColor(progress) {
   return `rgb(${r},${g},${b})`
 }
 
+const TRACK_GRADIENT = `linear-gradient(to bottom, ${getZoneColor(0)}, ${getZoneColor(0.25)}, ${getZoneColor(0.5)}, ${getZoneColor(0.75)}, ${getZoneColor(1)})`
+
 export default function DepthIndicator() {
   const valueRef = useRef(null)
   const markerRef = useRef(null)
   const trackRef = useRef(null)
 
   useEffect(() => {
+    if (trackRef.current) {
+      trackRef.current.style.background = TRACK_GRADIENT
+    }
+
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
       const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0
@@ -43,9 +49,6 @@ export default function DepthIndicator() {
         markerRef.current.style.top = `${progress * 100}%`
         markerRef.current.style.background = color
         markerRef.current.style.boxShadow = `0 0 8px ${color}`
-      }
-      if (trackRef.current) {
-        trackRef.current.style.background = `linear-gradient(to bottom, ${getZoneColor(0)}, ${getZoneColor(0.25)}, ${getZoneColor(0.5)}, ${getZoneColor(0.75)}, ${getZoneColor(1)})`
       }
     }
 

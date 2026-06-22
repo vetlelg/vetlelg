@@ -20,9 +20,8 @@ Applied meshopt geometry compression + WebP texture compression via @gltf-transf
 - [x] **Split vendor chunks in Vite**
 Used Rolldown's `codeSplitting.groups` (Vite 8's native API) instead of legacy `manualChunks`. Split the 880 KB monolithic chunk into five independently cacheable chunks: three-core (723 KB), react-three-fiber (168 KB), drei (72 KB), postprocessing (75 KB), gsap (120 KB). Build passes clean with no warnings.
 
-- [] **DepthIndicator: compute track gradient once**
-The track gradient is 5 fixed colors that never change, but it's recomputed on every scroll event. Set it once on mount.
-_Done when: gradient set once in useEffect, scroll handler no longer touches trackRef._
+- [x] **DepthIndicator: compute track gradient once**
+Precomputed the static 5-color gradient as a module-level constant (`TRACK_GRADIENT`). Applied once on mount in useEffect, removed from the scroll handler entirely. Scroll handler no longer touches trackRef.
 
 - [] **Reduce mobile post-processing**
 Skip Vignette and HueSaturation effects on mobile for TwilightParticles, MidnightParticles, and AbyssParticles. Bloom stays (core to the aesthetic). Saves GPU passes per frame on constrained devices.
