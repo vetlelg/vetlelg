@@ -118,14 +118,10 @@ export default function ProjectsSection() {
           if (!cards?.length) return
           const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
           if (prefersReduced) return
-          gsap.from(cards, {
-            y: 20,
-            opacity: 0,
-            duration: 0.4,
-            stagger: 0.08,
-            ease: 'power2.out',
-            delay: 0.15,
-          })
+          gsap.fromTo(cards,
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out', delay: 0.15, overwrite: true }
+          )
         })
       }
       return next
