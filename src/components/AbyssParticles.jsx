@@ -319,9 +319,9 @@ function AbyssScene() {
         {!IS_MOBILE && <WaterDistortion strength={0.001} speed={0.3} />}
         <Bloom mipmapBlur intensity={3.0} luminanceThreshold={0.0} luminanceSmoothing={0.15} />
         {!IS_MOBILE && <ChromaticAberration offset={CA_OFFSET} radialModulation />}
-        <Vignette darkness={0.6} offset={0.4} />
+        {!IS_MOBILE && <Vignette darkness={0.6} offset={0.4} />}
         {!IS_MOBILE && <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} opacity={0.05} />}
-        <HueSaturation saturation={-0.15} />
+        {!IS_MOBILE && <HueSaturation saturation={-0.15} />}
       </EffectComposer>
     </>
   )

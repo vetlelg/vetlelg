@@ -407,9 +407,9 @@ export default function MidnightParticles() {
           {!IS_MOBILE && <WaterDistortion strength={0.0015} speed={0.4} />}
           <Bloom mipmapBlur intensity={2.5} luminanceThreshold={0.0} luminanceSmoothing={0.2} />
           {!IS_MOBILE && <ChromaticAberration offset={CA_OFFSET} radialModulation />}
-          <Vignette darkness={0.5} offset={0.45} />
+          {!IS_MOBILE && <Vignette darkness={0.5} offset={0.45} />}
           {!IS_MOBILE && <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} opacity={0.035} />}
-          <HueSaturation saturation={-0.1} />
+          {!IS_MOBILE && <HueSaturation saturation={-0.1} />}
         </EffectComposer>
       </Canvas>
     </Suspense>

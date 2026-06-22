@@ -362,9 +362,9 @@ export default function TwilightParticles() {
           {!IS_MOBILE && <WaterDistortion strength={0.002} speed={0.6} />}
           <Bloom mipmapBlur intensity={1.8} luminanceThreshold={0.0} luminanceSmoothing={0.2} />
           {!IS_MOBILE && <ChromaticAberration offset={CA_OFFSET} radialModulation />}
-          <Vignette darkness={0.35} offset={0.5} />
+          {!IS_MOBILE && <Vignette darkness={0.35} offset={0.5} />}
           {!IS_MOBILE && <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} opacity={0.02} />}
-          <HueSaturation saturation={-0.05} />
+          {!IS_MOBILE && <HueSaturation saturation={-0.05} />}
         </EffectComposer>
       </Canvas>
     </Suspense>
