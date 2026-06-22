@@ -8,9 +8,8 @@ Reverted position-track stripping (restored original GLB animation). Added opaci
 - [x] **Collapse-button in projects section**
 Increased `margin-top` on `.projects__archive-toggle` from 3rem to 4.5rem, giving comfortable clearance between the last featured card and the button (especially on mobile where the overlap was most visible).
 
-- [] **Anglerfish light**
-The light of the anglerfish isn't placed at the lure. Its position seems to be south of the anglerfish's current position, but the lure/front of the anglerfish is facing east. The light seems to be correctly placed in the up/down direction, but not in the south/north and east/west direction. It needs to be in the middle (in the north/south direction) and to the east in the east/west direction. It's currently approximately in the middle in the east/west direction and to the south in the north/south direction. I also think the anglerfish can be slightly transparent like it was before.
-_Done when: The light/glow is correctly positioned at the lure of the anglerfish, and the anglerfish is slightly transparent._
+- [x] **Anglerfish light**
+Moved lure/light offset from Z-axis (+0.5 towards camera) to X-axis (+0.6 east), matching the direction the fish faces. Reduced body opacity from 0.3 to 0.15 for a ghostlier deep-sea look while preserving face illumination from the lure's point light.
 
 - [] **Suggest performance improvements**
 Suggest performance improvements, without making the visuals worse. Add tasks to this list.

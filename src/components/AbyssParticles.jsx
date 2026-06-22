@@ -198,7 +198,7 @@ function Anglerfish({ lurePositionRef }) {
       if (child.isMesh) {
         const mat = child.material.clone()
         mat.transparent = true
-        mat.opacity = 0.3
+        mat.opacity = 0.15
         mat.depthWrite = false
         mat.toneMapped = false
 
@@ -279,9 +279,9 @@ function Anglerfish({ lurePositionRef }) {
 
     const wobbleX = Math.sin(t * 1.5) * 0.08
     const wobbleY = Math.sin(t * 1.8 + 0.5) * 0.05
-    const lureX = bodyX + wobbleX
+    const lureX = bodyX + 0.6 + wobbleX
     const lureY = bodyY + 0.35 + wobbleY
-    const lureZ = bodyZ + 0.5
+    const lureZ = bodyZ
 
     lureRef.current.position.set(lureX, lureY, lureZ)
     lurePositionRef.current.set(lureX, lureY, lureZ)
