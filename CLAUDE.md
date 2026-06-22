@@ -90,7 +90,7 @@ Used for experience entries, education entries, project cards:
 | Component | File | Three.js scene |
 |-----------|------|----------------|
 | HeroSection | `HeroSection.jsx` | HeroCaustics (lazy) — custom caustic shader + instanced bubbles + Bloom + WaterDistortion |
-| ExperienceSection | `ExperienceSection.jsx` | SunlightParticles — instanced floating spheres + FishSchool (instanced ShapeGeometry fish with Boids flocking) + Bloom + ChromaticAberration + Vignette + WaterDistortion |
+| ExperienceSection | `ExperienceSection.jsx` | SunlightParticles — instanced floating spheres + FishSchool (GLB model `fishschool.glb`, 50 animated fish with fresnel rim shader, gentle drift motion, desktop only) + Bloom + ChromaticAberration + Vignette + WaterDistortion |
 | EducationSection | `EducationSection.jsx` | TwilightParticles — bioluminescent particles + procedural Jellyfish (lathe geometry, sinusoidal tentacles) + Bloom + ChromaticAberration + Vignette + Noise + HueSaturation + WaterDistortion |
 | ProjectsSection | `ProjectsSection.jsx` | MidnightParticles — flashing bioluminescent particles + procedural Squid + Bloom + ChromaticAberration + Vignette + Noise + HueSaturation + WaterDistortion |
 | ContactSection | `ContactSection.jsx` | AbyssParticles — angler fish lure (pulse glow) + AnglerBody silhouette (ShapeGeometry, proximity-driven visibility) + instanced particles + Bloom + ChromaticAberration + Vignette + Noise + HueSaturation + WaterDistortion |

@@ -1,5 +1,6 @@
-import { Suspense, useRef, useMemo } from 'react'
+import { Suspense, useRef, useMemo, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
+import { useGLTF, useAnimations } from '@react-three/drei'
 import * as THREE from 'three'
 import { EffectComposer, Bloom, ChromaticAberration, Vignette } from '@react-three/postprocessing'
 import { WaterDistortion } from '../effects/WaterDistortion'
@@ -7,8 +8,6 @@ import FrameloopControl from './FrameloopControl'
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768
 const PARTICLE_COUNT = IS_MOBILE ? 25 : 60
-const FISH_COUNT = IS_MOBILE ? 6 : 12
-const FISH_COLOR = new THREE.Color('#90E0EF')
 const CA_OFFSET = new THREE.Vector2(0.0006, 0.0003)
 
 const PARTICLE_DATA = Array.from({ length: PARTICLE_COUNT }, () => ({
@@ -20,25 +19,6 @@ const PARTICLE_DATA = Array.from({ length: PARTICLE_COUNT }, () => ({
   scale: Math.random() * 0.03 + 0.01,
   phase: Math.random() * Math.PI * 2,
 }))
-
-const FISH_DATA = (() => {
-  const startAngle = Math.random() * Math.PI * 2
-  const startX = (Math.random() - 0.5) * 4
-  const startY = (Math.random() - 0.5) * 2
-  return Array.from({ length: FISH_COUNT }, () => {
-    const angle = startAngle + (Math.random() - 0.5) * 0.6
-    return {
-      x: startX + (Math.random() - 0.5) * 2,
-      y: startY + (Math.random() - 0.5) * 1.5,
-      z: (Math.random() - 0.5) * 1.5,
-      vx: Math.cos(angle) * 0.5,
-      vy: Math.sin(angle) * 0.5,
-      scale: 0.6 + Math.random() * 0.35,
-      phase: Math.random() * Math.PI * 2,
-      wanderPhase: Math.random() * Math.PI * 2,
-    }
-  })
-})()
 
 function Particles() {
   const meshRef = useRef()
@@ -69,142 +49,107 @@ function Particles() {
 }
 
 function FishSchool() {
-  const meshRef = useRef()
-  const dummy = useMemo(() => new THREE.Object3D(), [])
+  const groupRef = useRef()
+  const { scene, animations } = useGLTF(`${import.meta.env.BASE_URL}models/fishschool.glb`)
+  const { actions } = useAnimations(animations, groupRef)
 
-  const fishShape = useMemo(() => {
-    const shape = new THREE.Shape()
-    shape.moveTo(0.18, 0)
-    shape.lineTo(0.08, 0.024)
-    shape.lineTo(0, 0.028)
-    shape.lineTo(-0.06, 0.02)
-    shape.lineTo(-0.1, 0.006)
-    shape.lineTo(-0.16, 0.035)
-    shape.lineTo(-0.11, 0)
-    shape.lineTo(-0.16, -0.035)
-    shape.lineTo(-0.1, -0.006)
-    shape.lineTo(-0.06, -0.02)
-    shape.lineTo(0, -0.028)
-    shape.lineTo(0.08, -0.024)
-    shape.closePath()
-    return shape
-  }, [])
-
-  const colorArr = useMemo(() => {
-    const arr = new Float32Array(FISH_COUNT * 3)
-    for (let i = 0; i < FISH_COUNT; i++) {
-      arr[i * 3] = FISH_COLOR.r
-      arr[i * 3 + 1] = FISH_COLOR.g
-      arr[i * 3 + 2] = FISH_COLOR.b
+  useEffect(() => {
+    const first = Object.values(actions)[0]
+    if (first) {
+      first.timeScale = 0.6
+      first.play()
     }
-    return arr
-  }, [])
+  }, [actions])
 
-  const colorAttrRef = useRef()
+  useMemo(() => {
+    const baseColor = new THREE.Color('#0a6ea8')
+    const rimColor = new THREE.Color('#90E0EF')
 
-  const fish = FISH_DATA
+    scene.traverse((child) => {
+      if (child.isMesh) {
+        const mat = child.material.clone()
+        mat.transparent = true
+        mat.opacity = 0.2
+        mat.depthWrite = false
+        mat.toneMapped = false
 
-  useFrame((state, delta) => {
-    if (!meshRef.current) return
-    const t = state.clock.elapsedTime
-    const dt = Math.min(delta, 0.05)
-
-    fish.forEach((f, i) => {
-      let sepX = 0, sepY = 0
-      let aliX = 0, aliY = 0
-      let cohX = 0, cohY = 0
-      let n = 0
-
-      for (let j = 0; j < fish.length; j++) {
-        if (i === j) continue
-        const other = fish[j]
-        const dx = other.x - f.x
-        const dy = other.y - f.y
-        const dist = Math.sqrt(dx * dx + dy * dy)
-
-        if (dist < 2.0) {
-          n++
-          if (dist < 0.4 && dist > 0.001) {
-            sepX -= dx / dist
-            sepY -= dy / dist
-          }
-          aliX += other.vx
-          aliY += other.vy
-          cohX += other.x
-          cohY += other.y
+        if (mat.isMeshStandardMaterial || mat.isMeshPhysicalMaterial) {
+          mat.color = baseColor.clone()
+          mat.emissive = baseColor.clone()
+          mat.emissiveIntensity = 0.3
+          mat.metalness = 0
+          mat.roughness = 1
         }
+
+        mat.onBeforeCompile = (shader) => {
+          shader.uniforms.uRimColor = { value: rimColor }
+          shader.uniforms.uRimPower = { value: 2.5 }
+          shader.uniforms.uRimIntensity = { value: 0.8 }
+
+          shader.vertexShader = shader.vertexShader.replace(
+            'void main() {',
+            `varying vec3 vFresnelViewDir;
+            varying vec3 vFresnelNormal;
+            void main() {`
+          )
+
+          shader.vertexShader = shader.vertexShader.replace(
+            '#include <clipping_planes_vertex>',
+            `vec4 fresnelMVPos = modelViewMatrix * vec4(transformed, 1.0);
+            vFresnelViewDir = normalize(-fresnelMVPos.xyz);
+            vFresnelNormal = normalize(normalMatrix * objectNormal);
+            #include <clipping_planes_vertex>`
+          )
+
+          shader.fragmentShader = shader.fragmentShader.replace(
+            'void main() {',
+            `uniform vec3 uRimColor;
+            uniform float uRimPower;
+            uniform float uRimIntensity;
+            varying vec3 vFresnelViewDir;
+            varying vec3 vFresnelNormal;
+            void main() {`
+          )
+
+          shader.fragmentShader = shader.fragmentShader.replace(
+            '#include <dithering_fragment>',
+            `#include <dithering_fragment>
+            float fresnelTerm = pow(1.0 - abs(dot(normalize(vFresnelViewDir), normalize(vFresnelNormal))), uRimPower);
+            gl_FragColor.rgb += uRimColor * fresnelTerm * uRimIntensity;
+            gl_FragColor.a = max(gl_FragColor.a, fresnelTerm * uRimIntensity);`
+          )
+        }
+
+        mat.customProgramCacheKey = () => 'fish-fresnel'
+        mat.needsUpdate = true
+        child.material = mat
       }
-
-      const wanderX = Math.cos(t * 0.3 + f.wanderPhase) * 0.008
-      const wanderY = Math.sin(t * 0.25 + f.wanderPhase * 1.3) * 0.008
-
-      if (n > 0) {
-        aliX /= n
-        aliY /= n
-        cohX = cohX / n - f.x
-        cohY = cohY / n - f.y
-
-        f.vx += sepX * 0.05 + (aliX - f.vx) * 0.02 + cohX * 0.01 + wanderX
-        f.vy += sepY * 0.05 + (aliY - f.vy) * 0.02 + cohY * 0.01 + wanderY
-      } else {
-        f.vx += wanderX
-        f.vy += wanderY
-      }
-
-      if (f.x > 6) f.vx -= 0.02
-      if (f.x < -6) f.vx += 0.02
-      if (f.y > 3.5) f.vy -= 0.02
-      if (f.y < -3.5) f.vy += 0.02
-
-      const speed = Math.sqrt(f.vx * f.vx + f.vy * f.vy)
-      if (speed > 0.01) {
-        const ratio = 0.5 / speed
-        f.vx += (f.vx * ratio - f.vx) * 0.03
-        f.vy += (f.vy * ratio - f.vy) * 0.03
-      }
-
-      f.x += f.vx * dt
-      f.y += f.vy * dt
-
-      const heading = Math.atan2(f.vy, f.vx)
-      const waggle = Math.sin(t * 8 + f.phase) * 0.08
-
-      dummy.position.set(f.x, f.y, f.z)
-      dummy.rotation.set(0, 0, heading + waggle)
-      dummy.scale.setScalar(f.scale)
-      dummy.updateMatrix()
-      meshRef.current.setMatrixAt(i, dummy.matrix)
-
-      const glint = Math.abs(waggle) / 0.08
-      const shimmer = Math.sin(t * 1.5 + f.phase * 2.7) * 0.2 + 0.85
-      const brightness = shimmer + glint * 0.35
-      colorArr[i * 3] = FISH_COLOR.r * brightness
-      colorArr[i * 3 + 1] = FISH_COLOR.g * brightness
-      colorArr[i * 3 + 2] = FISH_COLOR.b * brightness
     })
+  }, [scene])
 
-    meshRef.current.instanceMatrix.needsUpdate = true
-    if (colorAttrRef.current) colorAttrRef.current.needsUpdate = true
+  useFrame((state) => {
+    if (!groupRef.current) return
+    const t = state.clock.elapsedTime
+    const x = Math.sin(t * 0.06) * 2.5 + Math.sin(t * 0.15) * 0.4
+    const y = Math.sin(t * 0.09) * 0.8 + Math.sin(t * 0.22) * 0.15
+    const z = Math.sin(t * 0.12) * 0.5
+    groupRef.current.position.set(x, y, z)
+
+    const vx = Math.cos(t * 0.06) * 0.15 + Math.cos(t * 0.15) * 0.06
+    const vy = Math.cos(t * 0.09) * 0.072 + Math.cos(t * 0.22) * 0.033
+    const targetY = Math.atan2(-vx, 1) * 0.3
+    let deltaY = targetY - groupRef.current.rotation.y
+    if (deltaY > Math.PI) deltaY -= Math.PI * 2
+    if (deltaY < -Math.PI) deltaY += Math.PI * 2
+    groupRef.current.rotation.y += deltaY * 0.03
+    groupRef.current.rotation.z = vy * 0.15
   })
 
   return (
-    <instancedMesh ref={meshRef} args={[null, null, FISH_COUNT]}>
-      <shapeGeometry args={[fishShape]}>
-        <instancedBufferAttribute
-          ref={colorAttrRef}
-          attach="attributes-color"
-          args={[colorArr, 3]}
-        />
-      </shapeGeometry>
-      <meshBasicMaterial
-        vertexColors
-        transparent
-        opacity={0.35}
-        depthWrite={false}
-        side={THREE.DoubleSide}
-        toneMapped={false}
-      />
-    </instancedMesh>
+    <group ref={groupRef} scale={5}>
+      <primitive object={scene} />
+      <pointLight color="#90E0EF" intensity={0.3} distance={8} decay={2} />
+    </group>
   )
 }
 
@@ -231,8 +176,10 @@ export default function SunlightParticles() {
         }}
       >
         <FrameloopControl sectionId="experience" />
+        <ambientLight intensity={0.3} />
+        <directionalLight position={[0, 5, 3]} intensity={0.5} color="#90E0EF" />
         <Particles />
-        <FishSchool />
+        {!IS_MOBILE && <FishSchool />}
         <EffectComposer multisampling={0}>
           {!IS_MOBILE && <WaterDistortion strength={0.003} speed={0.8} />}
           <Bloom mipmapBlur intensity={1.2} luminanceThreshold={0.1} luminanceSmoothing={0.3} />
