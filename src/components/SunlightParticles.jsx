@@ -50,7 +50,18 @@ function Particles() {
 
 function FishSchool() {
   const groupRef = useRef()
+  const localTime = useRef(Math.random() * 100)
   const { scene, animations } = useGLTF(`${import.meta.env.BASE_URL}models/fishschool.glb`)
+
+  // Strip position tracks to prevent loop-induced teleportation;
+  // swimming rotation/morph tracks still loop seamlessly.
+  // Must run before useAnimations creates clipActions from these clips.
+  useMemo(() => {
+    animations.forEach(clip => {
+      clip.tracks = clip.tracks.filter(track => !track.name.endsWith('.position'))
+    })
+  }, [animations])
+
   const { actions } = useAnimations(animations, groupRef)
 
   useEffect(() => {
@@ -127,10 +138,12 @@ function FishSchool() {
     })
   }, [scene])
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (!groupRef.current) return
-    const t = state.clock.elapsedTime
-    const x = Math.sin(t * 0.06) * 2.5 + Math.sin(t * 0.15) * 0.4
+    localTime.current += delta
+    const t = localTime.current
+    const driftX = IS_MOBILE ? 1.5 : 2.5
+    const x = Math.sin(t * 0.06) * driftX + Math.sin(t * 0.15) * 0.4
     const y = Math.sin(t * 0.09) * 0.8 + Math.sin(t * 0.22) * 0.15
     const z = Math.sin(t * 0.12) * 0.5
     groupRef.current.position.set(x, y, z)
@@ -146,7 +159,7 @@ function FishSchool() {
   })
 
   return (
-    <group ref={groupRef} scale={5}>
+    <group ref={groupRef} scale={IS_MOBILE ? 3.5 : 5}>
       <primitive object={scene} />
       <pointLight color="#90E0EF" intensity={0.3} distance={8} decay={2} />
     </group>
@@ -179,7 +192,7 @@ export default function SunlightParticles() {
         <ambientLight intensity={0.3} />
         <directionalLight position={[0, 5, 3]} intensity={0.5} color="#90E0EF" />
         <Particles />
-        {!IS_MOBILE && <FishSchool />}
+        <FishSchool />
         <EffectComposer multisampling={0}>
           {!IS_MOBILE && <WaterDistortion strength={0.003} speed={0.8} />}
           <Bloom mipmapBlur intensity={1.2} luminanceThreshold={0.1} luminanceSmoothing={0.3} />

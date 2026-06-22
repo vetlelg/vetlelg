@@ -32,9 +32,10 @@ Anglerfish is too big. The glowing lure is also not in front of it at the correc
 _Done when: Improvements has been made and it looks good._
 _Changes: Reduced scale 0.8→0.4. Lure now attached to body head (offset + wobble) instead of orbiting independently. Point light at lure (intensity 2-6, distance 1.5, decay 3) illuminates face; zero emissive so unlit body stays dark. Subtler Fresnel rim (power 3.5, intensity 0.06). Body drifts on own path with gentle 3-axis rotation. Mobile X-drift narrowed. Merged AnglerBody+AnglerLure into single Anglerfish component._
 
-- [] **School of fish improvements**
+- [x] **School of fish improvements**
 School of fish movement animation suddenly resets and the fish appear out of nowhere. Not exactly sure how this should be solved. School of fish should be visible on mobile.
 _Done when: Problem is fixed._
+_Changes: Fixed animation reset by using local time accumulation (delta-based) instead of clock.elapsedTime — immune to FrameloopControl pause/resume. Stripped position tracks from GLB animation clips to prevent loop-induced teleportation while keeping swimming rotation/morph animations. Enabled fish school on mobile with reduced scale (3.5) and drift range (1.5)._
 
 - [] **Whale improvements**
 I want it to look like the whale is swimming more in the background. Maybe add some blur or similar effects / depth of field. Or make it very slightly smaller.
