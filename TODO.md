@@ -27,9 +27,10 @@ Reconsider if this is the best looking approach. It could be, or maybe not. Use 
 _Done when: You have made a decision and it looks good._
 _Decision: Transparent Fresnel rim approach is correct — matches the deep-sea theme with graduated visibility by depth. Tuned whale and fish school parameters (slightly higher opacity, wider/softer rim, more emissive glow) to better reflect their brighter depth zones. Anglerfish left as-is for its dedicated task._
 
-- [] **Anglerfish improvements**
+- [x] **Anglerfish improvements**
 Anglerfish is too big. The glowing lure is also not in front of it at the correct position. Maybe the glowing lure should light up its face and the rest of the body should be less visible / shadowy. Like how an anglerfish would look like in reality.
 _Done when: Improvements has been made and it looks good._
+_Changes: Reduced scale 0.8→0.4. Lure now attached to body head (offset + wobble) instead of orbiting independently. Point light at lure (intensity 2-6, distance 1.5, decay 3) illuminates face; zero emissive so unlit body stays dark. Subtler Fresnel rim (power 3.5, intensity 0.06). Body drifts on own path with gentle 3-axis rotation. Mobile X-drift narrowed. Merged AnglerBody+AnglerLure into single Anglerfish component._
 
 - [] **School of fish improvements**
 School of fish movement animation suddenly resets and the fish appear out of nowhere. Not exactly sure how this should be solved. School of fish should be visible on mobile.

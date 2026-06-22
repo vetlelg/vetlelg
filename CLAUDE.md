@@ -93,7 +93,7 @@ Used for experience entries, education entries, project cards:
 | ExperienceSection | `ExperienceSection.jsx` | SunlightParticles — instanced floating spheres + FishSchool (GLB model `fishschool.glb`, 50 animated fish with fresnel rim shader, gentle drift motion, desktop only) + Bloom + ChromaticAberration + Vignette + WaterDistortion |
 | EducationSection | `EducationSection.jsx` | TwilightParticles — bioluminescent particles + procedural Jellyfish (lathe geometry, sinusoidal tentacles) + Bloom + ChromaticAberration + Vignette + Noise + HueSaturation + WaterDistortion |
 | ProjectsSection | `ProjectsSection.jsx` | MidnightParticles — flashing bioluminescent particles + procedural Squid + Bloom + ChromaticAberration + Vignette + Noise + HueSaturation + WaterDistortion |
-| ContactSection | `ContactSection.jsx` | AbyssParticles — angler fish lure (pulse glow) + AnglerBody (GLB model `anglerfish.glb`, Fresnel rim shader, proximity-driven visibility, laggy lure follow) + instanced particles + Bloom + ChromaticAberration + Vignette + Noise + HueSaturation + WaterDistortion |
+| ContactSection | `ContactSection.jsx` | AbyssParticles — Anglerfish (GLB model `anglerfish.glb`, body-attached lure with point light face illumination, Fresnel rim shader, slow drift with 3-axis rotation) + instanced particles + Bloom + ChromaticAberration + Vignette + Noise + HueSaturation + WaterDistortion |
 
 ### Global effects (fixed, always visible)
 | Component | File | Role |
@@ -135,7 +135,7 @@ Each section has a title and a depth label in mono (e.g. "1,000m — Twilight Zo
 - **Experience:** Work history timeline. Glassmorphism cards with company, role, dates, description. GSAP stagger reveal on scroll.
 - **Education:** Degrees and certifications. Cards with institution, degree, year, highlights. Procedural jellyfish drifting through the scene.
 - **Projects:** Featured projects shown by default in a grid (2 cols desktop, 1 mobile), with a collapsible "Archive" section for older projects (CSS max-height transition, GSAP stagger on cards). Each card: specimen ID, status badge, title, year/org context line, description, tech tags, optional GitHub/live-demo links. Styled as deep-sea specimen cards with a procedural squid.
-- **Contact:** Centered. "Send a Transmission" heading. Email button. GitHub + LinkedIn social links (32px inline SVG with touch-friendly hit targets). "Back to surface" scroll-to-top with animated upward chevron. Angler fish lure as focal point with detailed AnglerBody silhouette.
+- **Contact:** Centered. "Send a Transmission" heading. Email button. GitHub + LinkedIn social links (32px inline SVG with touch-friendly hit targets). "Back to surface" scroll-to-top with animated upward chevron. Anglerfish with body-attached lure — point light at lure illuminates face while body fades into shadow.
 
 ## Conventions
 - One component per file, default export
