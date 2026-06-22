@@ -14,9 +14,8 @@ Moved lure/light offset from Z-axis (+0.5 towards camera) to X-axis (+0.6 east),
 - [x] **Suggest performance improvements**
 Audited the full codebase for performance. Key findings: GLB models total 12.2 MB uncompressed; the Three.js ecosystem bundles into a single 880 KB chunk; DepthIndicator recomputes a static gradient every scroll frame; mobile still runs Vignette + HueSaturation post-processing. Tasks added below.
 
-- [] **Compress GLB models**
-Apply meshopt compression to anglerfish.glb (7.5 MB), whale.glb (4.0 MB), and fishschool.glb (1.1 MB) using @gltf-transform/cli. Expected ~70% reduction (~12.2 MB → ~3-4 MB). drei's useGLTF handles meshopt decompression automatically.
-_Done when: all three models are compressed, load correctly, and look identical._
+- [x] **Compress GLB models**
+Applied meshopt geometry compression + WebP texture compression via @gltf-transform/cli. Results: anglerfish 7.5 MB → 947 KB, fishschool 1.1 MB → 226 KB, whale 4.0 MB → 474 KB. Total 12.6 MB → 1.6 MB (87% reduction). drei's useGLTF handles meshopt decompression automatically.
 
 - [] **Split vendor chunks in Vite**
 The Three.js ecosystem (three + fiber + drei + postprocessing) is a single 880 KB chunk. Configure Vite manualChunks to split into three-core, drei, postprocessing, and gsap. Improves cache granularity and parallel loading.
