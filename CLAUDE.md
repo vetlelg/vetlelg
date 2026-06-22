@@ -93,7 +93,7 @@ Used for experience entries, education entries, project cards:
 | ExperienceSection | `ExperienceSection.jsx` | SunlightParticles — instanced floating spheres + FishSchool (GLB model `fishschool.glb`, 50 animated fish with fresnel rim shader, gentle drift motion, desktop only) + Bloom + ChromaticAberration + Vignette + WaterDistortion |
 | EducationSection | `EducationSection.jsx` | TwilightParticles — bioluminescent particles + procedural Jellyfish (lathe geometry, sinusoidal tentacles) + Bloom + ChromaticAberration + Vignette + Noise + HueSaturation + WaterDistortion |
 | ProjectsSection | `ProjectsSection.jsx` | MidnightParticles — flashing bioluminescent particles + procedural Squid + Bloom + ChromaticAberration + Vignette + Noise + HueSaturation + WaterDistortion |
-| ContactSection | `ContactSection.jsx` | AbyssParticles — angler fish lure (pulse glow) + AnglerBody silhouette (ShapeGeometry, proximity-driven visibility) + instanced particles + Bloom + ChromaticAberration + Vignette + Noise + HueSaturation + WaterDistortion |
+| ContactSection | `ContactSection.jsx` | AbyssParticles — angler fish lure (pulse glow) + AnglerBody (GLB model `anglerfish.glb`, Fresnel rim shader, proximity-driven visibility, laggy lure follow) + instanced particles + Bloom + ChromaticAberration + Vignette + Noise + HueSaturation + WaterDistortion |
 
 ### Global effects (fixed, always visible)
 | Component | File | Role |
@@ -123,7 +123,9 @@ All section content lives in `src/data/` and is imported by sections — never h
 ### Static assets (`public/`)
 - `profile.jpg` — hero portrait photo
 - `favicon.svg`, `og-image.png` — metadata assets
-- `models/whale.glb`, `models/fishschool.glb`, `models/anglerfish.glb` — GLB models (not yet integrated, pending TODO tasks)
+- `models/fishschool.glb` — school of fish model (used in ExperienceSection)
+- `models/anglerfish.glb` — anglerfish model (used in ContactSection)
+- `models/whale.glb` — whale model (not yet integrated)
 
 ## Section content
 
