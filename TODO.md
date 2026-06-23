@@ -1,3 +1,4 @@
+ALL_TASKS_COMPLETE
 # TODO.md — Deep Sea Dev Portfolio
 
 > Read this first every session. Pick the top incomplete task. Update with an X before exiting.
